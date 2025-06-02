@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валдайская мастерская колоколов - авторские колокольчики ручной работы</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #5a3921;
+            text-align: center;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #8b6b47;
+            margin: 15px auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #8b6b47;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #5a3921;
+            transform: translateY(-3px);
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        header p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        /* Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .gallery-item p {
+            padding: 15px;
+            text-align: center;
+            background: white;
+        }
+        
+        /* Услуги */
+        .services {
+            background: #f9f5f0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-item i {
+            font-size: 2.5rem;
+            color: #8b6b47;
+            margin-bottom: 20px;
+        }
+        
+        .service-item h3 {
+            margin-bottom: 15px;
+            color: #5a3921;
+        }
+        
+        /* Другие товары */
+        .other-items {
+            position: relative;
+        }
+        
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 20px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .carousel::-webkit-scrollbar-thumb {
+            background: #8b6b47;
+            border-radius: 4px;
+        }
+        
+        .carousel-item {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .carousel-item p {
+            padding: 15px;
+            text-align: center;
+            background: white;
+        }
+        
+        /* Форма заказа */
+        .order-form {
+            background: #f9f5f0;
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        
+        .form-notice {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        /* Контакты */
+        footer {
+            background: #5a3921;
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-item i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #d4b78f;
+        }
+        
+        .contact-item h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .order-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <h1>Валдайская колокольная мастерская </h1>
+            <p>по художественной обработке колокола</p>
+            <a href="#order" class="btn">Заказать колокольчик</a>
+        </div>
+    </header>
+    
+    <!-- Галерея работ -->
+    <section id="gallery" class="container">
+        <h2>Наши работы</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300?text=Валдайский+сувенирный" alt="Валдайский сувенирный">
+                <p>Валдайский сувенирный</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300?text=Свадебный+колокольчик" alt="Свадебный колокольчик">
+                <p>Свадебный колокольчик</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300?text=С+гербом+города" alt="С гербом города">
+                <p>С гербом города</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300?text=Подарочный+набор" alt="Подарочный набор">
+                <p>Подарочный набор</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300?text=Традиционный+вариант" alt="Традиционный вариант">
+                <p>Традиционный вариант</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300?text=Колокольчик+с+росписью" alt="Колокольчик с росписью">
+                <p>Колокольчик с росписью</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Индивидуальный рисунок</h3>
+                    <p>Создаем уникальные дизайны по вашим пожеланиям</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-ruler-combined"></i>
+                    <h3>Любые размеры</h3>
+                    <p>От миниатюрных 3 см до крупных экземпляров</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-boxes"></i>
+                    <h3>Опт и розница</h3>
+                    <p>Работаем как с розничными, так и с оптовыми клиентами</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-stopwatch"></i>
+                    <h3>Срочные заказы</h3>
+                    <p>Возможность изготовления в кратчайшие сроки</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Другие товары -->
+    <section id="other" class="other-items container">
+        <h2>Другие товары</h2>
+        <p style="text-align: center; margin-bottom: 30px;">А также: распродажа имущества магазина «От Плюшкина» – предварительный осмотр по телефону</p>
+        
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/400x300?text=Старинные+колокола" alt="Старинные колокола">
+                <p>Старинные колокола</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/400x300?text=Антикварный+фарфор" alt="Антикварный фарфор">
+                <p>Антикварный фарфор</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/400x300?text=Валдайские+открытки" alt="Валдайские открытки">
+                <p>Валдайские открытки</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/400x300?text=Картины+художников" alt="Картины художников">
+                <p>Картины художников</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/400x300?text=Старинные+книги" alt="Старинные книги">
+                <p>Старинные книги</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Форма заказа -->
+    <section id="order" class="container">
+        <h2>Закажите свой колокольчик</h2>
+        <form id="orderForm" class="order-form">
+            <div class="form-group">
+                <label for="name" class="required">Имя</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone" class="required">Телефон</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="size">Примерный размер</label>
+                <select id="size" name="size">
+                    <option value="3-5 см">3-5 см</option>
+                    <option value="5-10 см">5-10 см</option>
+                    <option value=">10 см">>10 см</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="type">Тип оформления</label>
+                <select id="type" name="type">
+                    <option value="традиционный">Традиционный</option>
+                    <option value="с символикой">С символикой</option>
+                    <option value="индивидуальный">Индивидуальный рисунок</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="comment">Комментарий к заказу</label>
+                <textarea id="comment" name="comment"></textarea>
+            </div>
+            
+            <button type="submit" class="btn">Отправить заявку</button>
+            
+            <p class="form-notice">Мы свяжемся с вами в течение 2 дней для уточнения деталей</p>
+        </form>
+    </section>
+    
+    <!-- Контакты -->
+    <footer>
+        <div class="container">
+            <h2>Контакты</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Адрес</h3>
+                    <p>г. Валдай, ул. Мастеровая, 15</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Телефон</h3>
+                    <p>+7 (996) 067-28-37</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>valday-kolokol@mail.ru</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Часы работы</h3>
+                    <p>Пн-Пт 10:00-18:00<br>Осмотр антиквариата – по договоренности</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Валдайская мастерская колоколов. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Обработка формы
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Собираем данные формы
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Здесь должна быть отправка на сервер
+            // Вместо этого просто покажем сообщение
+            alert(`Спасибо за заявку, ${data.name}! Мы свяжемся с вами по телефону ${data.phone} в ближайшее время.`);
+            
+            // Очищаем форму
+            this.reset();
+        });
+        
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Анимация при прокрутке
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            
+            // Пример: параллакс для шапки
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+            }
+            
+            // Анимация элементов при появлении
+            const animateItems = document.querySelectorAll('.gallery-item, .service-item, .carousel-item');
+            
+            animateItems.forEach(item => {
+                const itemPosition = item.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (itemPosition < screenPosition) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Инициализация анимации
+        window.addEventListener('load', function() {
+            const animateItems = document.querySelectorAll('.gallery-item, .service-item, .carousel-item');
+            
+            animateItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'all 0.6s ease';
+            });
+            
+            // Запускаем проверку при загрузке
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>
