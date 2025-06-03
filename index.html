@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Валдайская колокольная мастерская</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        /* Основные стили с новыми шрифтами */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             color: #333;
             background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
@@ -27,15 +31,20 @@
             z-index: -1;
         }
         
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+        
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
         header {
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px 0;
+            padding: 25px 0;
             border-bottom: 1px solid #e0e0e0;
             display: flex;
             align-items: center;
@@ -45,94 +54,74 @@
         
         .logo {
             position: absolute;
-            left: 20px;
-            height: 60px;
+            left: 30px;
+            height: 70px;
         }
         
         h1 {
-            font-weight: 300;
             color: #444;
             margin: 0;
-            font-size: 2.2em;
+            font-size: 2.4em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         .content {
             background-color: rgba(255, 255, 255, 0.95);
             padding: 40px;
             margin: 30px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-radius: 4px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border-radius: 6px;
         }
         
         h2 {
             color: #555;
-            font-weight: 300;
             border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 30px;
-        }
-        
-        ul {
-            padding-left: 20px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        .contact {
-            background-color: rgba(245, 245, 245, 0.9);
-            padding: 25px;
-            text-align: center;
-            font-size: 1.2em;
+            padding-bottom: 12px;
             margin-top: 40px;
-            border-radius: 4px;
+            font-size: 1.8em;
         }
         
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #777;
-            font-size: 0.9em;
-            background-color: rgba(255, 255, 255, 0.9);
+        /* Стили для галереи с разными размерами */
+        .gallery-category {
+            margin-bottom: 50px;
         }
         
-        .highlight {
-            font-weight: bold;
-            color: #222;
+        .gallery-container {
+            position: relative;
+            margin: 25px 0;
         }
-
-        /* Стили для галереи */
+        
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            padding: 10px 0;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 15px 0;
         }
         
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 6px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: pointer;
         }
         
         /* Разные размеры для фотографий */
         .gallery-item.size-small {
             grid-row-end: span 1;
-            height: 180px;
+            height: 200px;
         }
         
         .gallery-item.size-medium {
             grid-row-end: span 2;
-            height: 280px;
+            height: 320px;
         }
         
         .gallery-item.size-large {
             grid-row-end: span 3;
-            height: 380px;
+            height: 420px;
         }
         
         .gallery-item img {
@@ -140,11 +129,16 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
         
         .gallery-caption {
@@ -152,33 +146,40 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0,0,0,0.7);
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white;
-            padding: 10px;
-            font-size: 0.9em;
-            transform: translateY(100%);
-            transition: transform 0.3s;
+            padding: 15px;
+            font-size: 0.95em;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
         .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
+            opacity: 1;
         }
         
-        /* Убираем кнопки навигации, так как теперь сетка */
-        .gallery-nav {
-            display: none;
+        .gallery-category h3 {
+            display: flex;
+            align-items: center;
+            color: #555;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
         
         .photo-count {
-            margin-left: 10px;
-            font-size: 0.75em;
-            color: #888;
-            background-color: #f0f0f0;
-            padding: 3px 10px;
+            margin-left: 12px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.8em;
+            font-weight: 500;
+            color: #777;
+            background-color: #f5f5f5;
+            padding: 4px 12px;
             border-radius: 20px;
         }
 
-        /* Стили для раздела "Наши услуги" */
+        /* Стили для услуг */
         .services-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -258,6 +259,21 @@
             font-size: 0.95em;
             color: #555;
             background: white;
+        }
+
+        /* Контактная информация */
+        .contact {
+            background-color: rgba(245, 245, 245, 0.9);
+            padding: 25px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 40px;
+            border-radius: 4px;
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: #222;
         }
 
         /* Модальное окно галереи */
@@ -365,11 +381,18 @@
             transform: translateY(-50%) scale(1.1);
         }
         
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9em;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 60px 0 20px;
+            h1 {
+                font-size: 2em;
+                padding-top: 20px;
             }
             
             .logo {
@@ -377,20 +400,27 @@
                 margin-bottom: 15px;
             }
             
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 0;
+            }
+            
             .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
             }
             
             .gallery-item.size-small {
-                height: 150px;
+                height: 160px;
             }
             
             .gallery-item.size-medium {
-                height: 220px;
+                height: 240px;
             }
             
             .gallery-item.size-large {
-                height: 300px;
+                height: 320px;
             }
             
             .services-container {
@@ -436,11 +466,6 @@
         }
         
         @media (max-width: 480px) {
-            .gallery-item {
-                width: 200px;
-                height: auto;
-            }
-            
             .product-grid {
                 grid-template-columns: 1fr;
             }
@@ -466,43 +491,93 @@
             <h2>Наши работы</h2>
             
             <div class="gallery-category">
-                <h3>Традиционные колокольчики <span class="photo-count">4 фото</span></h3>
+                <h3>Валдайские колокольчики<span class="photo-count" id="traditional-count"></span></h3>
+                <p>Колокольчики с символикой и достопримечательностями города Валдай, традиционные Валдайские колокольчики в наличии.</p>
+                <p>Колокольчики разных размеров, от 3 см в диаметре.</p>
+                <p>Традиционные валдайские надписи, достопримечательности города, герб города.</p>
+                <p>Примеры колокольчиков на фото</p>
                 <div class="gallery-container">
-                    <div class="gallery">
+                    <div class="gallery" id="traditional-gallery">
                         <div class="gallery-item size-large" onclick="openModal('traditional', 0)">
-                            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Традиционные валдайские колокольчики">
-                            <div class="gallery-caption">Традиционный валдайский колокольчик (большой)</div>
+                            <img src="/tradmuz2.jpg" alt="Колокольчик №5 с ручкой">
+                            <div class="gallery-caption">Колокольчик №5 с ручкой</div>
                         </div>
                         <div class="gallery-item size-medium" onclick="openModal('traditional', 1)">
-                            <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Колокольчики с традиционным орнаментом">
-                            <div class="gallery-caption">Колокольчик с орнаментом (средний)</div>
+                            <img src="/kolivmon2.jpg" alt="Колокольчик №6 с ручкой">
+                            <div class="gallery-caption">Колокольчик №6 с ручкой</div>
                         </div>
-                        <div class="gallery-item size-small" onclick="openModal('traditional', 2)">
-                            <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Традиционные колокольчики">
-                            <div class="gallery-caption">Миниатюрный колокольчик</div>
+                        <div class="gallery-item size-large" onclick="openModal('traditional', 2)">
+                            <img src="/kolokolasuv.jpg" alt="Колокольчики разных размеров">
+                            <div class="gallery-caption">Колокольчики разных размеров</div>
                         </div>
-                        <div class="gallery-item size-medium" onclick="openModal('traditional', 3)">
-                            <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Традиционные колокольчики">
-                            <div class="gallery-caption">Колокольчик среднего размера</div>
+                        <div class="gallery-item size-small" onclick="openModal('traditional', 3)">
+                            <img src="/nomer6.jpg" alt="Колокольчик №6 с Иверским монастырем">
+                            <div class="gallery-caption">Колокольчик №6 с Иверским монастырем</div>
+                        </div>
+                        <div class="gallery-item size-large" onclick="openModal('traditional', 4)">
+                            <img src="/nomer4.jpg" alt="Колокольчик №4">
+                            <div class="gallery-caption">Колокольчик №4</div>
+                        </div>
+                        <div class="gallery-item size-medium" onclick="openModal('traditional', 5)">
+                            <img src="/nomer4ivmon.jpg" alt="Колокольчик №4 с Иверским монастырем">
+                            <div class="gallery-caption">Колокольчик №4 с Иверским монастырем</div>
+                        </div>
+                        <div class="gallery-item size-medium" onclick="openModal('traditional', 6)">
+                            <img src="/nomer5slojvld.png" alt="Колокольчик №5 с гербом города и сложной надписью">
+                            <div class="gallery-caption">Колокольчик №5 с гербом города и сложной надписью</div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="gallery-category">
-                <h3>Индивидуальные колокольчики <span class="photo-count">3 фото</span></h3>
+                <h3>Индивидуальные колокольчики под заказ <span class="photo-count" id="custom-count"></span></h3>
+                <p>Примеры работ индивидульных заказов.</p>
                 <div class="gallery-container">
-                    <div class="gallery">
-                        <div class="gallery-item size-small" onclick="openModal('custom', 0)">
-                            <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Колокольчики с гравировкой">
+                    <div class="gallery" id="custom-gallery">
+                        <div class="gallery-item size-medium" onclick="openModal('custom', 0)">
+                            <img src="/nomer7ind.jpg" alt="Колокольчики с гравировкой">
                             <div class="gallery-caption">Маленький с гравировкой</div>
                         </div>
-                        <div class="gallery-item size-large" onclick="openModal('custom', 1)">
-                            <img src="https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Колокольчики с памятными надписями">
+                        <div class="gallery-item size-small" onclick="openModal('custom', 1)">
+                            <img src="/nomer7svadeb.jpg" alt="Колокольчики с памятными надписями">
                             <div class="gallery-caption">Большой с памятной надписью</div>
                         </div>
-                        <div class="gallery-item size-medium" onclick="openModal('custom', 2)">
-                            <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Индивидуальные колокольчики">
+                        <div class="gallery-item size-large" onclick="openModal('custom', 2)">
+                            <img src="/naborkolind.jpg" alt="Индивидуальные колокольчики">
+                            <div class="gallery-caption">Средний индивидуальный</div>
+                        </div>
+                        <div class="gallery-item size-medium" onclick="openModal('custom', 3)">
+                            <img src="/srospind.jpg" alt="Индивидуальные колокольчики">
+                            <div class="gallery-caption">Средний индивидуальный</div>
+                        </div>
+                        <div class="gallery-item size-medium" onclick="openModal('custom', 4)">
+                            <img src="/finisher105.jpg" alt="Индивидуальные колокольчики">
+                            <div class="gallery-caption">Средний индивидуальный</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <h3>Колокола различных городов <span class="photo-count" id="custom-count"></span></h3>
+                <p>Примеры работ для городов России.</p>
+                <div class="gallery-container">
+                    <div class="gallery" id="custom-gallery">
+                        <div class="gallery-item size-medium" onclick="openModal('custom', 0)">
+                            <img src="/nomer7ind.jpg" alt="Колокольчики с гравировкой">
+                            <div class="gallery-caption">Маленький с гравировкой</div>
+                        </div>
+                        <div class="gallery-item size-small" onclick="openModal('custom', 1)">
+                            <img src="/nomer7svadeb.jpg" alt="Колокольчики с памятными надписями">
+                            <div class="gallery-caption">Большой с памятной надписью</div>
+                        </div>
+                        <div class="gallery-item size-large" onclick="openModal('custom', 2)">
+                            <img src="/naborkolind.jpg" alt="Индивидуальные колокольчики">
+                            <div class="gallery-caption">Средний индивидуальный</div>
+                        </div>
+                        <div class="gallery-item size-medium" onclick="openModal('custom', 3)">
+                            <img src="/srospind.jpg" alt="Индивидуальные колокольчики">
                             <div class="gallery-caption">Средний индивидуальный</div>
                         </div>
                     </div>
@@ -595,19 +670,20 @@
         // Галерея изображений сгруппирована по категориям
         const galleriesData = {
             traditional: [
-                {src: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Традиционный валдайский колокольчик"},
-                {src: "https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Колокольчик с традиционным орнаментом"},
-                {src: "https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Ещё один традиционный колокольчик"}
+                {src: "/tradmuz2.jpg", caption: "Традиционный валдайский колокольчик (большой)"},
+                {src: "/kolivmon2.jpg", caption: "Колокольчик с традиционным орнаментом (средний)"},
+                {src: "/kolokolasuv.jpg", caption: "Миниатюрный колокольчик"},
+                {src: "/nomer6.jpg", caption: "Колокольчик среднего размера"},
+                {src: "/nomer4.jpg", caption: "Колокольчик среднего размера"},
+                {src: "/nomer4ivmon.jpg", caption: "Колокольчик среднего размера"},
+                {src: "/nomer5slojvld.png", caption: "Колокольчик среднего размера"}
             ],
             custom: [
-                {src: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Колокольчик с именной гравировкой"},
-                {src: "https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Колокольчик с памятной надписью"},
-                {src: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Индивидуальный дизайн по заказу"}
-            ],
-            symbols: [
-                {src: "https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Колокольчик с гербом Валдая"},
-                {src: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Колокольчик с достопримечательностями"},
-                {src: "https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", caption: "Сувенирный колокольчик с символикой"}
+                {src: "/nomer7ind.jpg", caption: "Маленький с гравировкой"},
+                {src: "/nomer7svadeb.jpg", caption: "Большой с памятной надписью"},
+                {src: "/naborkolind.jpg", caption: "Средний индивидуальный"},
+                {src: "/srospind.jpg", caption: "Средний индивидуальный"},
+                {src: "/finisher105.jpg", caption: "Средний индивидуальный"}
             ]
         };
         
@@ -616,38 +692,15 @@
         
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
-            initGalleries();
+            // Обновляем счетчики фотографий
+            updatePhotoCount('traditional', 'traditional-count');
+            updatePhotoCount('custom', 'custom-count');
         });
         
-        function initGalleries() {
-            // Инициализация кнопок навигации галерей
-            document.querySelectorAll('.gallery-container').forEach(container => {
-                const galleryEl = container.querySelector('.gallery');
-                const prevBtn = container.querySelector('.gallery-nav.prev');
-                const nextBtn = container.querySelector('.gallery-nav.next');
-                
-                if (prevBtn) {
-                    prevBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        galleryEl.scrollBy({
-                            left: -galleryEl.offsetWidth * 0.8,
-                            behavior: 'smooth'
-                        });
-                    });
-                }
-                
-                if (nextBtn) {
-                    nextBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        galleryEl.scrollBy({
-                            left: galleryEl.offsetWidth * 0.8,
-                            behavior: 'smooth'
-                        });
-                    });
-                }
-            });
+        // Функция для обновления счетчика фото
+        function updatePhotoCount(galleryId, counterId) {
+            const count = document.getElementById(galleryId + '-gallery').children.length;
+            document.getElementById(counterId).textContent = count + ' фото';
         }
         
         function openModal(gallery, index) {
