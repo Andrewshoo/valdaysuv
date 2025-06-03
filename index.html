@@ -3,20 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Валдайская колокольная мастерская</title>
+    <title>Валдайская колокольная мастерская | Авторские колокольчики ручной работы</title>
+    <meta name="description" content="Изготовление традиционных и индивидуальных колокольчиков в Валдае. Сувениры с символикой города, памятные подарки и колокола для городов России.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* Основные стили с новыми шрифтами */
+        :root {
+            --primary-color: #8B7355;
+            --secondary-color: #5a4a3a;
+            --text-color: #333;
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --dark-bg: rgba(0, 0, 0, 0.8);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-color);
             background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
             background-size: cover;
-            margin: 0;
-            padding: 0;
             position: relative;
         }
         
@@ -33,70 +46,114 @@
         
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--secondary-color);
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
+        /* Шапка с анимацией */
         header {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 25px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
             border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .header-container {
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .logo {
             position: absolute;
-            left: 30px;
-            height: 70px;
+            left: 20px;
+            height: 60px;
+            transition: var(--transition);
         }
         
         h1 {
-            color: #444;
             margin: 0;
-            font-size: 2.4em;
-            font-weight: 600;
+            font-size: 2.2em;
             letter-spacing: 0.5px;
+            text-align: center;
+            background: linear-gradient(to right, #8B7355, #5a4a3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 10px;
         }
         
         .content {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            background-color: var(--light-bg);
+            padding: 30px;
             margin: 30px 0;
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            border-radius: 6px;
+            border-radius: 8px;
+            border-top: 4px solid var(--primary-color);
         }
         
         h2 {
-            color: #555;
-            border-bottom: 1px solid #eee;
+            position: relative;
             padding-bottom: 12px;
-            margin-top: 40px;
+            margin: 40px 0 25px;
             font-size: 1.8em;
         }
         
-        /* Стили для галереи с разными размерами */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        
+        /* Стили для галереи */
         .gallery-category {
             margin-bottom: 50px;
         }
         
+        .gallery-category h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .gallery-intro {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(139, 115, 85, 0.1);
+            border-left: 3px solid var(--primary-color);
+            border-radius: 0 4px 4px 0;
+        }
+        
         .gallery-container {
             position: relative;
-            margin: 25px 0;
+            margin: 20px 0;
         }
         
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
-            padding: 15px 0;
         }
         
         .gallery-item {
@@ -104,11 +161,11 @@
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: var(--transition);
             cursor: pointer;
+            background: #fff;
         }
         
-        /* Разные размеры для фотографий */
         .gallery-item.size-small {
             grid-row-end: span 1;
             height: 200px;
@@ -116,12 +173,12 @@
         
         .gallery-item.size-medium {
             grid-row-end: span 2;
-            height: 320px;
+            height: 300px;
         }
         
         .gallery-item.size-large {
             grid-row-end: span 3;
-            height: 420px;
+            height: 400px;
         }
         
         .gallery-item img {
@@ -134,11 +191,11 @@
         
         .gallery-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
         .gallery-item:hover img {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
         
         .gallery-caption {
@@ -146,26 +203,16 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, var(--dark-bg), transparent);
             color: white;
             padding: 15px;
             font-size: 0.95em;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: var(--transition);
         }
         
         .gallery-item:hover .gallery-caption {
             opacity: 1;
-        }
-        
-        .gallery-category h3 {
-            display: flex;
-            align-items: center;
-            color: #555;
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
         }
         
         .photo-count {
@@ -182,7 +229,7 @@
         /* Стили для услуг */
         .services-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
             margin: 30px 0;
         }
@@ -192,44 +239,49 @@
             border-radius: 8px;
             padding: 25px;
             box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 3px solid #8B7355;
+            transition: var(--transition);
+            border-top: 3px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
         
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
         .service-card h3 {
-            color: #5a4a3a;
-            margin: 0 0 15px 0;
+            color: var(--secondary-color);
+            margin: 15px 0;
             font-size: 1.25em;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #e0e0e0;
         }
         
         .service-card p {
             color: #666;
-            line-height: 1.5;
-            margin: 0;
+            line-height: 1.6;
         }
         
         .service-icon {
-            font-size: 2.2em;
-            color: #8B7355;
-            margin-bottom: 15px;
-            display: inline-block;
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
         }
 
-        /* Стили для раздела дополнительных товаров */
+        /* Дополнительные товары */
         .additional-products {
-            margin: 30px 0;
+            margin: 40px 0;
         }
         
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
@@ -239,41 +291,64 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s;
+            transition: var(--transition);
+            text-align: center;
         }
         
         .product-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
         }
         
         .product-image {
-            height: 160px;
+            height: 150px;
             background-size: cover;
             background-position: center;
         }
         
         .product-caption {
-            padding: 14px;
-            text-align: center;
+            padding: 15px 10px;
             font-size: 0.95em;
-            color: #555;
+            color: var(--secondary-color);
             background: white;
+            font-weight: 500;
         }
 
         /* Контактная информация */
         .contact {
-            background-color: rgba(245, 245, 245, 0.9);
-            padding: 25px;
+            background-color: rgba(245, 245, 245, 0.95);
+            padding: 30px;
             text-align: center;
-            font-size: 1.2em;
-            margin-top: 40px;
-            border-radius: 4px;
+            margin-top: 50px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .contact h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .contact h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .contact p {
+            margin: 15px 0;
+            font-size: 1.1em;
         }
         
         .highlight {
             font-weight: bold;
-            color: #222;
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+        
+        .contact-icon {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
 
         /* Модальное окно галереи */
@@ -301,7 +376,7 @@
         }
         
         .modal-content {
-            max-width: 85%;
+            max-width: 90%;
             max-height: 75vh;
             object-fit: contain;
             margin: 0 auto;
@@ -309,6 +384,7 @@
             border: 12px solid white;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
             border-radius: 4px;
+            transition: opacity 0.3s;
         }
         
         .modal-caption {
@@ -318,7 +394,7 @@
             text-align: center;
             color: #fff;
             padding: 12px 20px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             background-color: rgba(0,0,0,0.7);
             border-radius: 30px;
         }
@@ -353,8 +429,8 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: rgba(0,0,0,0.6);
             border-radius: 50%;
             display: flex;
@@ -362,18 +438,19 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 30px;
-            transition: 0.3s;
+            font-size: 25px;
+            transition: var(--transition);
             user-select: none;
             border: none;
+            outline: none;
         }
         
         .modal-nav.next {
-            right: 30px;
+            right: 20px;
         }
         
         .modal-nav.prev {
-            left: 30px;
+            left: 20px;
         }
         
         .modal-nav:hover {
@@ -383,27 +460,64 @@
         
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             color: #777;
             font-size: 0.9em;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
         }
         
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .copyright {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Адаптивность */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-                padding-top: 20px;
+            .header-container {
+                flex-direction: column;
+                text-align: center;
             }
             
             .logo {
                 position: static;
                 margin-bottom: 15px;
+                height: 50px;
             }
             
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px 0;
+            h1 {
+                font-size: 1.8em;
+                padding: 0;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            h2 {
+                font-size: 1.6em;
+                margin: 30px 0 20px;
             }
             
             .gallery {
@@ -425,6 +539,10 @@
             
             .services-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                padding: 20px;
             }
             
             .product-grid {
@@ -451,21 +569,40 @@
             }
             
             .modal-nav {
-                width: 45px;
-                height: 45px;
-                font-size: 24px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
             }
             
             .modal-nav.next {
-                right: 15px;
+                right: 10px;
             }
             
             .modal-nav.prev {
-                left: 15px;
+                left: 10px;
             }
         }
         
         @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item.size-small,
+            .gallery-item.size-medium,
+            .gallery-item.size-large {
+                height: 250px;
+                grid-row-end: auto;
+            }
+            
             .product-grid {
                 grid-template-columns: 1fr;
             }
@@ -474,28 +611,35 @@
                 max-width: 100%;
                 border-width: 5px;
             }
+            
+            .contact {
+                padding: 20px 15px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="/logo.png" alt="Логотип мастерской" class="logo">
-        <h1>Валдайская колокольная мастерская</h1>
+        <div class="header-container">
+            <img src="/logo.png" alt="Логотип Валдайской колокольной мастерской" class="logo">
+            <h1>Валдайская колокольная мастерская</h1>
+        </div>
     </header>
     
     <div class="container">
-        <div class="content">
-            <h2>О мастерской</h2>
-            <p>Мы занимаемся художественной обработкой колоколов, создавая уникальные изделия с индивидуальным дизайном. Каждый колокольчик - это произведение искусства, изготовленное с душой и вниманием к деталям.</p>
+        <div class="content fade-in">
+            <h2 class="fade-in">О мастерской</h2>
+            <p class="fade-in delay-1">Мы — хранители традиций валдайского колокольного искусства. Каждый колокольчик, созданный в нашей мастерской, — это не просто сувенир, а частица души русского ремесла, воплощенная в металле.</p>
+            <p class="fade-in delay-1">С 1992 года мы создаем уникальные изделия, сочетающие вековые традиции с современным дизайном. Наши колокольчики — это символы русской культуры, которые дарят радость и становятся семейными реликвиями.</p>
             
-            <h2>Наши работы</h2>
+            <h2 class="fade-in delay-1">Наши работы</h2>
             
-            <div class="gallery-category">
-                <h3>Валдайские колокольчики<span class="photo-count" id="traditional-count"></span></h3>
-                <p>Колокольчики с символикой и достопримечательностями города Валдай, традиционные Валдайские колокольчики в наличии.</p>
-                <p>Колокольчики разных размеров, от 3 см в диаметре.</p>
-                <p>Традиционные валдайские надписи, достопримечательности города, герб города.</p>
-                <p>Примеры колокольчиков на фото</p>
+            <div class="gallery-category fade-in delay-1">
+                <h3>Валдайские колокольчики <span class="photo-count" id="traditional-count"></span></h3>
+                <div class="gallery-intro">
+                    <p>Колокольчики с символикой Валдая — это не просто сувениры, а маленькие произведения искусства. Каждый экземпляр создается вручную с использованием традиционных технологий.</p>
+                    <p>В наличии: колокольчики разных размеров (от 3 см), с изображением достопримечательностей города, гербом Валдая и традиционными надписями.</p>
+                </div>
                 <div class="gallery-container">
                     <div class="gallery" id="traditional-gallery">
                         <div class="gallery-item size-large" onclick="openModal('traditional', 0)">
@@ -530,9 +674,12 @@
                 </div>
             </div>
             
-            <div class="gallery-category">
+            <div class="gallery-category fade-in delay-2">
                 <h3>Индивидуальные колокольчики под заказ <span class="photo-count" id="custom-count"></span></h3>
-                <p>Примеры работ индивидульных заказов.</p>
+                <div class="gallery-intro">
+                    <p>Создаем уникальные колокольчики по вашему эскизу или разрабатываем дизайн совместно с вами. Идеальный подарок на свадьбу, юбилей или корпоративное мероприятие.</p>
+                    <p>Возможна гравировка имен, дат, памятных надписей и логотипов.</p>
+                </div>
                 <div class="gallery-container">
                     <div class="gallery" id="custom-gallery">
                         <div class="gallery-item size-medium" onclick="openModal('custom', 0)">
@@ -541,76 +688,79 @@
                         </div>
                         <div class="gallery-item size-small" onclick="openModal('custom', 1)">
                             <img src="/nomer7svadeb.jpg" alt="Колокольчики с памятными надписями">
-                            <div class="gallery-caption">Большой с памятной надписью</div>
+                            <div class="gallery-caption">Свадебный колокольчик с памятной надписью</div>
                         </div>
                         <div class="gallery-item size-large" onclick="openModal('custom', 2)">
                             <img src="/naborkolind.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Средний индивидуальный</div>
+                            <div class="gallery-caption">Набор индивидуальных колокольчиков</div>
                         </div>
                         <div class="gallery-item size-medium" onclick="openModal('custom', 3)">
                             <img src="/srospind.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Средний индивидуальный</div>
+                            <div class="gallery-caption">Колокольчик с росписью</div>
                         </div>
                         <div class="gallery-item size-medium" onclick="openModal('custom', 4)">
                             <img src="/finisher105.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Средний индивидуальный</div>
+                            <div class="gallery-caption">Эксклюзивный дизайн</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-category">
-                <h3>Колокола различных городов <span class="photo-count" id="custom-count"></span></h3>
-                <p>Примеры работ для городов России.</p>
+            <div class="gallery-category fade-in delay-2">
+                <h3>Колокола для городов России <span class="photo-count" id="cities-count"></span></h3>
+                <div class="gallery-intro">
+                    <p>Специальная серия колокольчиков с символикой российских городов. Отличный сувенир для туристов и памятный подарок для жителей.</p>
+                    <p>Возможен заказ колокольчиков с гербами и достопримечательностями вашего города.</p>
+                </div>
                 <div class="gallery-container">
-                    <div class="gallery" id="custom-gallery">
-                        <div class="gallery-item size-medium" onclick="openModal('custom', 0)">
-                            <img src="/nomer7ind.jpg" alt="Колокольчики с гравировкой">
-                            <div class="gallery-caption">Маленький с гравировкой</div>
+                    <div class="gallery" id="cities-gallery">
+                        <div class="gallery-item size-medium" onclick="openModal('cities', 0)">
+                            <img src="/nomer7ind.jpg" alt="Колокольчик с символикой города">
+                            <div class="gallery-caption">Колокольчик с городской символикой</div>
                         </div>
-                        <div class="gallery-item size-small" onclick="openModal('custom', 1)">
-                            <img src="/nomer7svadeb.jpg" alt="Колокольчики с памятными надписями">
-                            <div class="gallery-caption">Большой с памятной надписью</div>
+                        <div class="gallery-item size-small" onclick="openModal('cities', 1)">
+                            <img src="/nomer7svadeb.jpg" alt="Колокольчик с гербом города">
+                            <div class="gallery-caption">Колокольчик с гербом города</div>
                         </div>
-                        <div class="gallery-item size-large" onclick="openModal('custom', 2)">
-                            <img src="/naborkolind.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Средний индивидуальный</div>
+                        <div class="gallery-item size-large" onclick="openModal('cities', 2)">
+                            <img src="/naborkolind.jpg" alt="Набор колокольчиков городов России">
+                            <div class="gallery-caption">Набор колокольчиков городов России</div>
                         </div>
-                        <div class="gallery-item size-medium" onclick="openModal('custom', 3)">
-                            <img src="/srospind.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Средний индивидуальный</div>
+                        <div class="gallery-item size-medium" onclick="openModal('cities', 3)">
+                            <img src="/srospind.jpg" alt="Колокольчик с видом города">
+                            <div class="gallery-caption">Колокольчик с видом города</div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <h2>Наши услуги</h2>
+            <h2 class="fade-in delay-2">Наши услуги</h2>
             <div class="services-container">
-                <div class="service-card">
+                <div class="service-card fade-in delay-2">
                     <div class="service-icon">🔔</div>
-                    <h3>Нанесение рисунка и надписи</h3>
-                    <p>Индивидуальное оформление колокольчиков по вашему эскизу или нашему дизайну. Любые надписи, имена, даты и пожелания.</p>
+                    <h3>Индивидуальный дизайн</h3>
+                    <p>Создаем уникальные колокольчики по вашему эскизу. Гравировка имен, дат, памятных надписей и логотипов.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in delay-2">
                     <div class="service-icon">📏</div>
-                    <h3>Колокольчики разных размеров</h3>
-                    <p>Изготовление колокольчиков от миниатюрных (3 см) до крупных экземпляров. Разнообразие форм и звучаний.</p>
+                    <h3>Разнообразие размеров</h3>
+                    <p>Изготовление колокольчиков от миниатюрных (3 см) до крупных экземпляров (15 см). Разные формы и звучания.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in delay-3">
                     <div class="service-icon">🏢</div>
-                    <h3>Розничные и оптовые заказы</h3>
-                    <p>Работаем как с индивидуальными заказами, так и с крупными партиями для организаций и мероприятий.</p>
+                    <h3>Оптовые заказы</h3>
+                    <p>Производство крупных партий для организаций, музеев и сувенирных магазинов. Скидки от 20% на опт.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in delay-3">
                     <div class="service-icon">🏛️</div>
-                    <h3>Колокольчики с символикой Валдая</h3>
-                    <p>Уникальные сувениры с изображением достопримечательностей города и традиционными орнаментами.</p>
+                    <h3>Валдайская символика</h3>
+                    <p>Колокольчики с изображением достопримечательностей Валдая: Иверский монастырь, музей колоколов, герб города.</p>
                 </div>
             </div>
             
-            <h2>Дополнительные товары</h2>
-            <div class="additional-products">
-                <p>В нашей мастерской помимо колоколов можно приобрести:</p>
+            <h2 class="fade-in delay-3">Сопутствующие товары</h2>
+            <div class="additional-products fade-in delay-3">
+                <p>В нашей мастерской вы также можете приобрести:</p>
                 <div class="product-grid">
                     <div class="product-item">
                         <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
@@ -628,23 +778,18 @@
                         <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                         <div class="product-caption">Картины местных художников</div>
                     </div>
-                    <div class="product-item">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                        <div class="product-caption">Винтажные книги и открытки</div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1590845947676-fa2576f401d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                        <div class="product-caption">Старинные колокола</div>
-                    </div>
                 </div>
                 <p style="margin-top: 20px; font-size: 0.95em; color: #666;">Посмотреть дополнительные товары можно в дневное время по предварительному телефонному звонку.</p>
             </div>
             
-            <div class="contact">
+            <div class="contact fade-in delay-3">
+                <div class="contact-icon">📞</div>
                 <h2>Контакты</h2>
-                <p>Телефон: <span class="highlight">+7 (996) 067-28-37</span></p>
-                <p>Адрес: г. Валдай, ул. Колокольная, д. 1</p>
-                <p>Часы работы: ежедневно с 10:00 до 18:00</p>
+                <p>Мы находимся в самом сердце Валдая</p>
+                <p><span class="highlight">Телефон:</span> +7 (996) 067-28-37</p>
+                <p><span class="highlight">Адрес:</span> г. Валдай, ул. Колокольная, д. 1</p>
+                <p><span class="highlight">Часы работы:</span> ежедневно с 10:00 до 18:00</p>
+                <p style="margin-top: 20px;">Приезжайте в гости — у нас всегда звонко!</p>
             </div>
         </div>
     </div>
@@ -660,9 +805,12 @@
         <button class="modal-nav next" onclick="plusSlides(1)">❯</button>
     </div>
     
-    <footer>
+    <footer class="fade-in delay-3">
         <div class="container">
-            <p>© Валдайская колокольная мастерская, 2023</p>
+            <img src="/logo.png" alt="Логотип Валдайской колокольной мастерской" class="footer-logo">
+            <p>Валдайская колокольная мастерская</p>
+            <p>Изготовление традиционных и индивидуальных колокольчиков</p>
+            <div class="copyright">© 2023 Все права защищены</div>
         </div>
     </footer>
     
@@ -670,20 +818,26 @@
         // Галерея изображений сгруппирована по категориям
         const galleriesData = {
             traditional: [
-                {src: "/tradmuz2.jpg", caption: "Традиционный валдайский колокольчик (большой)"},
-                {src: "/kolivmon2.jpg", caption: "Колокольчик с традиционным орнаментом (средний)"},
-                {src: "/kolokolasuv.jpg", caption: "Миниатюрный колокольчик"},
-                {src: "/nomer6.jpg", caption: "Колокольчик среднего размера"},
-                {src: "/nomer4.jpg", caption: "Колокольчик среднего размера"},
-                {src: "/nomer4ivmon.jpg", caption: "Колокольчик среднего размера"},
-                {src: "/nomer5slojvld.png", caption: "Колокольчик среднего размера"}
+                {src: "/tradmuz2.jpg", caption: "Колокольчик №5 с ручкой. Традиционный валдайский дизайн."},
+                {src: "/kolivmon2.jpg", caption: "Колокольчик №6 с ручкой. Изображение Иверского монастыря."},
+                {src: "/kolokolasuv.jpg", caption: "Набор колокольчиков разных размеров. От 3 до 10 см в диаметре."},
+                {src: "/nomer6.jpg", caption: "Колокольчик №6 с Иверским монастырем. Традиционная валдайская надпись."},
+                {src: "/nomer4.jpg", caption: "Колокольчик №4. Классический дизайн с растительным орнаментом."},
+                {src: "/nomer4ivmon.jpg", caption: "Колокольчик №4 с Иверским монастырем. Сувенир из Валдая."},
+                {src: "/nomer5slojvld.png", caption: "Колокольчик №5 с гербом города Валдай и сложной надписью."}
             ],
             custom: [
-                {src: "/nomer7ind.jpg", caption: "Маленький с гравировкой"},
-                {src: "/nomer7svadeb.jpg", caption: "Большой с памятной надписью"},
-                {src: "/naborkolind.jpg", caption: "Средний индивидуальный"},
-                {src: "/srospind.jpg", caption: "Средний индивидуальный"},
-                {src: "/finisher105.jpg", caption: "Средний индивидуальный"}
+                {src: "/nomer7ind.jpg", caption: "Индивидуальный колокольчик с гравировкой. Размер 5 см."},
+                {src: "/nomer7svadeb.jpg", caption: "Свадебный колокольчик с памятной надписью. Идеальный подарок молодоженам."},
+                {src: "/naborkolind.jpg", caption: "Набор индивидуальных колокольчиков. Возможен любой дизайн."},
+                {src: "/srospind.jpg", caption: "Колокольчик с ручной росписью. Уникальный экземпляр."},
+                {src: "/finisher105.jpg", caption: "Эксклюзивный дизайн по индивидуальному заказу."}
+            ],
+            cities: [
+                {src: "/nomer7ind.jpg", caption: "Колокольчик с символикой города. Возможен заказ для любого города России."},
+                {src: "/nomer7svadeb.jpg", caption: "Колокольчик с гербом города. Изготовление по вашему заказу."},
+                {src: "/naborkolind.jpg", caption: "Набор колокольчиков городов России. Отличный подарок коллекционеру."},
+                {src: "/srospind.jpg", caption: "Колокольчик с видом города. Изображение достопримечательностей."}
             ]
         };
         
@@ -695,12 +849,29 @@
             // Обновляем счетчики фотографий
             updatePhotoCount('traditional', 'traditional-count');
             updatePhotoCount('custom', 'custom-count');
+            updatePhotoCount('cities', 'cities-count');
+            
+            // Плавное появление элементов
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+            });
+            
+            // Запуск анимаций
+            setTimeout(() => {
+                fadeElements.forEach(el => {
+                    el.style.opacity = '1';
+                });
+            }, 100);
         });
         
         // Функция для обновления счетчика фото
         function updatePhotoCount(galleryId, counterId) {
-            const count = document.getElementById(galleryId + '-gallery').children.length;
-            document.getElementById(counterId).textContent = count + ' фото';
+            const gallery = document.getElementById(galleryId + '-gallery');
+            if (gallery) {
+                const count = gallery.children.length;
+                document.getElementById(counterId).textContent = count + ' фото';
+            }
         }
         
         function openModal(gallery, index) {
@@ -752,6 +923,16 @@
             if (e.key === 'Escape') {
                 closeModal();
             }
+        });
+        
+        // Плавный скролл для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
