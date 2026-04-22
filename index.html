@@ -3,942 +3,1073 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Валдайская колокольная мастерская | Авторские колокольчики ручной работы</title>
-    <meta name="description" content="Изготовление традиционных и индивидуальных колокольчиков в Валдае. Сувениры с символикой города, памятные подарки и колокола для городов России.">
+    <title>Валдайская колокольная мастерская | Авторские колокольчики</title>
+    <meta name="description" content="Авторские валдайские колокольчики ручной работы. Заказ с доставкой по России. Мастерская в Валдае.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         :root {
-            --primary-color: #8B7355;
-            --secondary-color: #5a4a3a;
-            --text-color: #333;
-            --light-bg: rgba(255, 255, 255, 0.95);
-            --dark-bg: rgba(0, 0, 0, 0.8);
-            --transition: all 0.3s ease;
+            --parchment:  #F2E6CC;
+            --parchment2: #E8D9B5;
+            --cream:      #FBF6EC;
+            --ink:        #1A0D04;
+            --ink2:       #3D2010;
+            --mahogany:   #2A1505;
+            --gold:       #9B7A2E;
+            --gold2:      #C9A84C;
+            --rust:       #6B3520;
+            --bgold:      rgba(155,122,46,0.45);
+            --t:          0.22s ease;
         }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-            background-size: cover;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.85);
-            z-index: -1;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Шапка с анимацией */
-        header {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px 0;
-            border-bottom: 1px solid #e0e0e0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: relative;
-            transition: var(--transition);
-        }
-        
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            position: absolute;
-            left: 20px;
-            height: 100px;
-            transition: var(--transition);
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 2.2em;
-            letter-spacing: 0.5px;
-            text-align: center;
-            background: linear-gradient(to right, #8B7355, #5a4a3a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            padding: 0 10px;
-        }
-        
-        .content {
-            background-color: var(--light-bg);
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            border-radius: 8px;
-            border-top: 4px solid var(--primary-color);
-        }
-        
-        h2 {
-            position: relative;
-            padding-bottom: 12px;
-            margin: 40px 0 25px;
-            font-size: 1.8em;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--primary-color);
-        }
-        
-        p {
-            margin-bottom: 15px;
-            font-size: 1.05em;
+            font-family: 'EB Garamond', Georgia, serif;
+            background: var(--parchment);
+            color: var(--ink);
             line-height: 1.7;
+            font-size: 17px;
         }
-        
-        /* Стили для галереи */
-        .gallery-category {
-            margin-bottom: 50px;
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: var(--mahogany);
+            line-height: 1.2;
         }
-        
-        .gallery-category h3 {
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
+
+        img { max-width: 100%; height: auto; display: block; }
+        a   { color: inherit; text-decoration: none; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Ornamental divider */
+        .orn { text-align: center; color: var(--gold); letter-spacing: 6px; margin: 6px 0; }
+
+        .divider {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 32px; color: var(--gold2);
         }
-        
-        .gallery-intro {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: rgba(139, 115, 85, 0.1);
-            border-left: 3px solid var(--primary-color);
-            border-radius: 0 4px 4px 0;
+        .divider::before,
+        .divider::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
-        
-        .gallery-container {
+        .divider span { font-size: 0.95rem; letter-spacing: 5px; flex-shrink: 0; }
+
+        .sec-title {
+            font-size: clamp(1.7rem, 4vw, 2.3rem);
+            text-align: center; margin-bottom: 6px;
+            font-style: italic; font-weight: 600;
+        }
+
+        /* ── HEADER ── */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--mahogany);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .header-inner {
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 11px 20px; gap: 12px;
+            max-width: 1100px; margin: 0 auto;
+        }
+
+        .logo-link { display: flex; align-items: center; gap: 11px; flex: 1; min-width: 0; }
+
+        .logo {
+            height: 44px; width: auto; flex-shrink: 0;
+            filter: brightness(0) invert(1) sepia(1) saturate(0.4) brightness(1.4);
+        }
+
+        .site-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.97rem; font-weight: 600;
+            color: var(--parchment); line-height: 1.3;
+        }
+
+        .cart-btn {
+            display: flex; align-items: center; gap: 7px;
+            background: transparent; color: var(--parchment);
+            border: 1px solid var(--gold);
+            padding: 8px 15px; cursor: pointer; flex-shrink: 0;
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+            letter-spacing: 0.3px; white-space: nowrap;
+            transition: all var(--t);
+        }
+        .cart-btn:hover { background: var(--gold); color: var(--mahogany); }
+
+        .cart-badge {
+            background: var(--gold); color: var(--mahogany);
+            border-radius: 50%; width: 19px; height: 19px;
+            font-size: 0.7rem; font-weight: 700;
+            display: none; align-items: center; justify-content: center;
+        }
+        .cart-badge.show { display: flex; }
+
+        nav {
+            background: #1E0C03;
+            border-top: 1px solid rgba(155,122,46,0.25);
+            overflow-x: auto; scrollbar-width: none;
+        }
+        nav::-webkit-scrollbar { display: none; }
+
+        .nav-inner {
+            display: flex; max-width: 1100px;
+            margin: 0 auto; padding: 0 20px;
+        }
+
+        nav a {
+            padding: 9px 15px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem; letter-spacing: 0.4px;
+            color: rgba(242,230,204,0.7); white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: color var(--t), border-color var(--t);
+        }
+        nav a:hover { color: var(--gold2); border-bottom-color: var(--gold); }
+
+        /* ── HERO ── */
+        .hero {
+            background-color: var(--cream);
+            padding: clamp(40px, 8vw, 72px) 20px;
+            text-align: center;
+            border-bottom: 2px double var(--gold);
+        }
+
+        .hero-frame {
+            max-width: 620px; margin: 0 auto;
+            border: 1px solid var(--bgold);
+            padding: clamp(24px, 5vw, 44px);
             position: relative;
-            margin: 20px 0;
         }
-        
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+        /* Corner dots */
+        .hero-frame::before { content: '✦'; position: absolute; top: -9px; left: -7px; color: var(--gold); font-size: 0.9rem; }
+        .hero-frame::after  { content: '✦'; position: absolute; bottom: -9px; right: -7px; color: var(--gold); font-size: 0.9rem; }
+
+        .hero-stamp {
+            display: inline-block;
+            border: 1px solid var(--bgold);
+            color: var(--gold); font-family: 'Cormorant Garamond', serif;
+            font-size: 0.75rem; letter-spacing: 2.5px;
+            text-transform: uppercase; padding: 4px 14px;
+            margin-bottom: 18px;
         }
-        
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            transition: var(--transition);
-            cursor: pointer;
-            background: #fff;
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 2.9rem);
+            font-weight: 700; color: var(--mahogany); margin-bottom: 8px;
         }
-        
-        .gallery-item.size-small {
-            grid-row-end: span 1;
-            height: 200px;
+
+        .hero-sub {
+            font-style: italic; color: var(--rust);
+            font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+            margin-bottom: 8px;
         }
-        
-        .gallery-item.size-medium {
-            grid-row-end: span 2;
-            height: 300px;
+
+        .hero p {
+            color: var(--ink2); font-size: 1rem;
+            max-width: 440px; margin: 14px auto 24px; line-height: 1.8;
         }
-        
-        .gallery-item.size-large {
-            grid-row-end: span 3;
-            height: 400px;
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--mahogany); color: var(--parchment);
+            padding: 11px 28px;
+            border: 1px solid var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; letter-spacing: 0.4px;
+            cursor: pointer; transition: all var(--t);
         }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .btn-primary:hover { background: var(--gold); color: var(--mahogany); }
+
+        .hero-stats {
+            display: flex; justify-content: center;
+            gap: 32px; margin-top: 26px; flex-wrap: wrap;
+        }
+        .hero-stat strong {
             display: block;
-            transition: transform 0.5s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem; font-weight: 700; color: var(--mahogany);
         }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, var(--dark-bg), transparent);
-            color: white;
-            padding: 15px;
-            font-size: 0.95em;
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
-        .gallery-item:hover .gallery-caption {
-            opacity: 1;
-        }
-        
-        .photo-count {
-            margin-left: 12px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.8em;
-            font-weight: 500;
-            color: #777;
-            background-color: #f5f5f5;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
+        .hero-stat span { font-size: 0.8rem; color: var(--rust); }
 
-        /* Стили для услуг */
-        .services-container {
+        /* ── SECTIONS ── */
+        section { padding: clamp(44px, 7vw, 68px) 0; }
+        #about    { background: var(--parchment2); }
+        #contacts { background: var(--parchment2); }
+
+        /* ── CATALOG ── */
+        .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            border-top: 3px solid var(--primary-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .service-card h3 {
-            color: var(--secondary-color);
-            margin: 15px 0;
-            font-size: 1.25em;
-        }
-        
-        .service-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .service-icon {
-            font-size: 2.5em;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            transition: var(--transition);
-        }
-        
-        .service-card:hover .service-icon {
-            transform: scale(1.1);
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
         }
 
-        /* Дополнительные товары */
-        .additional-products {
-            margin: 40px 0;
+        .product-card {
+            background: var(--cream);
+            border: 1px solid var(--bgold);
+            display: flex; flex-direction: column;
+            position: relative;
+            transition: transform var(--t), box-shadow var(--t);
         }
-        
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .product-card::after {
+            content: ''; position: absolute; inset: 5px;
+            border: 1px solid rgba(155,122,46,0.15);
+            pointer-events: none;
+            transition: border-color var(--t);
         }
-        
-        .product-item {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: var(--transition);
-            text-align: center;
-        }
-        
-        .product-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-        }
-        
-        .product-image {
-            height: 150px;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .product-caption {
-            padding: 15px 10px;
-            font-size: 0.95em;
-            color: var(--secondary-color);
-            background: white;
-            font-weight: 500;
+        .product-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,21,5,0.1); }
+        .product-card:hover::after { border-color: rgba(155,122,46,0.4); }
+
+        .product-img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+        .product-placeholder {
+            width: 100%; aspect-ratio: 1;
+            background: var(--parchment);
+            display: flex; align-items: center; justify-content: center;
+            font-size: clamp(2rem, 7vw, 3rem);
+            color: rgba(155,122,46,0.25);
+            border-bottom: 1px solid var(--bgold);
         }
 
-        /* Контактная информация */
-        .contact {
-            background-color: rgba(245, 245, 245, 0.95);
-            padding: 30px;
-            text-align: center;
-            margin-top: 50px;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
+        .product-info { padding: 13px 11px; flex: 1; display: flex; flex-direction: column; }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.97rem; color: var(--mahogany);
+            margin-bottom: 5px; line-height: 1.3; flex: 1;
         }
-        
-        .contact h2 {
-            text-align: center;
-            margin-top: 0;
+
+        .product-price {
+            font-style: italic; font-size: 0.83rem;
+            color: var(--rust); margin-bottom: 10px;
         }
-        
-        .contact h2::after {
-            left: 50%;
-            transform: translateX(-50%);
+
+        .btn-add {
+            width: 100%; padding: 8px;
+            background: transparent; color: var(--mahogany);
+            border: 1px solid var(--bgold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem; cursor: pointer;
+            transition: all var(--t);
         }
-        
-        .contact p {
-            margin: 15px 0;
-            font-size: 1.1em;
+        .btn-add:hover, .btn-add.added {
+            background: var(--mahogany); color: var(--parchment);
+            border-color: var(--mahogany);
         }
-        
-        .highlight {
-            font-weight: bold;
-            color: var(--primary-color);
-            font-size: 1.1em;
+
+        /* ── ABOUT ── */
+        .about-lead {
+            font-style: italic; font-size: 1.05rem; line-height: 1.85;
+            text-align: center; max-width: 720px;
+            margin: 0 auto 32px; color: var(--ink2);
         }
-        
+
+        .about-cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+        .about-card {
+            background: var(--cream); border: 1px solid var(--bgold);
+            padding: 20px; text-align: center;
+        }
+        .about-icon { font-size: 1.7rem; margin-bottom: 8px; }
+        .about-card h3 { font-size: 1.1rem; font-style: italic; margin-bottom: 7px; }
+        .about-card p  { color: var(--ink2); font-size: 0.9rem; line-height: 1.7; }
+
+        /* ── WHERE TO BUY ── */
+        .locations-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+        .location-card {
+            background: var(--cream); border: 1px solid var(--bgold);
+            padding: 16px 18px; display: flex; gap: 13px; align-items: flex-start;
+        }
+        .loc-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+        .location-card h3 { font-size: 1rem; font-style: italic; margin-bottom: 3px; }
+        .location-card p  { color: var(--ink2); font-size: 0.88rem; line-height: 1.5; }
+        .loc-link { color: var(--gold); font-size: 0.83rem; display: inline-block; margin-top: 4px; }
+        .loc-link:hover { text-decoration: underline; }
+
+        .location-note {
+            background: rgba(155,122,46,0.06); border-left: 2px solid var(--gold);
+            padding: 11px 15px; font-style: italic;
+            font-size: 0.9rem; color: var(--ink2); margin-top: 12px;
+        }
+        .location-note strong { font-style: normal; color: var(--mahogany); }
+
+        /* ── CONTACTS ── */
+        .contacts-grid { display: grid; grid-template-columns: 1fr; gap: 11px; }
+
+        .contact-card {
+            background: var(--cream); border: 1px solid var(--bgold);
+            padding: 15px 17px; display: flex; align-items: center; gap: 13px;
+        }
         .contact-icon {
-            font-size: 2em;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+            width: 42px; height: 42px; flex-shrink: 0;
+            background: var(--parchment); border: 1px solid var(--bgold);
+            display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+        }
+        .contact-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--rust); margin-bottom: 2px;
+        }
+        .contact-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.02rem; color: var(--mahogany);
+        }
+        .contact-value a { color: var(--rust); }
+        .contact-value a:hover { text-decoration: underline; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--mahogany); color: rgba(242,230,204,0.6);
+            padding: 38px 20px; text-align: center;
+            border-top: 2px solid var(--gold);
+        }
+        .footer-logo {
+            height: 42px; width: auto; margin: 0 auto 14px;
+            filter: brightness(0) invert(1) sepia(1) saturate(0.4) brightness(1.3);
+            opacity: 0.7;
+        }
+        footer h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--parchment); font-size: 1.1rem;
+            font-style: italic; margin-bottom: 5px;
+        }
+        footer p  { font-size: 0.86rem; }
+        .footer-orn { color: var(--gold); letter-spacing: 7px; margin: 11px 0; }
+        .copyright {
+            margin-top: 20px; font-size: 0.77rem;
+            border-top: 1px solid rgba(155,122,46,0.2);
+            padding-top: 15px;
         }
 
-        /* Модальное окно галереи */
+        /* ── CART SIDEBAR ── */
+        .overlay {
+            position: fixed; inset: 0; z-index: 200;
+            background: rgba(26,13,4,0.55);
+            opacity: 0; pointer-events: none; transition: opacity var(--t);
+        }
+        .overlay.open { opacity: 1; pointer-events: all; }
+
+        .cart-sidebar {
+            position: fixed; top: 0; right: 0;
+            height: 100%; width: min(400px, 100%);
+            background: var(--cream); z-index: 201;
+            display: flex; flex-direction: column;
+            transform: translateX(100%);
+            transition: transform var(--t);
+            box-shadow: -4px 0 24px rgba(26,13,4,0.18);
+            border-left: 2px solid var(--gold);
+        }
+        .cart-sidebar.open { transform: translateX(0); }
+
+        .panel-hd {
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--mahogany);
+            border-bottom: 1px solid var(--gold);
+        }
+        .panel-hd h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem; font-style: italic; color: var(--parchment);
+        }
+
+        .btn-x {
+            background: none; border: none; cursor: pointer;
+            color: rgba(242,230,204,0.65); font-size: 1.4rem;
+            width: 30px; height: 30px;
+            display: flex; align-items: center; justify-content: center;
+            transition: color var(--t);
+        }
+        .btn-x:hover { color: var(--gold2); }
+        .btn-x.dark  { color: var(--rust); }
+        .btn-x.dark:hover { color: var(--mahogany); }
+
+        .cart-body { flex: 1; overflow-y: auto; padding: 14px 18px; }
+
+        .cart-empty {
+            text-align: center; padding: 44px 16px;
+            color: var(--rust); font-style: italic;
+        }
+        .cart-empty .big { font-size: 2.5rem; color: rgba(155,122,46,0.35); margin-bottom: 10px; }
+
+        .cart-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 0; border-bottom: 1px solid rgba(155,122,46,0.2);
+        }
+        .cart-item:last-child { border-bottom: none; }
+        .cart-item-name {
+            flex: 1; font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem; line-height: 1.3; color: var(--mahogany);
+        }
+
+        .qty {
+            display: flex; align-items: center; gap: 5px;
+            background: var(--parchment); border: 1px solid var(--bgold);
+            padding: 2px 5px;
+        }
+        .qty-btn {
+            background: none; border: none; cursor: pointer;
+            color: var(--gold); font-size: 1rem;
+            width: 22px; height: 22px;
+            display: flex; align-items: center; justify-content: center;
+            transition: color var(--t);
+        }
+        .qty-btn:hover { color: var(--rust); }
+        .qty-val {
+            min-width: 20px; text-align: center;
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--mahogany);
+        }
+
+        .cart-foot {
+            padding: 15px 18px; background: var(--parchment);
+            border-top: 1px solid var(--bgold);
+        }
+        .cart-summary {
+            display: flex; justify-content: space-between; margin-bottom: 12px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .cart-summary span { color: var(--rust); font-style: italic; font-size: 0.95rem; }
+        .cart-summary strong { color: var(--mahogany); font-size: 1.05rem; }
+
+        .btn-checkout {
+            width: 100%; padding: 11px;
+            background: var(--mahogany); color: var(--parchment);
+            border: 1px solid var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem; letter-spacing: 0.3px; cursor: pointer;
+            transition: all var(--t);
+        }
+        .btn-checkout:hover { background: var(--gold); color: var(--mahogany); }
+
+        /* ── MODALS ── */
+        .modal-wrap {
+            position: fixed; inset: 0; z-index: 300;
+            background: rgba(26,13,4,0.6);
+            display: flex; align-items: flex-end; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity var(--t);
+        }
+        .modal-wrap.open { opacity: 1; pointer-events: all; }
+
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.95);
-            overflow: auto;
+            background: var(--cream);
+            border-top: 2px solid var(--gold);
+            padding: 22px 20px; width: 100%; max-width: 480px;
+            max-height: 92vh; overflow-y: auto;
+            transform: translateY(100%); transition: transform var(--t);
         }
-        
-        .modal-content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100%;
-            padding: 40px 20px;
-            box-sizing: border-box;
-            position: relative;
+        .modal-wrap.open .modal { transform: translateY(0); }
+
+        .modal-hd {
+            display: flex; align-items: center;
+            justify-content: space-between; margin-bottom: 18px;
         }
-        
-        .modal-content {
-            max-width: 90%;
-            max-height: 75vh;
-            object-fit: contain;
-            margin: 0 auto;
+        .modal-hd h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem; font-style: italic; color: var(--mahogany);
+        }
+
+        .form-group { margin-bottom: 13px; }
+        .form-group label {
             display: block;
-            border: 12px solid white;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            border-radius: 4px;
-            transition: opacity 0.3s;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82rem; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--rust); margin-bottom: 4px;
         }
-        
-        .modal-caption {
-            margin: 20px auto 0;
-            display: block;
-            max-width: 80%;
-            text-align: center;
-            color: #fff;
-            padding: 12px 20px;
-            font-size: 1.1em;
-            background-color: rgba(0,0,0,0.7);
-            border-radius: 30px;
+        .form-group input,
+        .form-group select {
+            width: 100%; padding: 10px 12px;
+            border: 1px solid var(--bgold);
+            background: var(--parchment); color: var(--ink);
+            font-family: 'EB Garamond', serif; font-size: 1rem;
+            -webkit-appearance: none; appearance: none;
+            transition: border-color var(--t);
         }
-        
-        .close {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            z-index: 101;
-            background: rgba(0,0,0,0.5);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+        .form-group input:focus,
+        .form-group select:focus { outline: none; border-color: var(--gold); }
+
+        .sel-wrap { position: relative; }
+        .sel-wrap::after {
+            content: '▾'; position: absolute; right: 11px; top: 50%;
+            transform: translateY(-50%); color: var(--gold); pointer-events: none;
         }
-        
-        .close:hover {
-            color: #fff;
-            background: rgba(0,0,0,0.8);
-            transform: rotate(90deg);
+
+        .del-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 13px; }
+
+        .del-opt {
+            border: 1px solid var(--bgold);
+            padding: 12px 8px; cursor: pointer; text-align: center;
+            background: var(--parchment); transition: all var(--t);
         }
-        
-        .modal-nav {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            background: rgba(0,0,0,0.6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 25px;
-            transition: var(--transition);
-            user-select: none;
-            border: none;
-            outline: none;
+        .del-opt.sel { border-color: var(--gold); background: rgba(155,122,46,0.07); }
+        .del-opt input { display: none; }
+        .del-opt-icon { font-size: 1.4rem; margin-bottom: 4px; }
+        .del-opt-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.88rem; font-style: italic; color: var(--mahogany); line-height: 1.3;
         }
-        
-        .modal-nav.next {
-            right: 20px;
+
+        .estimate-box {
+            background: var(--parchment); border: 1px solid var(--bgold);
+            padding: 11px 13px; margin-bottom: 13px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem; font-style: italic; color: var(--mahogany);
         }
-        
-        .modal-nav.prev {
-            left: 20px;
+        .estimate-box strong { color: var(--rust); font-style: normal; }
+        .estimate-note { font-size: 0.8rem; color: var(--rust); }
+
+        /* ── RECEIPT ── */
+        .receipt-lead {
+            font-style: italic; font-size: 0.9rem; color: var(--rust);
+            margin-bottom: 12px; line-height: 1.65;
         }
-        
-        .modal-nav:hover {
-            background: rgba(0,0,0,0.9);
-            transform: translateY(-50%) scale(1.1);
+        .receipt-box {
+            background: var(--parchment); border: 1px solid var(--bgold);
+            padding: 13px; font-family: 'Courier New', monospace;
+            font-size: 0.79rem; line-height: 1.75;
+            white-space: pre-wrap; word-break: break-word;
+            margin-bottom: 14px; max-height: 220px; overflow-y: auto;
         }
-        
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: #777;
-            font-size: 0.9em;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-top: 1px solid #e0e0e0;
-            margin-top: 50px;
+        .action-btns { display: flex; flex-direction: column; gap: 8px; }
+
+        .btn-act {
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; padding: 11px; cursor: pointer; border: none;
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+            letter-spacing: 0.3px; transition: opacity var(--t);
         }
-        
-        .footer-logo {
-            height: 40px;
-            margin-bottom: 15px;
+        .btn-act:hover { opacity: 0.87; }
+        .btn-copy { background: var(--parchment); color: var(--mahogany); border: 1px solid var(--bgold); }
+        .btn-tg   { background: #229ED9; color: white; }
+        .btn-wa   { background: #25D366; color: white; }
+
+        .btn-close-plain {
+            width: 100%; margin-top: 9px; padding: 10px;
+            background: none; border: 1px solid var(--bgold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem; font-style: italic;
+            color: var(--rust); cursor: pointer;
         }
-        
-        .copyright {
-            margin-top: 15px;
-            font-size: 0.9em;
-            color: #999;
+
+        /* ── RESPONSIVE ── */
+        @media (min-width: 540px) {
+            .catalog-grid   { grid-template-columns: repeat(3, 1fr); }
+            .about-cards    { grid-template-columns: repeat(3, 1fr); }
+            .locations-grid { grid-template-columns: repeat(2, 1fr); }
+            .contacts-grid  { grid-template-columns: repeat(2, 1fr); }
         }
-        
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo {
-                position: static;
-                margin-bottom: 15px;
-                height: 50px;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-                padding: 0;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            h2 {
-                font-size: 1.6em;
-                margin: 30px 0 20px;
-            }
-            
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 15px;
-            }
-            
-            .gallery-item.size-small {
-                height: 160px;
-            }
-            
-            .gallery-item.size-medium {
-                height: 240px;
-            }
-            
-            .gallery-item.size-large {
-                height: 320px;
-            }
-            
-            .services-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .service-card {
-                padding: 20px;
-            }
-            
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .modal-content {
-                max-width: 95%;
-                max-height: 60vh;
-                border-width: 8px;
-            }
-            
-            .modal-caption {
-                max-width: 90%;
-                font-size: 1em;
-            }
-            
-            .close {
-                top: 15px;
-                right: 15px;
-                font-size: 30px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            .modal-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-            
-            .modal-nav.next {
-                right: 10px;
-            }
-            
-            .modal-nav.prev {
-                left: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.6em;
-            }
-            
-            h2 {
-                font-size: 1.4em;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .gallery-item.size-small,
-            .gallery-item.size-medium,
-            .gallery-item.size-large {
-                height: 250px;
-                grid-row-end: auto;
-            }
-            
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                max-width: 100%;
-                border-width: 5px;
-            }
-            
-            .contact {
-                padding: 20px 15px;
-            }
+        @media (min-width: 860px) {
+            .catalog-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+            .modal-wrap   { align-items: center; }
+            .modal        { border: 1px solid var(--bgold); border-top: 2px solid var(--gold); }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <img src="/logo.png" alt="Логотип Валдайской колокольной мастерской" class="logo">
-            <h1>Валдайская колокольная мастерская</h1>
-        </div>
-        <h1>по художественной обработке колокола</h1>
-    </header>
-    
-    <div class="container">
-        <div class="content fade-in">
-            <h2 class="fade-in">О мастерской</h2>
-            <p class="fade-in delay-1">Мы — хранители традиций валдайского колокольного искусства. Каждый колокольчик, созданный в нашей мастерской, — это не просто сувенир, а частица души русского ремесла, воплощенная в металле.</p>
-            <p class="fade-in delay-1">С 1992 года мы создаем уникальные изделия, сочетающие вековые традиции с современным дизайном. Наши колокольчики — это символы русской культуры, которые дарят радость и становятся семейными реликвиями.</p>
-            
-            <h2 class="fade-in delay-1">Наши работы</h2>
-            
-            <div class="gallery-category fade-in delay-1">
-                <h3>Валдайские колокольчики <span class="photo-count" id="traditional-count"></span></h3>
-                <div class="gallery-intro">
-                    <p>Колокольчики с символикой Валдая — это не просто сувениры, а маленькие произведения искусства. Каждый экземпляр создается вручную с использованием традиционных технологий.</p>
-                    <p>В наличии: колокольчики разных размеров (от 3 см), с изображением достопримечательностей города, гербом Валдая и традиционными надписями.</p>
-                </div>
-                <div class="gallery-container">
-                    <div class="gallery" id="traditional-gallery">
-                        <div class="gallery-item size-large" onclick="openModal('traditional', 0)">
-                            <img src="/tradmuz2.jpg" alt="Колокольчик №5 с ручкой">
-                            <div class="gallery-caption">Колокольчик №5 с ручкой</div>
-                        </div>
-                        <div class="gallery-item size-medium" onclick="openModal('traditional', 1)">
-                            <img src="/kolivmon2.jpg" alt="Колокольчик №6 с ручкой">
-                            <div class="gallery-caption">Колокольчик №6 с ручкой</div>
-                        </div>
-                        <div class="gallery-item size-large" onclick="openModal('traditional', 2)">
-                            <img src="/kolokolasuv.jpg" alt="Колокольчики разных размеров">
-                            <div class="gallery-caption">Колокольчики разных размеров</div>
-                        </div>
-                        <div class="gallery-item size-small" onclick="openModal('traditional', 3)">
-                            <img src="/nomer6.jpg" alt="Колокольчик №6 с Иверским монастырем">
-                            <div class="gallery-caption">Колокольчик №6 с Иверским монастырем</div>
-                        </div>
-                        <div class="gallery-item size-large" onclick="openModal('traditional', 4)">
-                            <img src="/nomer4.jpg" alt="Колокольчик №4">
-                            <div class="gallery-caption">Колокольчик №4</div>
-                        </div>
-                        <div class="gallery-item size-medium" onclick="openModal('traditional', 5)">
-                            <img src="/nomer4ivmon.jpg" alt="Колокольчик №4 с Иверским монастырем">
-                            <div class="gallery-caption">Колокольчик №4 с Иверским монастырем</div>
-                        </div>
-                        <div class="gallery-item size-medium" onclick="openModal('traditional', 6)">
-                            <img src="/nomer5slojvld.png" alt="Колокольчик №5 с гербом города и сложной надписью">
-                            <div class="gallery-caption">Колокольчик №5 с гербом города и сложной надписью</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-category fade-in delay-2">
-                <h3>Индивидуальные колокольчики под заказ <span class="photo-count" id="custom-count"></span></h3>
-                <div class="gallery-intro">
-                    <p>Создаем уникальные колокольчики по вашему эскизу или разрабатываем дизайн совместно с вами. Идеальный подарок на свадьбу, юбилей или корпоративное мероприятие.</p>
-                    <p>Возможна гравировка имен, дат, памятных надписей и логотипов.</p>
-                </div>
-                <div class="gallery-container">
-                    <div class="gallery" id="custom-gallery">
-                        <div class="gallery-item size-medium" onclick="openModal('custom', 0)">
-                            <img src="/nomer7ind.jpg" alt="Колокольчики с гравировкой">
-                            <div class="gallery-caption">Маленький с гравировкой</div>
-                        </div>
-                        <div class="gallery-item size-small" onclick="openModal('custom', 1)">
-                            <img src="/nomer7svadeb.jpg" alt="Колокольчики с памятными надписями">
-                            <div class="gallery-caption">Свадебный колокольчик с памятной надписью</div>
-                        </div>
-                        <div class="gallery-item size-large" onclick="openModal('custom', 2)">
-                            <img src="/naborkolind.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Набор индивидуальных колокольчиков</div>
-                        </div>
-                        <div class="gallery-item size-medium" onclick="openModal('custom', 3)">
-                            <img src="/srospind.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Колокольчик с росписью</div>
-                        </div>
-                        <div class="gallery-item size-medium" onclick="openModal('custom', 4)">
-                            <img src="/finisher105.jpg" alt="Индивидуальные колокольчики">
-                            <div class="gallery-caption">Эксклюзивный дизайн</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="gallery-category fade-in delay-2">
-                <h3>Колокола для городов России <span class="photo-count" id="cities-count"></span></h3>
-                <div class="gallery-intro">
-                    <p>Специальная серия колокольчиков с символикой российских городов. Отличный сувенир для туристов и памятный подарок для жителей.</p>
-                    <p>Возможен заказ колокольчиков с гербами и достопримечательностями вашего города.</p>
-                </div>
-                <div class="gallery-container">
-                    <div class="gallery" id="cities-gallery">
-                        <div class="gallery-item size-medium" onclick="openModal('cities', 0)">
-                            <img src="/tver2x.jpg" alt="Колокольчик с символикой города">
-                            <div class="gallery-caption">Колокольчик с городской символикой</div>
-                        </div>
-                        <div class="gallery-item size-large" onclick="openModal('cities', 1)">
-                            <img src="/rostov№8.jpg" alt="Колокольчик с гербом города">
-                            <div class="gallery-caption">Колокольчик с гербом города</div>
-                        </div>
-                        <div class="gallery-item size-large" onclick="openModal('cities', 2)">
-                            <img src="/klin.jpg" alt="Набор колокольчиков городов России">
-                            <div class="gallery-caption">Набор колокольчиков городов России</div>
-                        </div>
-                        <div class="gallery-item size-large" onclick="openModal('cities', 3)">
-                            <img src="/tver2.jpg" alt="Колокольчик с видом города">
-                            <div class="gallery-caption">Колокольчик с видом города</div>
-                        </div>
-                    </div>
+<header>
+    <div class="header-inner">
+        <a href="#" class="logo-link">
+            <img src="/logo.png" alt="Логотип" class="logo">
+            <span class="site-name">Валдайская<br>колокольная мастерская</span>
+        </a>
+        <button class="cart-btn" onclick="openCart()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+            Корзина
+            <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+    </div>
+    <nav>
+        <div class="nav-inner">
+            <a href="#catalog">Каталог</a>
+            <a href="#about">О мастерской</a>
+            <a href="#where-to-buy">Где купить</a>
+            <a href="#contacts">Контакты</a>
+        </div>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-frame">
+        <div class="orn">❦ ✦ ❦</div>
+        <div class="hero-stamp">Валдай · Ручная работа · Традиции</div>
+        <h1>Валдайская<br>колокольная мастерская</h1>
+        <div class="hero-sub">по художественной обработке колокола</div>
+        <div class="orn" style="margin:12px 0">— ✦ —</div>
+        <p>Авторские колокольчики, созданные вручную. Каждое изделие — живой отклик старинного ремесла, которое Валдай хранит уже несколько столетий.</p>
+        <a href="#catalog" class="btn-primary">Смотреть каталог</a>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <strong>100%</strong>
+                <span>ручная работа</span>
+            </div>
+            <div class="hero-stat">
+                <strong>Валдай</strong>
+                <span>место рождения звона</span>
+            </div>
+            <div class="hero-stat">
+                <strong>Россия</strong>
+                <span>доставка по стране</span>
+            </div>
+        </div>
+        <div class="orn" style="margin-top:18px">❧</div>
+    </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog">
+    <div class="container">
+        <h2 class="sec-title">Каталог</h2>
+        <div class="divider"><span>❦ ✦ ❦</span></div>
+        <div class="catalog-grid" id="catalogGrid"></div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <h2 class="sec-title">О мастерской</h2>
+        <div class="divider"><span>❦ ✦ ❦</span></div>
+        <p class="about-lead">
+            Мы находимся в Валдае — городе, который на протяжении столетий славился своими колокольчиками и был известен на всю Россию. Наша мастерская хранит традиции ручного колокольного ремесла: каждый колокольчик отливается и обрабатывается руками мастера — так, как это делалось здесь сотни лет.
+        </p>
+        <div class="about-cards">
+            <div class="about-card">
+                <div class="about-icon">🔔</div>
+                <h3>Ручная работа</h3>
+                <p>Каждый колокольчик создаётся вручную с использованием традиционных технологий литья и художественной обработки металла.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">📍</div>
+                <h3>Город Валдай</h3>
+                <p>Производство в Валдае — историческом центре колокольного искусства России. Приезжайте и выбирайте лично.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🎁</div>
+                <h3>Индивидуальный заказ</h3>
+                <p>Создаём колокольчики по вашему эскизу: гравировка имён, дат, символики организаций и городов.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHERE TO BUY -->
+<section id="where-to-buy">
+    <div class="container">
+        <h2 class="sec-title">Где купить</h2>
+        <div class="divider"><span>❦ ✦ ❦</span></div>
+        <div class="locations-grid">
+            <div class="location-card">
+                <div class="loc-icon">🏠</div>
+                <div>
+                    <h3>Мастерская</h3>
+                    <p>г. Валдай, ул. Пролетарская, 22</p>
+                    <a class="loc-link" href="https://yandex.ru/maps/?text=%D0%92%D0%B0%D0%BB%D0%B4%D0%B0%D0%B9+%D1%83%D0%BB.+%D0%9F%D1%80%D0%BE%D0%BB%D0%B5%D1%82%D0%B0%D1%80%D1%81%D0%BA%D0%B0%D1%8F+22" target="_blank" rel="noopener">Открыть на Яндекс.Картах →</a>
                 </div>
             </div>
-            
-            <h2 class="fade-in delay-2">Наши услуги</h2>
-            <div class="services-container">
-                <div class="service-card fade-in delay-2">
-                    <div class="service-icon">🔔</div>
-                    <h3>Индивидуальный дизайн</h3>
-                    <p>Создаем уникальные колокольчики по вашему эскизу. Гравировка имен, дат, памятных надписей и логотипов.</p>
-                </div>
-                <div class="service-card fade-in delay-2">
-                    <div class="service-icon">📏</div>
-                    <h3>Разнообразие размеров</h3>
-                    <p>Изготовление колокольчиков от миниатюрных (3 см) до крупных экземпляров (15 см). Разные формы и звучания.</p>
-                </div>
-                <div class="service-card fade-in delay-3">
-                    <div class="service-icon">🏢</div>
-                    <h3>Оптовые заказы</h3>
-                    <p>Производство крупных партий для организаций, музеев и сувенирных магазинов. Скидки от 20% на опт.</p>
-                </div>
-                <div class="service-card fade-in delay-3">
-                    <div class="service-icon">🏛️</div>
-                    <h3>Валдайская символика</h3>
-                    <p>Колокольчики с изображением достопримечательностей Валдая: Иверский монастырь, музей колоколов, герб города.</p>
+            <div class="location-card">
+                <div class="loc-icon">🏛️</div>
+                <div>
+                    <h3>Музей колоколов</h3>
+                    <p>г. Валдай</p>
                 </div>
             </div>
-            
-            <h2 class="fade-in delay-3">Сопутствующие товары</h2>
-            <div class="additional-products fade-in delay-3">
-                <p>В нашей мастерской вы также можете приобрести:</p>
-                <div class="product-grid">
-                    <div class="product-item">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                        <div class="product-caption">Изделия народных промыслов</div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                        <div class="product-caption">Антикварный фарфор</div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                        <div class="product-caption">Киоты и иконы</div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                        <div class="product-caption">Картины местных художников</div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                        <div class="product-caption">Картины местных художников</div>
-                    </div>
+            <div class="location-card">
+                <div class="loc-icon">🔔</div>
+                <div>
+                    <h3>Валдайский колокольный центр</h3>
+                    <p>г. Валдай</p>
                 </div>
-                <p style="margin-top: 20px; font-size: 0.95em; color: #666;">Посмотреть дополнительные товары можно в дневное время по предварительному телефонному звонку.</p>
             </div>
-            
-            <div class="contact fade-in delay-3">
+            <div class="location-card">
+                <div class="loc-icon">🏙️</div>
+                <div>
+                    <h3>Музей Уездного города и магазины Валдая</h3>
+                    <p>Несколько точек продаж по городу</p>
+                </div>
+            </div>
+        </div>
+        <div class="location-note">
+            Во всех точках спрашивайте <strong>«колокольчики Валдайской мастерской»</strong>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts">
+    <div class="container">
+        <h2 class="sec-title">Контакты</h2>
+        <div class="divider"><span>❦ ✦ ❦</span></div>
+        <div class="contacts-grid">
+            <div class="contact-card">
                 <div class="contact-icon">📞</div>
-                <h2>Контакты</h2>
-                <p>Мы находимся в самом сердце Валдая</p>
-                <p><span class="highlight">Телефон:</span> +7 (996) 067-28-37</p>
-                <p><span class="highlight">Адрес:</span> г. Валдай, ул. Колокольная, д. 1</p>
-                <p><span class="highlight">Часы работы:</span> ежедневно с 10:00 до 18:00</p>
-                <p style="margin-top: 20px;">Приезжайте в гости — у нас всегда звонко!</p>
+                <div>
+                    <div class="contact-label">Телефон / Telegram (Max)</div>
+                    <div class="contact-value"><a href="tel:+79992801367">+7 (999) 280-13-67</a></div>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <div>
+                    <div class="contact-label">Электронная почта</div>
+                    <div class="contact-value"><a href="mailto:sales@valdaysuv.ru">sales@valdaysuv.ru</a></div>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">📍</div>
+                <div>
+                    <div class="contact-label">Адрес мастерской</div>
+                    <div class="contact-value">г. Валдай, ул. Пролетарская, 22</div>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🕐</div>
+                <div>
+                    <div class="contact-label">Режим работы</div>
+                    <div class="contact-value">Ежедневно 10:00 – 18:00</div>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!-- Модальное окно галереи -->
-    <div id="galleryModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-content-container">
-            <img class="modal-content" id="modalImage">
-            <div class="modal-caption" id="caption"></div>
+</section>
+
+<footer>
+    <div class="container">
+        <img src="/logo.png" alt="Логотип" class="footer-logo">
+        <div class="footer-orn">❦ ✦ ❦</div>
+        <h3>Валдайская колокольная мастерская</h3>
+        <p>Авторские колокольчики ручной работы</p>
+        <div class="copyright">
+            © 2024 Все права защищены ·
+            <a href="mailto:sales@valdaysuv.ru" style="color:rgba(242,230,204,0.3)">sales@valdaysuv.ru</a>
         </div>
-        <button class="modal-nav prev" onclick="plusSlides(-1)">❮</button>
-        <button class="modal-nav next" onclick="plusSlides(1)">❯</button>
     </div>
-    
-    <footer class="fade-in delay-3">
-        <div class="container">
-            <img src="/logo.png" alt="Логотип Валдайской колокольной мастерской" class="footer-logo">
-            <p>Валдайская колокольная мастерская</p>
-            <p>Изготовление традиционных и индивидуальных колокольчиков</p>
-            <div class="copyright">© 2023 Все права защищены</div>
+</footer>
+
+<!-- CART -->
+<div class="overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="panel-hd">
+        <h2>Корзина</h2>
+        <button class="btn-x" onclick="closeCart()">×</button>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-foot" id="cartFoot" style="display:none">
+        <div class="cart-summary">
+            <span>Итого позиций:</span>
+            <strong id="cartTotal">0 шт.</strong>
         </div>
-    </footer>
-    
-    <script>
-        // Галерея изображений сгруппирована по категориям
-        const galleriesData = {
-            traditional: [
-                {src: "/tradmuz2.jpg", caption: "Колокольчик №5 с ручкой. Традиционный валдайский дизайн."},
-                {src: "/kolivmon2.jpg", caption: "Колокольчик №6 с ручкой. Изображение Иверского монастыря."},
-                {src: "/kolokolasuv.jpg", caption: "Набор колокольчиков разных размеров. От 3 до 10 см в диаметре."},
-                {src: "/nomer6.jpg", caption: "Колокольчик №6 с Иверским монастырем. Традиционная валдайская надпись."},
-                {src: "/nomer4.jpg", caption: "Колокольчик №4. Классический дизайн с растительным орнаментом."},
-                {src: "/nomer4ivmon.jpg", caption: "Колокольчик №4 с Иверским монастырем. Сувенир из Валдая."},
-                {src: "/nomer5slojvld.png", caption: "Колокольчик №5 с гербом города Валдай и сложной надписью."}
-            ],
-            custom: [
-                {src: "/nomer7ind.jpg", caption: "Индивидуальный колокольчик с гравировкой. Размер 5 см."},
-                {src: "/nomer7svadeb.jpg", caption: "Свадебный колокольчик с памятной надписью. Идеальный подарок молодоженам."},
-                {src: "/naborkolind.jpg", caption: "Набор индивидуальных колокольчиков. Возможен любой дизайн."},
-                {src: "/srospind.jpg", caption: "Колокольчик с ручной росписью. Уникальный экземпляр."},
-                {src: "/finisher105.jpg", caption: "Эксклюзивный дизайн по индивидуальному заказу."}
-            ],
-            cities: [
-                {src: "/tver2x.jpg", caption: "Колокольчик с символикой города. Возможен заказ для любого города России."},
-                {src: "/rostov№8.jpg", caption: "Колокольчик с гербом города. Изготовление по вашему заказу."},
-                {src: "/klin.jpg", caption: "Набор колокольчиков городов России. Отличный подарок коллекционеру."},
-                {src: "/tver2.jpg", caption: "Колокольчик с видом города. Изображение достопримечательностей."}
-            ]
-        };
-        
-        let currentGallery = '';
-        let currentSlide = 0;
-        
-        // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            // Обновляем счетчики фотографий
-            updatePhotoCount('traditional', 'traditional-count');
-            updatePhotoCount('custom', 'custom-count');
-            updatePhotoCount('cities', 'cities-count');
-            
-            // Плавное появление элементов
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(el => {
-                el.style.opacity = '0';
-            });
-            
-            // Запуск анимаций
-            setTimeout(() => {
-                fadeElements.forEach(el => {
-                    el.style.opacity = '1';
-                });
-            }, 100);
+        <button class="btn-checkout" onclick="openOrderModal()">Оформить заказ →</button>
+    </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-wrap" id="orderWrap">
+    <div class="modal">
+        <div class="modal-hd">
+            <h2>Оформление заказа</h2>
+            <button class="btn-x dark" onclick="closeOrderModal()">×</button>
+        </div>
+        <div class="form-group">
+            <label>Ваше имя *</label>
+            <input type="text" id="oName" placeholder="Иван Иванов" autocomplete="name">
+        </div>
+        <div class="form-group">
+            <label>Телефон *</label>
+            <input type="tel" id="oPhone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+        </div>
+        <div class="form-group">
+            <label>Способ получения</label>
+            <div class="del-row">
+                <label class="del-opt sel" id="dPickup">
+                    <input type="radio" name="del" value="pickup" checked onchange="setDelivery('pickup')">
+                    <div class="del-opt-icon">🚶</div>
+                    <div class="del-opt-name">Самовывоз<br>г. Валдай</div>
+                </label>
+                <label class="del-opt" id="dSdek">
+                    <input type="radio" name="del" value="sdek" onchange="setDelivery('sdek')">
+                    <div class="del-opt-icon">📦</div>
+                    <div class="del-opt-name">Доставка<br>СДЭК</div>
+                </label>
+            </div>
+        </div>
+        <div class="form-group" id="cityGroup" style="display:none">
+            <label>Город доставки</label>
+            <div class="sel-wrap">
+                <select id="oCity" onchange="calcDelivery()">
+                    <option value="">— Выберите город —</option>
+                    <option value="Великий Новгород|240">Великий Новгород</option>
+                    <option value="Тверь|280">Тверь</option>
+                    <option value="Москва|340">Москва</option>
+                    <option value="Санкт-Петербург|360">Санкт-Петербург</option>
+                    <option value="Нижний Новгород|380">Нижний Новгород</option>
+                    <option value="Воронеж|400">Воронеж</option>
+                    <option value="Казань|420">Казань</option>
+                    <option value="Самара|430">Самара</option>
+                    <option value="Саратов|430">Саратов</option>
+                    <option value="Волгоград|440">Волгоград</option>
+                    <option value="Краснодар|450">Краснодар</option>
+                    <option value="Калининград|450">Калининград</option>
+                    <option value="Ростов-на-Дону|460">Ростов-на-Дону</option>
+                    <option value="Уфа|460">Уфа</option>
+                    <option value="Екатеринбург|480">Екатеринбург</option>
+                    <option value="Челябинск|480">Челябинск</option>
+                    <option value="Пермь|490">Пермь</option>
+                    <option value="Омск|510">Омск</option>
+                    <option value="Новосибирск|550">Новосибирск</option>
+                    <option value="Красноярск|560">Красноярск</option>
+                    <option value="Иркутск|600">Иркутск</option>
+                    <option value="Хабаровск|680">Хабаровск</option>
+                    <option value="Владивосток|700">Владивосток</option>
+                    <option value="Другой город|500">Другой город (~500 руб.)</option>
+                </select>
+            </div>
+        </div>
+        <div class="estimate-box" id="estimateBox" style="display:none">
+            Примерная стоимость доставки: <strong id="estimateCost">—</strong><br>
+            <span class="estimate-note">Точная цена будет подтверждена менеджером</span>
+        </div>
+        <button class="btn-primary" style="width:100%;padding:12px;display:block" onclick="buildReceipt()">
+            Сформировать заказ →
+        </button>
+    </div>
+</div>
+
+<!-- RECEIPT MODAL -->
+<div class="modal-wrap" id="receiptWrap">
+    <div class="modal">
+        <div class="modal-hd">
+            <h2>Заказ сформирован</h2>
+            <button class="btn-x dark" onclick="closeReceipt()">×</button>
+        </div>
+        <p class="receipt-lead">Скопируйте текст и отправьте нам в Telegram или WhatsApp — менеджер свяжется с вами для уточнения стоимости и реквизитов оплаты (перевод на карту).</p>
+        <div class="receipt-box" id="receiptBox"></div>
+        <div class="action-btns">
+            <button class="btn-act btn-copy" onclick="copyReceipt()">📋 Скопировать текст</button>
+            <a class="btn-act btn-tg" id="tgBtn" href="#" target="_blank" rel="noopener">✈️ Написать в Telegram</a>
+            <a class="btn-act btn-wa" id="waBtn" href="#" target="_blank" rel="noopener">💬 Написать в WhatsApp</a>
+        </div>
+        <button class="btn-close-plain" onclick="closeReceipt()">Закрыть</button>
+    </div>
+</div>
+
+<script>
+    const PRODUCTS = [
+        { id:  1, name: 'Валдайский колокольчик черненый №2',          img: null },
+        { id:  2, name: 'Валдайский колокольчик черненый №3',          img: null },
+        { id:  3, name: 'Валдайский колокольчик черненый №4',          img: null },
+        { id:  4, name: 'Валдайский колокольчик черненый №5',          img: null },
+        { id:  5, name: 'Валдайский колокольчик черненый №7',          img: null },
+        { id:  6, name: 'Валдайский колокольчик черненый №8',          img: null },
+        { id:  7, name: 'Валдайский колокольчик черненый №4 с ручкой', img: null },
+        { id:  8, name: 'Валдайский колокольчик черненый №5 с ручкой', img: null },
+        { id:  9, name: 'Валдайский колокольчик черненый №6 с ручкой', img: null },
+        { id: 10, name: 'Колокол желтый в берестяной корзинке',         img: null },
+        { id: 11, name: 'Колокол желтый на берестяной подкове',         img: null },
+    ];
+
+    let cart = {};
+
+    function renderCatalog() {
+        document.getElementById('catalogGrid').innerHTML = PRODUCTS.map(p => `
+            <div class="product-card">
+                ${p.img
+                    ? `<img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy">`
+                    : `<div class="product-placeholder">🔔</div>`}
+                <div class="product-info">
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">Цена по запросу</div>
+                    <button class="btn-add" id="ba${p.id}" onclick="addToCart(${p.id})">+ В корзину</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function addToCart(id) {
+        cart[id] = (cart[id] || 0) + 1;
+        syncBadge();
+        const btn = document.getElementById('ba' + id);
+        if (!btn) return;
+        btn.textContent = '✓ Добавлено';
+        btn.classList.add('added');
+        setTimeout(() => { btn.textContent = '+ В корзину'; btn.classList.remove('added'); }, 1400);
+    }
+
+    function changeQty(id, d) {
+        cart[id] = (cart[id] || 0) + d;
+        if (cart[id] <= 0) delete cart[id];
+        syncBadge();
+        renderCartBody();
+    }
+
+    function totalQty() { return Object.values(cart).reduce((s, v) => s + v, 0); }
+
+    function syncBadge() {
+        const n = totalQty();
+        const el = document.getElementById('cartBadge');
+        el.textContent = n;
+        el.classList.toggle('show', n > 0);
+    }
+
+    function renderCartBody() {
+        const body = document.getElementById('cartBody');
+        const foot = document.getElementById('cartFoot');
+        const ids  = Object.keys(cart).map(Number);
+
+        if (!ids.length) {
+            body.innerHTML = `<div class="cart-empty"><div class="big">🔔</div><p>Корзина пуста</p><p style="font-size:.85rem;margin-top:5px">Добавьте товары из каталога</p></div>`;
+            foot.style.display = 'none';
+            return;
+        }
+
+        foot.style.display = 'block';
+        document.getElementById('cartTotal').textContent = totalQty() + ' шт.';
+        body.innerHTML = ids.map(id => {
+            const p = PRODUCTS.find(x => x.id === id);
+            return `<div class="cart-item">
+                <div class="cart-item-name">${p.name}</div>
+                <div class="qty">
+                    <button class="qty-btn" onclick="changeQty(${id},-1)">−</button>
+                    <span class="qty-val">${cart[id]}</span>
+                    <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function openCart() {
+        document.getElementById('cartOverlay').classList.add('open');
+        document.getElementById('cartSidebar').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        renderCartBody();
+    }
+    function closeCart() {
+        document.getElementById('cartOverlay').classList.remove('open');
+        document.getElementById('cartSidebar').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function openOrderModal() {
+        closeCart();
+        document.getElementById('orderWrap').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeOrderModal() {
+        document.getElementById('orderWrap').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function setDelivery(type) {
+        document.getElementById('dPickup').classList.toggle('sel', type === 'pickup');
+        document.getElementById('dSdek').classList.toggle('sel',   type === 'sdek');
+        document.getElementById('cityGroup').style.display   = type === 'sdek' ? 'block' : 'none';
+        document.getElementById('estimateBox').style.display = 'none';
+    }
+
+    function calcDelivery() {
+        const sel = document.getElementById('oCity');
+        const box = document.getElementById('estimateBox');
+        if (!sel.value) { box.style.display = 'none'; return; }
+        const [, rate] = sel.value.split('|');
+        document.getElementById('estimateCost').textContent = '~' + rate + ' руб.';
+        box.style.display = 'block';
+    }
+
+    function buildReceipt() {
+        const name    = document.getElementById('oName').value.trim();
+        const phone   = document.getElementById('oPhone').value.trim();
+        const delType = document.querySelector('input[name="del"]:checked').value;
+        const cityEl  = document.getElementById('oCity');
+
+        if (!name || !phone) { alert('Пожалуйста, укажите имя и телефон.'); return; }
+        if (delType === 'sdek' && !cityEl.value) { alert('Пожалуйста, выберите город доставки.'); return; }
+
+        const now = new Date().toLocaleString('ru-RU', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
         });
-        
-        // Функция для обновления счетчика фото
-        function updatePhotoCount(galleryId, counterId) {
-            const gallery = document.getElementById(galleryId + '-gallery');
-            if (gallery) {
-                const count = gallery.children.length;
-                document.getElementById(counterId).textContent = count + ' фото';
-            }
+
+        let delStr = '', delCostStr = '';
+        if (delType === 'pickup') {
+            delStr = 'Самовывоз — г. Валдай, ул. Пролетарская, 22';
+        } else {
+            const [city, rate] = cityEl.value.split('|');
+            delStr     = 'Доставка СДЭК — г. ' + city;
+            delCostStr = '\nПримерная стоимость доставки: ~' + rate + ' руб.';
         }
-        
-        function openModal(gallery, index) {
-            currentGallery = gallery;
-            currentSlide = index;
-            document.getElementById('galleryModal').style.display = "block";
-            document.body.style.overflow = 'hidden';
-            updateModalContent();
-        }
-        
-        function closeModal() {
-            document.getElementById('galleryModal').style.display = "none";
-            document.body.style.overflow = '';
-        }
-        
-        function plusSlides(n) {
-            currentSlide += n;
-            const galleryLength = galleriesData[currentGallery].length;
-            
-            if (currentSlide >= galleryLength) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = galleryLength - 1;
-            
-            updateModalContent();
-        }
-        
-        function updateModalContent() {
-            const image = galleriesData[currentGallery][currentSlide];
-            const modalImg = document.getElementById('modalImage');
-            const caption = document.getElementById('caption');
-            
-            // Плавная смена изображения
-            modalImg.style.opacity = 0;
-            setTimeout(() => {
-                modalImg.src = image.src;
-                caption.innerHTML = image.caption;
-                modalImg.style.opacity = 1;
-            }, 200);
-        }
-        
-        // Закрытие модального окна при клике вне изображения
-        document.getElementById('galleryModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+
+        const lines = Object.keys(cart).map(id => {
+            const p = PRODUCTS.find(x => x.id === Number(id));
+            return `  • ${p.name} — ${cart[id]} шт.`;
+        }).join('\n');
+
+        const text =
+`ЗАКАЗ от ${now}
+================================
+Имя:       ${name}
+Телефон:   ${phone}
+Получение: ${delStr}${delCostStr}
+
+Состав заказа (${totalQty()} шт.):
+${lines}
+
+================================
+Для подтверждения стоимости и оплаты:
+📞 +7 (999) 280-13-67 (Max / Telegram)
+📧 sales@valdaysuv.ru`;
+
+        document.getElementById('receiptBox').textContent = text;
+        const enc = encodeURIComponent(text);
+        document.getElementById('tgBtn').href = 'tg://resolve?phone=79992801367';
+        document.getElementById('waBtn').href = 'https://wa.me/79992801367?text=' + enc;
+
+        closeOrderModal();
+        document.getElementById('receiptWrap').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeReceipt() {
+        document.getElementById('receiptWrap').classList.remove('open');
+        document.body.style.overflow = '';
+        cart = {};
+        syncBadge();
+    }
+
+    function copyReceipt() {
+        const text = document.getElementById('receiptBox').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.querySelector('.btn-copy');
+            const orig = btn.textContent;
+            btn.textContent = '✓ Скопировано!';
+            setTimeout(() => { btn.textContent = orig; }, 2000);
         });
-        
-        // Закрытие модального окна по клавише ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+    }
+
+    ['orderWrap', 'receiptWrap'].forEach(id => {
+        document.getElementById(id).addEventListener('click', function(e) {
+            if (e.target === this) this.id === 'receiptWrap' ? closeReceipt() : closeOrderModal();
         });
-        
-        // Плавный скролл для якорных ссылок
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key !== 'Escape') return;
+        closeCart(); closeOrderModal(); closeReceipt();
+    });
+
+    renderCatalog();
+    renderCartBody();
+</script>
 </body>
 </html>
