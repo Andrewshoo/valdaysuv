@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:max.ru)",
+      "WebFetch(domain:dev.max.ru)",
+      "WebFetch(domain:help.max.ru)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:umnico.com)"
+    ]
+  }
+}
