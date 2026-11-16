@@ -3,592 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Валдайская колокольная мастерская | Авторские колокольчики</title>
-    <meta name="description" content="Авторские валдайские колокольчики ручной работы. Заказ с доставкой по России. Мастерская в Валдае.">
+    <title>Валдайские колокольчики ручной работы — Валдайская мастерская</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --parchment:  #F2E6CC;
-            --parchment2: #E8D9B5;
-            --cream:      #FBF6EC;
-            --ink:        #1A0D04;
-            --ink2:       #3D2010;
-            --mahogany:   #2A1505;
-            --gold:       #9B7A2E;
-            --gold2:      #C9A84C;
-            --rust:       #6B3520;
-            --bgold:      rgba(155,122,46,0.45);
-            --t:          0.22s ease;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'EB Garamond', Georgia, serif;
-            background: var(--parchment);
-            color: var(--ink);
-            line-height: 1.7;
-            font-size: 19px;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            color: var(--mahogany);
-            line-height: 1.2;
-        }
-
-        img { max-width: 100%; height: auto; display: block; }
-        a   { color: inherit; text-decoration: none; }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
-        /* Ornamental divider */
-        .orn { text-align: center; color: var(--gold); letter-spacing: 6px; margin: 6px 0; }
-
-        .divider {
-            display: flex; align-items: center; gap: 12px;
-            margin-bottom: 32px; color: var(--gold2);
-        }
-        .divider::before,
-        .divider::after {
-            content: ''; flex: 1; height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold), transparent);
-        }
-        .divider span { font-size: 0.95rem; letter-spacing: 5px; flex-shrink: 0; }
-
-        .sec-title {
-            font-size: clamp(1.7rem, 4vw, 2.3rem);
-            text-align: center; margin-bottom: 6px;
-            font-style: italic; font-weight: 600;
-        }
-
-        /* ── HEADER ── */
-        header {
-            position: sticky; top: 0; z-index: 100;
-            background: var(--mahogany);
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .header-inner {
-            display: flex; align-items: center;
-            justify-content: space-between;
-            padding: 11px 20px; gap: 12px;
-            max-width: 1100px; margin: 0 auto;
-        }
-
-        .logo-link { display: flex; align-items: center; gap: 11px; flex: 1; min-width: 0; }
-
-        .logo {
-            height: 44px; width: auto; flex-shrink: 0;
-            filter: brightness(0) invert(1) sepia(1) saturate(0.4) brightness(1.4);
-        }
-
-        .site-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.97rem; font-weight: 600;
-            color: var(--parchment); line-height: 1.3;
-        }
-
-        .cart-btn {
-            display: flex; align-items: center; gap: 7px;
-            background: transparent; color: var(--parchment);
-            border: 1px solid var(--gold);
-            padding: 8px 15px; cursor: pointer; flex-shrink: 0;
-            font-family: 'Cormorant Garamond', serif; font-size: 1rem;
-            letter-spacing: 0.3px; white-space: nowrap;
-            transition: all var(--t);
-        }
-        .cart-btn:hover { background: var(--gold); color: var(--mahogany); }
-
-        .cart-badge {
-            background: var(--gold); color: var(--mahogany);
-            border-radius: 50%; width: 19px; height: 19px;
-            font-size: 0.7rem; font-weight: 700;
-            display: none; align-items: center; justify-content: center;
-        }
-        .cart-badge.show { display: flex; }
-
-        nav {
-            background: #1E0C03;
-            border-top: 1px solid rgba(155,122,46,0.25);
-            overflow-x: auto; scrollbar-width: none;
-        }
-        nav::-webkit-scrollbar { display: none; }
-
-        .nav-inner {
-            display: flex; max-width: 1100px;
-            margin: 0 auto; padding: 0 20px;
-        }
-
-        nav a {
-            padding: 9px 15px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem; letter-spacing: 0.4px;
-            color: rgba(242,230,204,0.7); white-space: nowrap;
-            border-bottom: 2px solid transparent;
-            transition: color var(--t), border-color var(--t);
-        }
-        nav a:hover { color: var(--gold2); border-bottom-color: var(--gold); }
-
-        /* ── HERO ── */
-        .hero {
-            background-color: var(--cream);
-            padding: clamp(40px, 8vw, 72px) 20px;
-            text-align: center;
-            border-bottom: 2px double var(--gold);
-        }
-
-        .hero-frame {
-            max-width: 620px; margin: 0 auto;
-            border: 1px solid var(--bgold);
-            padding: clamp(24px, 5vw, 44px);
-            position: relative;
-        }
-        /* Corner dots */
-        .hero-frame::before { content: '✦'; position: absolute; top: -9px; left: -7px; color: var(--gold); font-size: 0.9rem; }
-        .hero-frame::after  { content: '✦'; position: absolute; bottom: -9px; right: -7px; color: var(--gold); font-size: 0.9rem; }
-
-        .hero-stamp {
-            display: inline-block;
-            border: 1px solid var(--bgold);
-            color: var(--gold); font-family: 'Cormorant Garamond', serif;
-            font-size: 0.75rem; letter-spacing: 2.5px;
-            text-transform: uppercase; padding: 4px 14px;
-            margin-bottom: 18px;
-        }
-
-        .hero h1 {
-            font-size: clamp(1.8rem, 5vw, 2.9rem);
-            font-weight: 700; color: var(--mahogany); margin-bottom: 8px;
-        }
-
-        .hero-sub {
-            font-style: italic; color: var(--rust);
-            font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-            margin-bottom: 8px;
-        }
-
-        .hero p {
-            color: var(--ink2); font-size: 1rem;
-            max-width: 440px; margin: 14px auto 24px; line-height: 1.8;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background: var(--mahogany); color: var(--parchment);
-            padding: 11px 28px;
-            border: 1px solid var(--gold);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem; letter-spacing: 0.4px;
-            cursor: pointer; transition: all var(--t);
-        }
-        .btn-primary:hover { background: var(--gold); color: var(--mahogany); }
-
-        .hero-stats {
-            display: flex; justify-content: center;
-            gap: 32px; margin-top: 26px; flex-wrap: wrap;
-        }
-        .hero-stat strong {
-            display: block;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem; font-weight: 700; color: var(--mahogany);
-        }
-        .hero-stat span { font-size: 0.8rem; color: var(--rust); }
-
-        /* ── SECTIONS ── */
-        section { padding: clamp(44px, 7vw, 68px) 0; }
-        #about    { background: var(--parchment2); }
-        #contacts { background: var(--parchment2); }
-
-        /* ── CATALOG ── */
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-
-        .product-card {
-            background: var(--cream);
-            border: 1px solid var(--bgold);
-            display: flex; flex-direction: column;
-            position: relative;
-            transition: transform var(--t), box-shadow var(--t);
-        }
-        .product-card::after {
-            content: ''; position: absolute; inset: 5px;
-            border: 1px solid rgba(155,122,46,0.15);
-            pointer-events: none;
-            transition: border-color var(--t);
-        }
-        .product-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,21,5,0.1); }
-        .product-card:hover::after { border-color: rgba(155,122,46,0.4); }
-
-        .product-img { width: 100%; aspect-ratio: 1; object-fit: cover; }
-
-        .product-placeholder {
-            width: 100%; aspect-ratio: 1;
-            background: var(--parchment);
-            display: flex; align-items: center; justify-content: center;
-            font-size: clamp(2rem, 7vw, 3rem);
-            color: rgba(155,122,46,0.25);
-            border-bottom: 1px solid var(--bgold);
-        }
-
-        .product-info { padding: 13px 11px; flex: 1; display: flex; flex-direction: column; }
-
-        .product-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.97rem; color: var(--mahogany);
-            margin-bottom: 5px; line-height: 1.3; flex: 1;
-        }
-
-        .product-price {
-            font-style: italic; font-size: 0.83rem;
-            color: var(--rust); margin-bottom: 10px;
-        }
-
-        .btn-add {
-            width: 100%; padding: 8px;
-            background: transparent; color: var(--mahogany);
-            border: 1px solid var(--bgold);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem; cursor: pointer;
-            transition: all var(--t);
-        }
-        .btn-add:hover, .btn-add.added {
-            background: var(--mahogany); color: var(--parchment);
-            border-color: var(--mahogany);
-        }
-
-        /* ── ABOUT ── */
-        .about-lead {
-            font-style: italic; font-size: 1.05rem; line-height: 1.85;
-            text-align: center; max-width: 720px;
-            margin: 0 auto 32px; color: var(--ink2);
-        }
-
-        .about-cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
-
-        .about-card {
-            background: var(--cream); border: 1px solid var(--bgold);
-            padding: 20px; text-align: center;
-        }
-        .about-icon { font-size: 1.7rem; margin-bottom: 8px; }
-        .about-card h3 { font-size: 1.1rem; font-style: italic; margin-bottom: 7px; }
-        .about-card p  { color: var(--ink2); font-size: 0.9rem; line-height: 1.7; }
-
-        /* ── WHERE TO BUY ── */
-        .locations-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-
-        .location-card {
-            background: var(--cream); border: 1px solid var(--bgold);
-            padding: 16px 18px; display: flex; gap: 13px; align-items: flex-start;
-        }
-        .loc-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
-        .location-card h3 { font-size: 1rem; font-style: italic; margin-bottom: 3px; }
-        .location-card p  { color: var(--ink2); font-size: 0.88rem; line-height: 1.5; }
-        .loc-link { color: var(--gold); font-size: 0.83rem; display: inline-block; margin-top: 4px; }
-        .loc-link:hover { text-decoration: underline; }
-
-        .location-note {
-            background: rgba(155,122,46,0.06); border-left: 2px solid var(--gold);
-            padding: 11px 15px; font-style: italic;
-            font-size: 0.9rem; color: var(--ink2); margin-top: 12px;
-        }
-        .location-note strong { font-style: normal; color: var(--mahogany); }
-
-        /* ── CONTACTS ── */
-        .contacts-grid { display: grid; grid-template-columns: 1fr; gap: 11px; }
-
-        .contact-card {
-            background: var(--cream); border: 1px solid var(--bgold);
-            padding: 15px 17px; display: flex; align-items: center; gap: 13px;
-        }
-        .contact-icon {
-            width: 42px; height: 42px; flex-shrink: 0;
-            background: var(--parchment); border: 1px solid var(--bgold);
-            display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
-        }
-        .contact-label {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.75rem; text-transform: uppercase;
-            letter-spacing: 0.5px; color: var(--rust); margin-bottom: 2px;
-        }
-        .contact-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.02rem; color: var(--mahogany);
-        }
-        .contact-value a { color: var(--rust); }
-        .contact-value a:hover { text-decoration: underline; }
-
-        /* ── FOOTER ── */
-        footer {
-            background: var(--mahogany); color: rgba(242,230,204,0.6);
-            padding: 38px 20px; text-align: center;
-            border-top: 2px solid var(--gold);
-        }
-        .footer-logo {
-            height: 42px; width: auto; margin: 0 auto 14px;
-            filter: brightness(0) invert(1) sepia(1) saturate(0.4) brightness(1.3);
-            opacity: 0.7;
-        }
-        footer h3 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--parchment); font-size: 1.1rem;
-            font-style: italic; margin-bottom: 5px;
-        }
-        footer p  { font-size: 0.86rem; }
-        .footer-orn { color: var(--gold); letter-spacing: 7px; margin: 11px 0; }
-        .copyright {
-            margin-top: 20px; font-size: 0.77rem;
-            border-top: 1px solid rgba(155,122,46,0.2);
-            padding-top: 15px;
-        }
-
-        /* ── CART SIDEBAR ── */
-        .overlay {
-            position: fixed; inset: 0; z-index: 200;
-            background: rgba(26,13,4,0.55);
-            opacity: 0; pointer-events: none; transition: opacity var(--t);
-        }
-        .overlay.open { opacity: 1; pointer-events: all; }
-
-        .cart-sidebar {
-            position: fixed; top: 0; right: 0;
-            height: 100%; width: min(400px, 100%);
-            background: var(--cream); z-index: 201;
-            display: flex; flex-direction: column;
-            transform: translateX(100%);
-            transition: transform var(--t);
-            box-shadow: -4px 0 24px rgba(26,13,4,0.18);
-            border-left: 2px solid var(--gold);
-        }
-        .cart-sidebar.open { transform: translateX(0); }
-
-        .panel-hd {
-            display: flex; align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: var(--mahogany);
-            border-bottom: 1px solid var(--gold);
-        }
-        .panel-hd h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem; font-style: italic; color: var(--parchment);
-        }
-
-        .btn-x {
-            background: none; border: none; cursor: pointer;
-            color: rgba(242,230,204,0.65); font-size: 1.4rem;
-            width: 30px; height: 30px;
-            display: flex; align-items: center; justify-content: center;
-            transition: color var(--t);
-        }
-        .btn-x:hover { color: var(--gold2); }
-        .btn-x.dark  { color: var(--rust); }
-        .btn-x.dark:hover { color: var(--mahogany); }
-
-        .cart-body { flex: 1; overflow-y: auto; padding: 14px 18px; }
-
-        .cart-empty {
-            text-align: center; padding: 44px 16px;
-            color: var(--rust); font-style: italic;
-        }
-        .cart-empty .big { font-size: 2.5rem; color: rgba(155,122,46,0.35); margin-bottom: 10px; }
-
-        .cart-item {
-            display: flex; align-items: center; gap: 10px;
-            padding: 10px 0; border-bottom: 1px solid rgba(155,122,46,0.2);
-        }
-        .cart-item:last-child { border-bottom: none; }
-        .cart-item-name {
-            flex: 1; font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem; line-height: 1.3; color: var(--mahogany);
-        }
-
-        .qty {
-            display: flex; align-items: center; gap: 5px;
-            background: var(--parchment); border: 1px solid var(--bgold);
-            padding: 2px 5px;
-        }
-        .qty-btn {
-            background: none; border: none; cursor: pointer;
-            color: var(--gold); font-size: 1rem;
-            width: 22px; height: 22px;
-            display: flex; align-items: center; justify-content: center;
-            transition: color var(--t);
-        }
-        .qty-btn:hover { color: var(--rust); }
-        .qty-val {
-            min-width: 20px; text-align: center;
-            font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--mahogany);
-        }
-
-        .cart-foot {
-            padding: 15px 18px; background: var(--parchment);
-            border-top: 1px solid var(--bgold);
-        }
-        .cart-summary {
-            display: flex; justify-content: space-between; margin-bottom: 12px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        .cart-summary span { color: var(--rust); font-style: italic; font-size: 0.95rem; }
-        .cart-summary strong { color: var(--mahogany); font-size: 1.05rem; }
-
-        .btn-checkout {
-            width: 100%; padding: 11px;
-            background: var(--mahogany); color: var(--parchment);
-            border: 1px solid var(--gold);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem; letter-spacing: 0.3px; cursor: pointer;
-            transition: all var(--t);
-        }
-        .btn-checkout:hover { background: var(--gold); color: var(--mahogany); }
-
-        /* ── MODALS ── */
-        .modal-wrap {
-            position: fixed; inset: 0; z-index: 300;
-            background: rgba(26,13,4,0.6);
-            display: flex; align-items: flex-end; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity var(--t);
-        }
-        .modal-wrap.open { opacity: 1; pointer-events: all; }
-
-        .modal {
-            background: var(--cream);
-            border-top: 2px solid var(--gold);
-            padding: 22px 20px; width: 100%; max-width: 480px;
-            max-height: 92vh; overflow-y: auto;
-            transform: translateY(100%); transition: transform var(--t);
-        }
-        .modal-wrap.open .modal { transform: translateY(0); }
-
-        .modal-hd {
-            display: flex; align-items: center;
-            justify-content: space-between; margin-bottom: 18px;
-        }
-        .modal-hd h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem; font-style: italic; color: var(--mahogany);
-        }
-
-        .form-group { margin-bottom: 13px; }
-        .form-group label {
-            display: block;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.82rem; text-transform: uppercase;
-            letter-spacing: 0.5px; color: var(--rust); margin-bottom: 4px;
-        }
-        .form-group input,
-        .form-group select {
-            width: 100%; padding: 10px 12px;
-            border: 1px solid var(--bgold);
-            background: var(--parchment); color: var(--ink);
-            font-family: 'EB Garamond', serif; font-size: 1rem;
-            -webkit-appearance: none; appearance: none;
-            transition: border-color var(--t);
-        }
-        .form-group input:focus,
-        .form-group select:focus { outline: none; border-color: var(--gold); }
-
-        .sel-wrap { position: relative; }
-        .sel-wrap::after {
-            content: '▾'; position: absolute; right: 11px; top: 50%;
-            transform: translateY(-50%); color: var(--gold); pointer-events: none;
-        }
-
-        .del-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 13px; }
-
-        .del-opt {
-            border: 1px solid var(--bgold);
-            padding: 12px 8px; cursor: pointer; text-align: center;
-            background: var(--parchment); transition: all var(--t);
-        }
-        .del-opt.sel { border-color: var(--gold); background: rgba(155,122,46,0.07); }
-        .del-opt input { display: none; }
-        .del-opt-icon { font-size: 1.4rem; margin-bottom: 4px; }
-        .del-opt-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.88rem; font-style: italic; color: var(--mahogany); line-height: 1.3;
-        }
-
-        .estimate-box {
-            background: var(--parchment); border: 1px solid var(--bgold);
-            padding: 11px 13px; margin-bottom: 13px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem; font-style: italic; color: var(--mahogany);
-        }
-        .estimate-box strong { color: var(--rust); font-style: normal; }
-        .estimate-note { font-size: 0.8rem; color: var(--rust); }
-
-        /* ── RECEIPT ── */
-        .receipt-lead {
-            font-style: italic; font-size: 0.9rem; color: var(--rust);
-            margin-bottom: 12px; line-height: 1.65;
-        }
-        .receipt-box {
-            background: var(--parchment); border: 1px solid var(--bgold);
-            padding: 13px; font-family: 'Courier New', monospace;
-            font-size: 0.79rem; line-height: 1.75;
-            white-space: pre-wrap; word-break: break-word;
-            margin-bottom: 14px; max-height: 220px; overflow-y: auto;
-        }
-        .action-btns { display: flex; flex-direction: column; gap: 8px; }
-
-        .btn-act {
-            display: flex; align-items: center; justify-content: center;
-            gap: 8px; padding: 11px; cursor: pointer; border: none;
-            font-family: 'Cormorant Garamond', serif; font-size: 1rem;
-            letter-spacing: 0.3px; transition: opacity var(--t);
-        }
-        .btn-act:hover { opacity: 0.87; }
-        .btn-copy { background: var(--parchment); color: var(--mahogany); border: 1px solid var(--bgold); }
-        .btn-tg   { background: #229ED9; color: white; }
-        .btn-wa   { background: #25D366; color: white; }
-        .btn-max   { background: #0077FF; color: white; }
-        .btn-email { background: var(--mahogany); color: var(--parchment); border: 1px solid var(--gold); }
-
-        .consent-label {
-            display: none; align-items: flex-start; gap: 8px;
-            margin-bottom: 13px; cursor: pointer;
-            font-family: 'EB Garamond', serif; font-size: 0.88rem; color: var(--ink2);
-            line-height: 1.45;
-        }
-        .consent-label input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--gold); }
-        .consent-label a { color: var(--rust); }
-
-        .btn-close-plain {
-            width: 100%; margin-top: 9px; padding: 10px;
-            background: none; border: 1px solid var(--bgold);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem; font-style: italic;
-            color: var(--rust); cursor: pointer;
-        }
-
-        /* ── RESPONSIVE ── */
-        @media (min-width: 540px) {
-            .catalog-grid   { grid-template-columns: repeat(3, 1fr); }
-            .about-cards    { grid-template-columns: repeat(3, 1fr); }
-            .locations-grid { grid-template-columns: repeat(2, 1fr); }
-            .contacts-grid  { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 860px) {
-            .catalog-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
-            .modal-wrap   { align-items: center; }
-            .modal        { border: 1px solid var(--bgold); border-top: 2px solid var(--gold); }
-        }
-    </style>
+    <link rel="stylesheet" href="src/home.css">
+    <link rel="stylesheet" href="src/styles.css">
+    <meta name="description" content="Валдайские колокольчики ручной работы: классические формы, узоры и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://valdaysuv.ru/">
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="Валдайская колокольная мастерская">
+    <meta property="og:title" content="Валдайские колокольчики ручной работы — Валдайская мастерская">
+    <meta property="og:description" content="Валдайские колокольчики ручной работы: классические формы, узоры и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
+    <meta property="og:url" content="https://valdaysuv.ru/">
+    <meta property="og:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
+    <meta property="og:image:alt" content="Валдайские колокольчики ручной работы">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Валдайские колокольчики ручной работы — Валдайская мастерская">
+    <meta name="twitter:description" content="Валдайские колокольчики ручной работы: классические формы, узоры и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
+    <meta name="twitter:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://valdaysuv.ru/#workshop",
+      "name": "Валдайская колокольная мастерская",
+      "url": "https://valdaysuv.ru/",
+      "image": "https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg",
+      "logo": "https://valdaysuv.ru/img/logo.png",
+      "telephone": "+79992801367",
+      "email": "sales@valdaysuv.ru",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Пролетарская, 22",
+        "addressLocality": "Валдай",
+        "addressCountry": "RU"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "10:00",
+          "closes": "18:00"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://valdaysuv.ru/",
+      "name": "Валдайская колокольная мастерская",
+      "inLanguage": "ru-RU"
+    }
+  ]
+}
+</script>
 </head>
-<body>
+<body data-contact-phone="+79992801367" data-contact-email="sales@valdaysuv.ru" data-pickup-address="г. Валдай, ул. Пролетарская, 22">
 
 <header>
     <div class="header-inner">
-        <a href="#" class="logo-link">
-            <img src="/logo.png" alt="Логотип" class="logo">
+        <a href="index.html" class="logo-link">
+            <img src="img/logo.png" alt="Валдайская колокольная мастерская" class="logo">
             <span class="site-name">Валдайская<br>колокольная мастерская</span>
         </a>
         <button class="cart-btn" onclick="openCart()">
@@ -604,6 +92,7 @@
     <nav>
         <div class="nav-inner">
             <a href="#catalog">Каталог</a>
+            <a href="gallery.html">Галерея</a>
             <a href="#about">О мастерской</a>
             <a href="#where-to-buy">Где купить</a>
             <a href="#contacts">Контакты</a>
@@ -612,46 +101,131 @@
 </header>
 
 <!-- HERO -->
+<main>
 <section class="hero">
     <div class="hero-frame">
-        <div class="orn">❦ ✦ ❦</div>
-        <div class="hero-stamp">Валдай · Ручная работа · Традиции</div>
-        <h1>Валдайская<br>колокольная мастерская</h1>
-        <div class="hero-sub">по художественной обработке колокола</div>
-        <div class="orn" style="margin:12px 0">— ✦ —</div>
-        <p>Авторские колокольчики, созданные вручную. Каждое изделие — живой отклик старинного ремесла, которое Валдай хранит уже несколько столетий.</p>
-        <a href="#catalog" class="btn-primary">Смотреть каталог</a>
-        <div class="hero-stats">
-            <div class="hero-stat">
-                <strong>100%</strong>
-                <span>ручная работа</span>
-            </div>
-            <div class="hero-stat">
-                <strong>Валдай</strong>
-                <span>место рождения звона</span>
-            </div>
-            <div class="hero-stat">
-                <strong>Россия</strong>
-                <span>доставка по стране</span>
-            </div>
-        </div>
-        <div class="orn" style="margin-top:18px">❧</div>
+        <span class="eyebrow">Валдай · Колокольная мастерская</span>
+        <h1>Тёплый металл.<br><em>Живой звук.</em></h1>
+        <p>Валдайские колокольчики с характером и историей. Создаём и украшаем их вручную в Валдае — для подарка, на память и просто для души.</p>
+        <div class="hero-actions"><a href="#catalog" class="btn-primary">Выбрать колокольчик ↗</a><a href="#about" class="text-link">Познакомиться с мастерской</a></div>
+        <div class="hero-footnote"><span>Ручная работа<br>и внимание к деталям</span><span>Из Валдая<br>с доставкой по России</span></div>
     </div>
+    <figure class="hero-photo"><img src="img/photo_5325715840693302141_y.jpg" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
 </section>
 
 <!-- CATALOG -->
 <section id="catalog">
     <div class="container">
-        <h2 class="sec-title">Каталог</h2>
+        <span class="eyebrow">Сделано руками</span><h2 class="sec-title">Найдите свой колокольчик</h2><p class="section-intro">От классических колокольчиков до подарков в бересте. Выберите категорию — стоимость и детали заказа обсудим лично.</p>
         <div class="divider"><span>❦ ✦ ❦</span></div>
-        <div class="catalog-grid" id="catalogGrid"></div>
+<nav class="catalog-nav" aria-label="Категории товаров"><a href="#catalog-bells">Колокольчики<span>6</span></a><a href="#catalog-handles">Колокольчики с ручкой<span>3</span></a><a href="#catalog-baskets">В берестяных корзинках<span>1</span></a><a href="#catalog-horseshoes">На подковах<span>1</span></a><a href="#catalog-souvenirs">Магниты и сувениры<span></span></a></nav><div class="catalog-toolbar"><p>Колокольчики, береста и небольшие подарки из Валдая</p>
+<label class="catalog-sort" id="catalogSortControl" hidden>Порядок моделей
+<select id="catalogSort"><option value="number-asc">По номеру ↑</option><option value="number-desc">По номеру ↓</option><option value="name">По названию А–Я</option></select></label></div><div id="catalogGrid"><section class="catalog-group" id="catalog-bells" aria-labelledby="heading-bells">
+<div class="catalog-group-heading"><h3 id="heading-bells">Колокольчики</h3><p>Классическая форма без ручки. Модели №2, №3, №4, №5, №7 и №8.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-1" data-category="bells" data-size-number="2" data-product-id="1" data-product-name="Валдайский колокольчик черненый №2" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №2</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №2</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba1" onclick="addToCart(1)" hidden>+ В корзину</button>
     </div>
+</article>
+<article class="product-card" id="product-2" data-category="bells" data-size-number="3" data-product-id="2" data-product-name="Валдайский колокольчик черненый №3" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №3</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №3</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba2" onclick="addToCart(2)" hidden>+ В корзину</button>
+    </div>
+</article>
+<article class="product-card" id="product-3" data-category="bells" data-size-number="4" data-product-id="3" data-product-name="Валдайский колокольчик черненый №4" data-product-image="img/nomer4.jpg">
+    <img class="product-img" src="img/nomer4.jpg" alt="Валдайский колокольчик черненый №4" loading="lazy">
+    <div class="product-info"><span class="product-type">Модель №4</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №4</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba3" onclick="addToCart(3)" hidden>+ В корзину</button>
+    </div>
+</article>
+<article class="product-card" id="product-4" data-category="bells" data-size-number="5" data-product-id="4" data-product-name="Валдайский колокольчик черненый №5" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №5</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №5</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba4" onclick="addToCart(4)" hidden>+ В корзину</button>
+    </div>
+</article>
+<article class="product-card" id="product-5" data-category="bells" data-size-number="7" data-product-id="5" data-product-name="Валдайский колокольчик черненый №7" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №7</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №7</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba5" onclick="addToCart(5)" hidden>+ В корзину</button>
+    </div>
+</article>
+<article class="product-card" id="product-6" data-category="bells" data-size-number="8" data-product-id="6" data-product-name="Валдайский колокольчик черненый №8" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №8</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №8</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba6" onclick="addToCart(6)" hidden>+ В корзину</button>
+    </div>
+</article></div></section>
+<section class="catalog-group" id="catalog-handles" aria-labelledby="heading-handles">
+<div class="catalog-group-heading"><h3 id="heading-handles">Колокольчики с ручкой</h3><p>Удобная ручка и знакомый валдайский звон. Модели №4, №5 и №6.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-7" data-category="handles" data-size-number="4" data-product-id="7" data-product-name="Валдайский колокольчик черненый №4 с ручкой" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №4</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №4 с ручкой</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba7" onclick="addToCart(7)" hidden>+ В корзину</button>
+    </div>
+</article>
+<article class="product-card" id="product-8" data-category="handles" data-size-number="5" data-product-id="8" data-product-name="Валдайский колокольчик черненый №5 с ручкой" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №5</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №5 с ручкой</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba8" onclick="addToCart(8)" hidden>+ В корзину</button>
+    </div>
+</article>
+<article class="product-card" id="product-9" data-category="handles" data-size-number="6" data-product-id="9" data-product-name="Валдайский колокольчик черненый №6 с ручкой" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">Модель №6</span>
+        <h4 class="product-name">Валдайский колокольчик черненый №6 с ручкой</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba9" onclick="addToCart(9)" hidden>+ В корзину</button>
+    </div>
+</article></div></section>
+<section class="catalog-group" id="catalog-baskets" aria-labelledby="heading-baskets">
+<div class="catalog-group-heading"><h3 id="heading-baskets">В берестяных корзинках</h3><p>Колокольчик в обрамлении натуральной бересты.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-10" data-category="baskets" data-size-number="0" data-product-id="10" data-product-name="Колокол желтый в берестяной корзинке" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">В берестяных корзинках</span>
+        <h4 class="product-name">Колокол желтый в берестяной корзинке</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba10" onclick="addToCart(10)" hidden>+ В корзину</button>
+    </div>
+</article></div></section>
+<section class="catalog-group" id="catalog-horseshoes" aria-labelledby="heading-horseshoes">
+<div class="catalog-group-heading"><h3 id="heading-horseshoes">На подковах</h3><p>Колокольчик на берестяной подкове — подарок на память о Валдае.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-11" data-category="horseshoes" data-size-number="0" data-product-id="11" data-product-name="Колокол желтый на берестяной подкове" data-product-image="">
+    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+    <div class="product-info"><span class="product-type">На подковах</span>
+        <h4 class="product-name">Колокол желтый на берестяной подкове</h4>
+        <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+        <button class="btn-add" id="ba11" onclick="addToCart(11)" hidden>+ В корзину</button>
+    </div>
+</article></div></section>
+<section class="catalog-group" id="catalog-souvenirs" aria-labelledby="heading-souvenirs">
+<div class="catalog-group-heading"><h3 id="heading-souvenirs">Магниты и сувениры</h3><p>Сопутствующие товары мастерской.</p></div><div class="catalog-request"><p>Уточните ассортимент и наличие у мастерской.</p><a class="btn-primary" href="mailto:sales@valdaysuv.ru?subject=%D0%9C%D0%B0%D0%B3%D0%BD%D0%B8%D1%82%D1%8B%20%D0%B8%20%D1%81%D1%83%D0%B2%D0%B5%D0%BD%D0%B8%D1%80%D1%8B">Узнать об ассортименте ↗</a></div></section></div>
+        <noscript><p>Для заказа позвоните <a href="tel:+79992801367">+7 (999) 280-13-67</a> или напишите <a href="mailto:sales@valdaysuv.ru">sales@valdaysuv.ru</a>.</p></noscript>
+    </div>
+</section>
+
+<section class="gallery-teaser">
+    <div class="container"><span class="eyebrow">Примеры наших работ</span><h2 class="sec-title">Больше, чем один узор</h2><p>Именные подарки, символы городов и памятные колокольчики — посмотрите, что создаёт мастерская.</p><a class="btn-primary" href="gallery.html">Открыть галерею ↗</a></div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
     <div class="container">
-        <h2 class="sec-title">О мастерской</h2>
+        <span class="eyebrow">Место, где рождается звон</span><h2 class="sec-title">Ремесло, которое живёт</h2>
         <div class="divider"><span>❦ ✦ ❦</span></div>
         <p class="about-lead">
             Мы находимся в Валдае — городе, который на протяжении столетий славился своими колокольчиками и был известен на всю Россию. Наша мастерская хранит традиции ручного колокольного ремесла: каждый колокольчик отливается и обрабатывается руками мастера — так, как это делалось здесь сотни лет.
@@ -679,7 +253,7 @@
 <!-- WHERE TO BUY -->
 <section id="where-to-buy">
     <div class="container">
-        <h2 class="sec-title">Где купить</h2>
+        <span class="eyebrow">Встретимся в Валдае</span><h2 class="sec-title">Выбрать. Подержать. Услышать.</h2>
         <div class="divider"><span>❦ ✦ ❦</span></div>
         <div class="locations-grid">
             <div class="location-card">
@@ -721,7 +295,7 @@
 <!-- CONTACTS -->
 <section id="contacts">
     <div class="container">
-        <h2 class="sec-title">Контакты</h2>
+        <span class="eyebrow">Всегда на связи</span><h2 class="sec-title">Давайте подберём ваш подарок</h2>
         <div class="divider"><span>❦ ✦ ❦</span></div>
         <div class="contacts-grid">
             <div class="contact-card">
@@ -756,9 +330,10 @@
     </div>
 </section>
 
+</main>
 <footer>
     <div class="container">
-        <img src="/logo.png" alt="Логотип" class="footer-logo">
+        <img src="img/logo.png" alt="Валдайская колокольная мастерская" class="footer-logo">
         <div class="footer-orn">❦ ✦ ❦</div>
         <h3>Валдайская колокольная мастерская</h3>
         <p>Авторские колокольчики ручной работы</p>
@@ -879,228 +454,6 @@
     </div>
 </div>
 
-<script>
-    const PRODUCTS = [
-        { id:  1, name: 'Валдайский колокольчик черненый №2',          img: null },
-        { id:  2, name: 'Валдайский колокольчик черненый №3',          img: null },
-        { id:  3, name: 'Валдайский колокольчик черненый №4',          img: null },
-        { id:  4, name: 'Валдайский колокольчик черненый №5',          img: null },
-        { id:  5, name: 'Валдайский колокольчик черненый №7',          img: null },
-        { id:  6, name: 'Валдайский колокольчик черненый №8',          img: null },
-        { id:  7, name: 'Валдайский колокольчик черненый №4 с ручкой', img: null },
-        { id:  8, name: 'Валдайский колокольчик черненый №5 с ручкой', img: null },
-        { id:  9, name: 'Валдайский колокольчик черненый №6 с ручкой', img: null },
-        { id: 10, name: 'Колокол желтый в берестяной корзинке',         img: null },
-        { id: 11, name: 'Колокол желтый на берестяной подкове',         img: null },
-    ];
-
-    let cart = {};
-
-    function renderCatalog() {
-        document.getElementById('catalogGrid').innerHTML = PRODUCTS.map(p => `
-            <div class="product-card">
-                ${p.img
-                    ? `<img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy">`
-                    : `<div class="product-placeholder">🔔</div>`}
-                <div class="product-info">
-                    <div class="product-name">${p.name}</div>
-                    <div class="product-price">Цена по запросу</div>
-                    <button class="btn-add" id="ba${p.id}" onclick="addToCart(${p.id})">+ В корзину</button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function addToCart(id) {
-        cart[id] = (cart[id] || 0) + 1;
-        syncBadge();
-        const btn = document.getElementById('ba' + id);
-        if (!btn) return;
-        btn.textContent = '✓ Добавлено';
-        btn.classList.add('added');
-        setTimeout(() => { btn.textContent = '+ В корзину'; btn.classList.remove('added'); }, 1400);
-    }
-
-    function changeQty(id, d) {
-        cart[id] = (cart[id] || 0) + d;
-        if (cart[id] <= 0) delete cart[id];
-        syncBadge();
-        renderCartBody();
-    }
-
-    function totalQty() { return Object.values(cart).reduce((s, v) => s + v, 0); }
-
-    function syncBadge() {
-        const n = totalQty();
-        const el = document.getElementById('cartBadge');
-        el.textContent = n;
-        el.classList.toggle('show', n > 0);
-    }
-
-    function renderCartBody() {
-        const body = document.getElementById('cartBody');
-        const foot = document.getElementById('cartFoot');
-        const ids  = Object.keys(cart).map(Number);
-
-        if (!ids.length) {
-            body.innerHTML = `<div class="cart-empty"><div class="big">🔔</div><p>Корзина пуста</p><p style="font-size:.85rem;margin-top:5px">Добавьте товары из каталога</p></div>`;
-            foot.style.display = 'none';
-            return;
-        }
-
-        foot.style.display = 'block';
-        document.getElementById('cartTotal').textContent = totalQty() + ' шт.';
-        body.innerHTML = ids.map(id => {
-            const p = PRODUCTS.find(x => x.id === id);
-            return `<div class="cart-item">
-                <div class="cart-item-name">${p.name}</div>
-                <div class="qty">
-                    <button class="qty-btn" onclick="changeQty(${id},-1)">−</button>
-                    <span class="qty-val">${cart[id]}</span>
-                    <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
-                </div>
-            </div>`;
-        }).join('');
-    }
-
-    function openCart() {
-        document.getElementById('cartOverlay').classList.add('open');
-        document.getElementById('cartSidebar').classList.add('open');
-        document.body.style.overflow = 'hidden';
-        renderCartBody();
-    }
-    function closeCart() {
-        document.getElementById('cartOverlay').classList.remove('open');
-        document.getElementById('cartSidebar').classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    function openOrderModal() {
-        closeCart();
-        document.getElementById('orderWrap').classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeOrderModal() {
-        document.getElementById('orderWrap').classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    function setDelivery(type) {
-        document.getElementById('dPickup').classList.toggle('sel', type === 'pickup');
-        document.getElementById('dSdek').classList.toggle('sel',   type === 'sdek');
-        document.getElementById('cityGroup').style.display   = type === 'sdek' ? 'block' : 'none';
-        document.getElementById('estimateBox').style.display = 'none';
-    }
-
-    function calcDelivery() {
-        const sel = document.getElementById('oCity');
-        const box = document.getElementById('estimateBox');
-        if (!sel.value) { box.style.display = 'none'; return; }
-        const [, rate] = sel.value.split('|');
-        document.getElementById('estimateCost').textContent = '~' + rate + ' руб.';
-        box.style.display = 'block';
-    }
-
-    function buildReceipt() {
-        const email   = document.getElementById('oEmail').value.trim();
-        const consent = document.getElementById('oConsent');
-        const delType = document.querySelector('input[name="del"]:checked').value;
-        const cityEl  = document.getElementById('oCity');
-
-        if (email && !consent.checked) {
-            alert('Пожалуйста, дайте согласие на обработку персональных данных (чекбокс под полем email).');
-            return;
-        }
-        if (delType === 'sdek' && !cityEl.value) { alert('Пожалуйста, выберите город доставки.'); return; }
-
-        const now = new Date().toLocaleString('ru-RU', {
-            day: '2-digit', month: '2-digit', year: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-        });
-
-        let delStr = '', delCostStr = '';
-        if (delType === 'pickup') {
-            delStr = 'Самовывоз — г. Валдай, ул. Пролетарская, 22';
-        } else {
-            const [city, rate] = cityEl.value.split('|');
-            delStr     = 'Доставка СДЭК — г. ' + city;
-            delCostStr = '\nПримерная стоимость доставки: ~' + rate + ' руб.';
-        }
-
-        const emailStr = email ? `\nEmail:     ${email}` : '';
-
-        const lines = Object.keys(cart).map(id => {
-            const p = PRODUCTS.find(x => x.id === Number(id));
-            return `  • ${p.name} — ${cart[id]} шт.`;
-        }).join('\n');
-
-        const text =
-`ЗАКАЗ от ${now}
-================================${emailStr}
-Получение: ${delStr}${delCostStr}
-
-Состав заказа (${totalQty()} шт.):
-${lines}
-
-================================
-📧 sales@valdaysuv.ru`;
-
-        document.getElementById('receiptBox').textContent = text;
-        const enc = encodeURIComponent(text);
-        document.getElementById('tgBtn').href = 'https://t.me/' + atob('YW5kcmV3c2hvbw==');
-        document.getElementById('waBtn').href = 'https://wa.me/' + atob('Nzk5OTI4MDEzNjc=') + '?text=' + enc;
-        document.getElementById('maxBtn').href = 'https://max.ru' + '/u/' + 'f9LHodD0cOJ4Vkr' + 'KwCvHQq4xEsapp' + 'WLGc3P_Ogl_ALy' + '_7OXoqaELlh2OGLc';
-        document.getElementById('emailBtn').href = 'mailto:' + atob('c2FsZXNAdmFsZGF5c3V2LnJ1')
-            + '?subject=' + encodeURIComponent('Заказ с сайта valdaysuv.ru')
-            + '&body=' + encodeURIComponent(text);
-
-        closeOrderModal();
-        document.getElementById('receiptWrap').classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeReceipt() {
-        document.getElementById('receiptWrap').classList.remove('open');
-        document.body.style.overflow = '';
-        cart = {};
-        syncBadge();
-    }
-
-    function copyReceipt() {
-        const text = document.getElementById('receiptBox').textContent;
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = document.querySelector('.btn-copy');
-            const orig = btn.textContent;
-            btn.textContent = '✓ Скопировано!';
-            setTimeout(() => { btn.textContent = orig; }, 2000);
-        });
-    }
-
-    ['tgBtn', 'maxBtn'].forEach(id => {
-        document.getElementById(id).addEventListener('click', function () {
-            navigator.clipboard.writeText(document.getElementById('receiptBox').textContent).catch(() => {});
-        });
-    });
-
-    document.getElementById('oEmail').addEventListener('input', function () {
-        const wrap = document.getElementById('consentWrap');
-        wrap.style.display = this.value.trim() ? 'flex' : 'none';
-        if (!this.value.trim()) document.getElementById('oConsent').checked = false;
-    });
-
-    ['orderWrap', 'receiptWrap'].forEach(id => {
-        document.getElementById(id).addEventListener('click', function(e) {
-            if (e.target === this) this.id === 'receiptWrap' ? closeReceipt() : closeOrderModal();
-        });
-    });
-
-    document.addEventListener('keydown', e => {
-        if (e.key !== 'Escape') return;
-        closeCart(); closeOrderModal(); closeReceipt();
-    });
-
-    renderCatalog();
-    renderCartBody();
-</script>
+<script src="src/script.js" defer></script>
 </body>
 </html>

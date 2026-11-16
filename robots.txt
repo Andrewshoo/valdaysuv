@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /.git/
+Disallow: /NOTES.md
+Disallow: /SEO.md
+
+Sitemap: https://valdaysuv.ru/sitemap.xml

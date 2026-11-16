@@ -1,0 +1,8 @@
+{
+  "name": "Тверь",
+  "image": "img/tver1.jpg",
+  "caption": "Колокольчик с изображением моста и надписью «Тверь»",
+  "category": "places",
+  "order": 3,
+  "published": true
+}

@@ -1,0 +1,12 @@
+# Optional Netlify mirror for GitHub OAuth. Primary hosting remains GitHub Pages.
+[build]
+  command = "python scripts/build.py"
+  publish = "dist"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

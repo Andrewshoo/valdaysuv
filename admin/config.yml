@@ -1,0 +1,301 @@
+{
+  "backend": {
+    "name": "github",
+    "repo": "Andrewshoo/valdaysuv",
+    "branch": "main",
+    "base_url": "https://api.netlify.com",
+    "auth_endpoint": "auth",
+    "site_domain": "valdaysuv.ru"
+  },
+  "locale": "ru",
+  "publish_mode": "editorial_workflow",
+  "media_folder": "img/uploads",
+  "public_folder": "/img/uploads",
+  "site_url": "https://valdaysuv.ru",
+  "display_url": "https://valdaysuv.ru",
+  "logo_url": "https://valdaysuv.ru/img/logo.png",
+  "editor": {
+    "preview": false
+  },
+  "collections": [
+    {
+      "name": "products",
+      "label": "Товары",
+      "label_singular": "Товар",
+      "folder": "content/products",
+      "create": true,
+      "format": "json",
+      "extension": "json",
+      "identifier_field": "name",
+      "slug": "{{slug}}",
+      "summary": "{{name}}",
+      "fields": [
+        {
+          "name": "id",
+          "label": "Служебный ID",
+          "widget": "hidden",
+          "required": false
+        },
+        {
+          "name": "name",
+          "label": "Название",
+          "widget": "string"
+        },
+        {
+          "name": "category",
+          "label": "Категория",
+          "widget": "relation",
+          "collection": "settings",
+          "file": "categories",
+          "search_fields": [
+            "items.*.name"
+          ],
+          "display_fields": [
+            "items.*.name"
+          ],
+          "value_field": "items.*.id"
+        },
+        {
+          "name": "number",
+          "label": "Номер модели",
+          "widget": "number",
+          "value_type": "int",
+          "min": 0,
+          "default": 0,
+          "hint": "0, если номера нет. Реальные размеры укажите отдельно."
+        },
+        {
+          "name": "image",
+          "label": "Основное фото",
+          "widget": "image",
+          "required": false
+        },
+        {
+          "name": "description",
+          "label": "Описание",
+          "widget": "text",
+          "required": false
+        },
+        {
+          "name": "dimensions",
+          "label": "Размеры",
+          "widget": "string",
+          "required": false,
+          "hint": "Например: высота 6 см, диаметр 5 см. Только проверенные размеры."
+        },
+        {
+          "name": "price",
+          "label": "Цена, ₽",
+          "widget": "number",
+          "value_type": "int",
+          "min": 1,
+          "required": false,
+          "hint": "Оставьте пустым для цены по запросу."
+        },
+        {
+          "name": "availability",
+          "label": "Наличие",
+          "widget": "select",
+          "options": [
+            "Уточните наличие",
+            "В наличии",
+            "Под заказ"
+          ],
+          "default": "Уточните наличие"
+        },
+        {
+          "name": "published",
+          "label": "Показывать на сайте",
+          "widget": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Порядок показа",
+          "widget": "number",
+          "default": 0,
+          "value_type": "int",
+          "min": 0
+        }
+      ]
+    },
+    {
+      "name": "works",
+      "label": "Галерея работ",
+      "label_singular": "Работа",
+      "folder": "content/works",
+      "create": true,
+      "format": "json",
+      "extension": "json",
+      "identifier_field": "name",
+      "slug": "{{slug}}",
+      "summary": "{{name}}",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Название",
+          "widget": "string"
+        },
+        {
+          "name": "image",
+          "label": "Фото",
+          "widget": "image"
+        },
+        {
+          "name": "caption",
+          "label": "Описание фотографии",
+          "widget": "text",
+          "hint": "Кратко опишите изображённую работу: текст используется и для доступности."
+        },
+        {
+          "name": "category",
+          "label": "Тема",
+          "widget": "select",
+          "options": [
+            {
+              "label": "Формы и узоры",
+              "value": "classic"
+            },
+            {
+              "label": "Имена и события",
+              "value": "custom"
+            },
+            {
+              "label": "Города и места",
+              "value": "places"
+            }
+          ]
+        },
+        {
+          "name": "published",
+          "label": "Показывать на сайте",
+          "widget": "boolean",
+          "default": true
+        },
+        {
+          "name": "order",
+          "label": "Порядок показа",
+          "widget": "number",
+          "default": 0,
+          "value_type": "int",
+          "min": 0
+        }
+      ]
+    },
+    {
+      "name": "settings",
+      "label": "Настройки сайта",
+      "files": [
+        {
+          "name": "categories",
+          "label": "Категории каталога",
+          "file": "content/settings/categories.json",
+          "fields": [
+            {
+              "name": "items",
+              "label": "Категории",
+              "widget": "list",
+              "summary": "{{fields.name}}",
+              "fields": [
+                {
+                  "name": "id",
+                  "label": "Код категории",
+                  "widget": "string",
+                  "pattern": [
+                    "^[a-z][a-z0-9-]*$",
+                    "Латинские буквы, цифры и дефис"
+                  ],
+                  "hint": "У существующих категорий не меняйте код, пока к ним привязаны товары."
+                },
+                {
+                  "name": "name",
+                  "label": "Название",
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Описание",
+                  "widget": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "site",
+          "label": "Мастерская и контакты",
+          "file": "content/settings/site.json",
+          "fields": [
+            {
+              "name": "name",
+              "label": "Название мастерской",
+              "widget": "string"
+            },
+            {
+              "name": "phone",
+              "label": "Телефон для ссылок",
+              "widget": "string",
+              "pattern": [
+                "^\\+[0-9]{10,15}$",
+                "Формат +79992801367"
+              ]
+            },
+            {
+              "name": "phone_display",
+              "label": "Телефон для отображения",
+              "widget": "string"
+            },
+            {
+              "name": "email",
+              "label": "Email",
+              "widget": "string"
+            },
+            {
+              "name": "address",
+              "label": "Полный адрес",
+              "widget": "string"
+            },
+            {
+              "name": "street",
+              "label": "Улица и дом для поисковиков",
+              "widget": "string"
+            },
+            {
+              "name": "city",
+              "label": "Город",
+              "widget": "string"
+            },
+            {
+              "name": "opens",
+              "label": "Открытие",
+              "widget": "string",
+              "pattern": [
+                "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",
+                "Формат 10:00"
+              ]
+            },
+            {
+              "name": "closes",
+              "label": "Закрытие",
+              "widget": "string",
+              "pattern": [
+                "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",
+                "Формат 18:00"
+              ]
+            },
+            {
+              "name": "hero_intro",
+              "label": "Текст первого экрана",
+              "widget": "text"
+            },
+            {
+              "name": "about",
+              "label": "О мастерской",
+              "widget": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
