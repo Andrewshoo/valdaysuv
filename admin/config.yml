@@ -5,7 +5,7 @@
     "branch": "main",
     "base_url": "https://api.netlify.com",
     "auth_endpoint": "auth",
-    "site_domain": "valdaysuv.ru"
+    "site_domain": "deluxe-crostata-af3a97.netlify.app"
   },
   "locale": "ru",
   "publish_mode": "editorial_workflow",
