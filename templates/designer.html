@@ -16,7 +16,7 @@
 <body>
 <header>
     <div class="header-inner">
-        <a href="index.html" class="logo-link"><img src="img/logo.png" alt="" class="logo"><span class="site-name">Валдайская<br>колокольная мастерская</span></a>
+        <a href="index.html" class="logo-link"><img src="img/shared/logo.png" alt="" class="logo"><span class="site-name">Валдайская<br>колокольная мастерская</span></a>
         <a href="index.html#catalog" class="cart-btn">Вернуться в каталог ↗</a>
     </div>
 </header>
@@ -24,9 +24,10 @@
     <div class="designer-intro"><span class="eyebrow">Мастерская вашего подарка · Прототип</span><h1>Слова, которые<br><em>останутся на память</em></h1><p>Посмотрите, как ваша надпись может выглядеть на юбке колокольчика. Герб и орнамент остаются на своих местах.</p></div>
     <div class="designer-layout">
         <section class="bell-stage" aria-label="Трёхмерный эскиз колокольчика">
-            <div class="stage-top"><span>Валдайский колокольчик · С гербом</span><span class="prototype-mark">3D-эскиз</span></div>
+            <div class="stage-top"><span>Колокольчик №5 · Сложная надпись</span><span class="prototype-mark">3D-эскиз</span></div>
             <div id="bellViewport" tabindex="0" aria-label="Модель колокольчика. Вращайте мышью или пальцем; стрелки клавиатуры поворачивают модель, плюс и минус меняют масштаб."></div>
             <p id="modelStatus" class="model-status" role="status">Подготавливаем колокольчик…</p>
+            <div class="bell-side-choices" aria-label="Стороны колокольчика"><button type="button" data-bell-angle="0">Колокольчики</button><button type="button" data-bell-angle="120">Дар Валдая</button><button type="button" data-bell-angle="-120">Герб</button></div>
             <div class="stage-bottom"><button type="button" id="resetView">Исходный ракурс</button><div class="view-directions"><button type="button" id="turnLeft" aria-label="Повернуть колокольчик влево">←</button><button type="button" id="turnRight" aria-label="Повернуть колокольчик вправо">→</button></div></div>
         </section>
         <section class="bell-editor" aria-labelledby="editorTitle">
@@ -42,7 +43,7 @@
             <p class="designer-disclaimer">Это эскиз оформления, а не точная копия изделия. Мастер наносит рисунки и надписи вручную — без трафаретов, поэтому готовая работа будет отличаться от визуализации.</p>
         </section>
     </div>
-    <section class="designer-reference"><img src="img/gerbvalday.jpg" alt="Исходная фотография колокольчика с гербом Валдая" width="750" height="750" loading="lazy"><div><span class="eyebrow">Основа эскиза</span><h2>Настоящий колокольчик мастерской</h2><p>Форму восстановили приблизительно по этому снимку. Фрагмент герба взят с фотографии; рисунок на обратной стороне и мелкие детали пока переданы условно. Для точной модели понадобятся размеры и дополнительные ракурсы.</p><a href="img/gerbvalday.jpg" class="text-link" target="_blank" rel="noopener">Рассмотреть оригинал ↗</a></div></section>
+    <section class="designer-reference"><img src="img/shop/nomer4.jpg" alt="Колокольчик №5 со сложной надписью, рисунок колокольчиков" width="750" height="1000" loading="lazy"><div><span class="eyebrow">Основа эскиза</span><h2>Настоящий колокольчик мастерской</h2><p>Пропорции уточняем по фотографиям колокольчика №5. Рисунок колокольчиков перенесён с этого снимка. Герб пока взят с другого фото мастерской, а «Дар Валдая» передан условно. Заменим их точными фрагментами, когда будут доступны оригиналы остальных ракурсов. Размеры модели пока приблизительные.</p><a href="img/shop/nomer4.jpg" class="text-link" target="_blank" rel="noopener">Рассмотреть оригинал ↗</a></div></section>
     <noscript><p>Для 3D-просмотра нужен JavaScript. Исходное фото доступно ниже.</p></noscript>
 </main>
 <script type="module" src="src/designer.js"></script>

@@ -8,23 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/home.css?v=309bb6c93f2b">
-    <link rel="stylesheet" href="src/styles.css?v=befdeac498f5">
+    <link rel="stylesheet" href="src/styles.css?v=7862f1284be7">
+    <link rel="stylesheet" href="src/shop.css?v=f33f738bdf57">
     <meta name="description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://valdaysuv.ru/">
-    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="icon" type="image/png" href="img/shared/logo.png">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="Валдайская колокольная мастерская">
     <meta property="og:title" content="Валдайские колокольчики с художественной обработкой — мастерская в Валдае">
     <meta property="og:description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
     <meta property="og:url" content="https://valdaysuv.ru/">
-    <meta property="og:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
+    <meta property="og:image" content="https://valdaysuv.ru/img/shared/photo_5325715840693302141_y.jpg">
     <meta property="og:image:alt" content="Валдайские колокольчики с художественной обработкой">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Валдайские колокольчики с художественной обработкой — мастерская в Валдае">
     <meta name="twitter:description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
-    <meta name="twitter:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
+    <meta name="twitter:image" content="https://valdaysuv.ru/img/shared/photo_5325715840693302141_y.jpg">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -34,8 +35,8 @@
       "@id": "https://valdaysuv.ru/#workshop",
       "name": "Валдайская колокольная мастерская",
       "url": "https://valdaysuv.ru/",
-      "image": "https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg",
-      "logo": "https://valdaysuv.ru/img/logo.png",
+      "image": "https://valdaysuv.ru/img/shared/photo_5325715840693302141_y.jpg",
+      "logo": "https://valdaysuv.ru/img/shared/logo.png",
       "telephone": [
         "+79992801367",
         "+79960672837"
@@ -79,7 +80,7 @@
 <header>
     <div class="header-inner">
         <a href="index.html" class="logo-link">
-            <img src="img/logo.png" alt="Валдайская колокольная мастерская" class="logo">
+            <img src="img/shared/logo.png" alt="Валдайская колокольная мастерская" class="logo">
             <span class="site-name">Валдайская<br>колокольная мастерская</span>
         </a>
         <button class="cart-btn" onclick="openCart()">
@@ -98,6 +99,7 @@
             <a href="gallery.html">Галерея</a>
             <a href="#history">История</a>
             <a href="#about">О мастерской</a>
+            <a href="#custom-order">Индивидуальный заказ</a>
             <a href="#where-to-buy">Где купить</a>
             <a href="#contacts">Контакты</a>
         </div>
@@ -109,13 +111,13 @@
 <section class="hero">
     <div class="hero-frame">
         <span class="eyebrow">Валдай · Колокольная мастерская</span>
-        <h1>Валдайские колокольчики.<br><em>Ручная работа.<br>Живой звук.</em></h1>
+        <h1>Валдайские колокольчики.<br><em>Ручная работа.</em></h1>
         <p>Вручную украшаем валдайские колокольчики узорами, рисунками и памятными надписями. Для подарка, на память и просто для души.</p>
         <p class="hero-availability">Колокольчики с валдайской символикой <strong>всегда в наличии</strong>.</p>
         <div class="hero-actions"><a href="#catalog" class="btn-primary">Выбрать колокольчик ↗</a><a href="#about" class="text-link">Познакомиться с мастерской</a></div>
         <div class="hero-footnote"><span>Ручная работа<br>и внимание к деталям</span><span>Из Валдая<br>с доставкой по России</span></div>
     </div>
-    <figure class="hero-photo"><img src="img/photo_5325715840693302141_y.jpg" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
+    <figure class="hero-photo"><img src="img/shared/photo_5325715840693302141_y.jpg" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
 </section>
 
 <section id="history" class="history-section">
@@ -123,10 +125,10 @@
         <div class="history-heading"><span class="eyebrow">Из дорожного звона — в памятный подарок</span><h2 class="sec-title">Откуда родом валдайский звон</h2></div>
         <div class="history-text"><p>История валдайского колокольчика связана с дорогой между Москвой и Петербургом. Во второй половине XVIII века Валдай стал одним из центров изготовления ямщицких колокольчиков. Их подвешивали под дугой конской упряжи — отсюда название «поддужные».</p><p>В пути колокольчик подавал сигнал о приближении экипажа и сопровождал пение ямщика. Особое место занимали надписи по нижнему краю — «юбке» колокольчика: пожелания, добрые слова и послания тому, кому его дарили. Сегодня эту традицию продолжают и в нашей мастерской: вручную наносим надписи, которые делают подарок личным.</p></div>
         <p class="history-source">Об истории колокольчика: <a href="https://www.prlib.ru/history/619320" target="_blank" rel="noopener">Президентская библиотека ↗</a></p>
-        <div class="inscriptions-heading"><span class="eyebrow">Традиционные надписи нашей мастерской</span><h2 class="sec-title">Слова, которые хочется подарить</h2><p>Признание, пожелание счастья или память о Валдае — у каждого колокольчика может быть своё послание.</p></div>
+        <div class="inscriptions-heading"><span class="eyebrow">Традиционные надписи нашей мастерской</span><h2 class="sec-title">Слова, которые хочется подарить</h2><p>Признание, пожелание счастья или память о Валдае — надпись выбирается отдельно от изображения. Любую из этих надписей можно сочетать с выбранным рисунком.</p></div>
         <div class="inscriptions-controls"><button type="button" id="inscriptionsToggle" class="inscriptions-toggle" aria-controls="inscriptionsRail" hidden><span class="inscriptions-toggle-icon" aria-hidden="true">Ⅱ</span><span class="inscriptions-toggle-label">Остановить прокрутку</span></button></div>
         <div class="inscriptions-grid" id="inscriptionsRail" tabindex="0" role="region" aria-label="Традиционные надписи на колокольчиках"><blockquote class="inscription"><p>«Кого люблю, того и дарю.»</p></blockquote><blockquote class="inscription"><p>«Кто мне внимает, тот счастье обретает.»</p></blockquote><blockquote class="inscription"><p>«Кто колокол купит, тот счастлив будет.»</p></blockquote><blockquote class="inscription"><p>«Звону много — веселей дорога.»</p></blockquote><blockquote class="inscription"><p>«Купи, не скупись, со мной веселись.»</p></blockquote><blockquote class="inscription"><p>«Лит для того, кто купит его.»</p></blockquote><blockquote class="inscription"><p>«Мчится тройка удалая, колокольчик Дар Валдая.»</p></blockquote><blockquote class="inscription"><p>«Валдайский Иверский монастырь.»</p></blockquote></div>
-        <p class="inscriptions-note">Выберите надпись из наших работ или предложите свои слова — обсудим оформление вашего колокольчика.</p>
+        <p class="inscriptions-note">На фотографиях показаны примеры сочетаний рисунков и надписей. Выберите любую традиционную надпись из списка или предложите свои слова — обсудим оформление вашего колокольчика.</p>
     </div>
 </section>
 
@@ -141,48 +143,54 @@
 <div class="catalog-group-heading"><h3 id="heading-bells">Колокольчики</h3><p>Классическая форма без ручки. Модели №2, №3, №4, №5, №7 и №8.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-1" data-category="bells" data-size-number="2" data-product-id="1" data-product-name="Валдайский колокольчик черненый №2" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">Модель №2</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №2</h4>
+        <h4 class="product-name">Колокольчик №2</h4><p class="product-detail product-dimensions">Диаметр 3,6 см · Высота 3,8 см</p>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba1" onclick="addToCart(1)" hidden>+ В корзину</button>
     </div>
 </article>
 <article class="product-card" id="product-2" data-category="bells" data-size-number="3" data-product-id="2" data-product-name="Валдайский колокольчик черненый №3" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">Модель №3</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №3</h4>
+        <h4 class="product-name">Колокольчик №3</h4><p class="product-detail product-dimensions">Диаметр 4,2 см · Высота 4,4 см</p>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba2" onclick="addToCart(2)" hidden>+ В корзину</button>
     </div>
 </article>
-<article class="product-card" id="product-3" data-category="bells" data-size-number="4" data-product-id="3" data-product-name="Валдайский колокольчик черненый №4" data-product-image="img/nomer4.jpg">
-    <img class="product-img" src="img/nomer4.jpg" alt="Валдайский колокольчик черненый №4" loading="lazy">
+<article class="product-card" id="product-3" data-category="bells" data-size-number="4" data-product-id="3" data-product-name="Валдайский колокольчик черненый №4" data-product-image="img/shop/nomer4.jpg">
+    <img class="product-img" src="img/shop/nomer4.jpg" alt="Валдайский колокольчик черненый №4" loading="lazy">
     <div class="product-info"><span class="product-type">Модель №4</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №4</h4>
+        <h4 class="product-name">№4 с рисунком колокольчиков</h4><p class="product-detail product-dimensions">Диаметр 5,0 см · Высота 5,2 см</p><p class="product-detail product-description">На фото — колокольчик №4 с рисунком колокольчиков. Надпись можно выбрать отдельно: любой из перечисленных на сайте традиционных вариантов подходит независимо от изображения.</p>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+<button type="button" class="product-more" data-product-details="3" hidden>Рассмотреть изделие ↗</button>
         <button class="btn-add" id="ba3" onclick="addToCart(3)" hidden>+ В корзину</button>
     </div>
 </article>
-<article class="product-card" id="product-4" data-category="bells" data-size-number="5" data-product-id="4" data-product-name="Валдайский колокольчик черненый №5" data-product-image="">
-    <div class="product-placeholder"><span>Фотография скоро появится</span></div>
+<article class="product-card" id="product-4" data-category="bells" data-size-number="5" data-product-id="4" data-product-name="Валдайский колокольчик чернёный №5 со сложной надписью" data-product-image="img/shop/nomer5slojvld.png">
+    <div class="product-photos"><img class="product-img" src="img/shop/nomer5slojvld.png" alt="Валдайский колокольчик чернёный №5 со сложной надписью" loading="lazy"><div class="product-photo-thumbs" aria-label="Ракурсы товара"><button type="button" class="product-photo-button" data-photo="img/shop/nomer5slojvld.png" data-caption="№5 со сложной надписью — два вида на камне" aria-label="№5 со сложной надписью — два вида на камне" aria-pressed="true"><img src="img/shop/nomer5slojvld.png" alt="" loading="lazy"></button><button type="button" class="product-photo-button" data-photo="img/shop/bell-no5-complex-dar-valdaya.jpg" data-caption="№5 — надпись «Дар Валдая»" aria-label="№5 — надпись «Дар Валдая»" aria-pressed="false"><img src="img/shop/bell-no5-complex-dar-valdaya.jpg" alt="" loading="lazy"></button><button type="button" class="product-photo-button" data-photo="img/shop/bell-no5-complex-coat-of-arms.jpg" data-caption="№5 — герб Валдая" aria-label="№5 — герб Валдая" aria-pressed="false"><img src="img/shop/bell-no5-complex-coat-of-arms.jpg" alt="" loading="lazy"></button></div></div>
     <div class="product-info"><span class="product-type">Модель №5</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №5</h4>
+        <h4 class="product-name">№5 со сложной надписью</h4><p class="product-detail product-dimensions">Диаметр 6,0 см · Высота 6,2 см</p><p class="product-detail product-description">На фото — колокольчик №5 с гербом Валдая, надписью «Дар Валдая» и сложным оформлением юбки. Традиционную надпись можно выбрать отдельно от изображения.</p>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+<button type="button" class="product-more" data-product-details="4" hidden>Рассмотреть изделие ↗</button>
         <button class="btn-add" id="ba4" onclick="addToCart(4)" hidden>+ В корзину</button>
     </div>
 </article>
 <article class="product-card" id="product-5" data-category="bells" data-size-number="7" data-product-id="5" data-product-name="Валдайский колокольчик черненый №7" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">Модель №7</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №7</h4>
+        <h4 class="product-name">Колокольчик №7</h4><p class="product-detail product-dimensions">Диаметр 8,4 см · Высота 9,0 см</p>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba5" onclick="addToCart(5)" hidden>+ В корзину</button>
     </div>
 </article>
 <article class="product-card" id="product-6" data-category="bells" data-size-number="8" data-product-id="6" data-product-name="Валдайский колокольчик черненый №8" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">Модель №8</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №8</h4>
+        <h4 class="product-name">Колокольчик №8</h4><p class="product-detail product-dimensions">Диаметр 10,0 см · Высота 11,0 см</p>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba6" onclick="addToCart(6)" hidden>+ В корзину</button>
     </div>
 </article></div></section>
@@ -190,24 +198,27 @@
 <div class="catalog-group-heading"><h3 id="heading-handles">Колокольчики с ручкой</h3><p>Удобная ручка и знакомый валдайский звон. Модели №4, №5 и №6.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-7" data-category="handles" data-size-number="4" data-product-id="7" data-product-name="Валдайский колокольчик черненый №4 с ручкой" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">Модель №4</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №4 с ручкой</h4>
+        <h4 class="product-name">№4 с ручкой</h4>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba7" onclick="addToCart(7)" hidden>+ В корзину</button>
     </div>
 </article>
 <article class="product-card" id="product-8" data-category="handles" data-size-number="5" data-product-id="8" data-product-name="Валдайский колокольчик черненый №5 с ручкой" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">Модель №5</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №5 с ручкой</h4>
+        <h4 class="product-name">№5 с ручкой</h4>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba8" onclick="addToCart(8)" hidden>+ В корзину</button>
     </div>
 </article>
 <article class="product-card" id="product-9" data-category="handles" data-size-number="6" data-product-id="9" data-product-name="Валдайский колокольчик черненый №6 с ручкой" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">Модель №6</span>
-        <h4 class="product-name">Валдайский колокольчик черненый №6 с ручкой</h4>
+        <h4 class="product-name">№6 с ручкой</h4>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba9" onclick="addToCart(9)" hidden>+ В корзину</button>
     </div>
 </article></div></section>
@@ -215,8 +226,9 @@
 <div class="catalog-group-heading"><h3 id="heading-baskets">В берестяных корзинках</h3><p>Колокольчик в обрамлении натуральной бересты.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-10" data-category="baskets" data-size-number="0" data-product-id="10" data-product-name="Колокол желтый в берестяной корзинке" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">В берестяных корзинках</span>
-        <h4 class="product-name">Колокол желтый в берестяной корзинке</h4>
+        <h4 class="product-name">Колокольчик в берестяной корзинке</h4>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba10" onclick="addToCart(10)" hidden>+ В корзину</button>
     </div>
 </article></div></section>
@@ -224,13 +236,31 @@
 <div class="catalog-group-heading"><h3 id="heading-horseshoes">На подковах</h3><p>Колокольчик на берестяной подкове — подарок на память о Валдае.</p></div><div class="catalog-grid catalog-group-grid"><article class="product-card" id="product-11" data-category="horseshoes" data-size-number="0" data-product-id="11" data-product-name="Колокол желтый на берестяной подкове" data-product-image="">
     <div class="product-placeholder"><span>Фотография скоро появится</span></div>
     <div class="product-info"><span class="product-type">На подковах</span>
-        <h4 class="product-name">Колокол желтый на берестяной подкове</h4>
+        <h4 class="product-name">Колокольчик на берестяной подкове</h4>
         <p class="product-price">Цена по запросу</p><p class="product-availability">Уточните наличие</p>
+
         <button class="btn-add" id="ba11" onclick="addToCart(11)" hidden>+ В корзину</button>
     </div>
 </article></div></section>
 <section class="catalog-group" id="catalog-souvenirs" aria-labelledby="heading-souvenirs">
-<div class="catalog-group-heading"><h3 id="heading-souvenirs">Магниты и сувениры</h3><p>Сопутствующие товары мастерской.</p></div><div class="catalog-request"><p>Уточните ассортимент и наличие у мастерской.</p><a class="btn-primary" href="mailto:sales@valdaysuv.ru?subject=%D0%9C%D0%B0%D0%B3%D0%BD%D0%B8%D1%82%D1%8B%20%D0%B8%20%D1%81%D1%83%D0%B2%D0%B5%D0%BD%D0%B8%D1%80%D1%8B">Узнать об ассортименте ↗</a></div></section></div>
+<div class="catalog-group-heading"><h3 id="heading-souvenirs">Магниты и сувениры</h3><p>Сопутствующие товары мастерской.</p></div><div class="catalog-request"><p>Уточните ассортимент и наличие у мастерской.</p><a class="btn-primary" href="mailto:sales@valdaysuv.ru?subject=%D0%9C%D0%B0%D0%B3%D0%BD%D0%B8%D1%82%D1%8B%20%D0%B8%20%D1%81%D1%83%D0%B2%D0%B5%D0%BD%D0%B8%D1%80%D1%8B">Узнать об ассортименте ↗</a></div></section></div><template id="product-detail-3">
+<div class="product-detail-layout">
+    <div class="product-detail-photos"><a class="product-detail-image-link" href="img/shop/nomer4.jpg" target="_blank" rel="noopener"><img class="product-detail-image" src="img/shop/nomer4.jpg" alt="Валдайский колокольчик черненый №4"></a><div class="product-detail-thumbnails"></div></div>
+    <div class="product-detail-description"><span class="eyebrow">Модель №4</span><h2 class="product-dialog-title" id="product-dialog-title-3">Валдайский колокольчик черненый №4</h2><p>На фото — колокольчик №4 с рисунком колокольчиков. Надпись можно выбрать отдельно: любой из перечисленных на сайте традиционных вариантов подходит независимо от изображения.</p><ul class="product-feature-list"><li>Рисунок колокольчиков на фото</li><li>Надпись выбирается отдельно от изображения</li><li>Художественная обработка вручную, без трафаретов</li></ul>
+    <dl class="product-specs"><div><dt>Размеры</dt><dd>Диаметр 5,0 см · Высота 5,2 см</dd></div><div><dt>Наличие</dt><dd>Уточните наличие</dd></div><div><dt>Стоимость</dt><dd>Цена по запросу</dd></div></dl>
+    <div class="product-design-note"><h3>Ваше оформление</h3><p>Выберите изображение и любую традиционную надпись из представленных на сайте. Также можно предложить свои слова и обсудить индивидуальный дизайн. Фото показывает один из вариантов оформления.</p></div>
+    <button type="button" class="btn-primary product-detail-select" data-select-product="3">Выбрать для заявки →</button><p class="product-select-note">Добавим изделие в корзину. Оформление и стоимость согласуем перед заказом.</p></div>
+</div>
+</template>
+<template id="product-detail-4">
+<div class="product-detail-layout">
+    <div class="product-detail-photos"><a class="product-detail-image-link" href="img/shop/nomer5slojvld.png" target="_blank" rel="noopener"><img class="product-detail-image" src="img/shop/nomer5slojvld.png" alt="Валдайский колокольчик чернёный №5 со сложной надписью"></a><div class="product-detail-thumbnails"><button type="button" class="product-detail-thumb" data-photo="img/shop/nomer5slojvld.png" data-caption="№5 со сложной надписью — два вида на камне" aria-label="№5 со сложной надписью — два вида на камне" aria-pressed="true"><img src="img/shop/nomer5slojvld.png" alt="" loading="lazy"></button><button type="button" class="product-detail-thumb" data-photo="img/shop/bell-no5-complex-dar-valdaya.jpg" data-caption="№5 — надпись «Дар Валдая»" aria-label="№5 — надпись «Дар Валдая»" aria-pressed="false"><img src="img/shop/bell-no5-complex-dar-valdaya.jpg" alt="" loading="lazy"></button><button type="button" class="product-detail-thumb" data-photo="img/shop/bell-no5-complex-coat-of-arms.jpg" data-caption="№5 — герб Валдая" aria-label="№5 — герб Валдая" aria-pressed="false"><img src="img/shop/bell-no5-complex-coat-of-arms.jpg" alt="" loading="lazy"></button></div></div>
+    <div class="product-detail-description"><span class="eyebrow">Модель №5</span><h2 class="product-dialog-title" id="product-dialog-title-4">Валдайский колокольчик чернёный №5 со сложной надписью</h2><p>На фото — колокольчик №5 с гербом Валдая, надписью «Дар Валдая» и сложным оформлением юбки. Традиционную надпись можно выбрать отдельно от изображения.</p><ul class="product-feature-list"><li>Герб Валдая на фото</li><li>Любая из представленных традиционных надписей</li><li>Художественная обработка вручную, без трафаретов</li></ul>
+    <dl class="product-specs"><div><dt>Размеры</dt><dd>Диаметр 6,0 см · Высота 6,2 см</dd></div><div><dt>Наличие</dt><dd>Уточните наличие</dd></div><div><dt>Стоимость</dt><dd>Цена по запросу</dd></div></dl>
+    <div class="product-design-note"><h3>Ваше оформление</h3><p>Изображение и надпись выбираются отдельно. Все перечисленные на сайте традиционные надписи подходят к выбранному рисунку. Свои слова, индивидуальный дизайн и детали оформления согласуем при заказе.</p></div>
+    <button type="button" class="btn-primary product-detail-select" data-select-product="4">Выбрать для заявки →</button><p class="product-select-note">Добавим изделие в корзину. Оформление и стоимость согласуем перед заказом.</p></div>
+</div>
+</template>
         <noscript><p>Для заказа позвоните <a href="tel:+79992801367">+7 (999) 280-13-67</a> или напишите <a href="mailto:sales@valdaysuv.ru">sales@valdaysuv.ru</a>.</p></noscript>
     </div>
 </section>
@@ -267,6 +297,22 @@
                 <h3>Индивидуальный заказ</h3>
                 <p>Разработаем дизайн специально для вашего колокольчика — с именем, важной датой, любимым местом или значимым для вас символом.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<section id="custom-order" class="custom-order-section">
+    <div class="container">
+        <span class="eyebrow">Своё имя, свой рисунок, своя история</span>
+        <h2 class="sec-title">Колокольчик специально для вас</h2>
+        <p class="custom-order-intro">Изображение и надпись выбираются отдельно: любую из представленных традиционных надписей можно сочетать с выбранным рисунком. Для своих слов или особой идеи разработаем индивидуальное оформление. Рисунки и надписи наносим вручную, без трафаретов.</p>
+        <div class="custom-order-layout">
+            <ol class="custom-order-steps">
+                <li><h3>Расскажите об идее</h3><p>Пришлите желаемую надпись, рисунок или пример. Укажите модель колокольчика, количество и дату, к которой нужен подарок.</p></li>
+                <li><h3>Согласуем оформление и условия</h3><p>Обсудим дизайн, стоимость, срок работы и способ получения. Приступим после согласования деталей.</p></li>
+                <li><h3>Выполним работу вручную</h3><p>Мастер нанесёт рисунок и надпись. Небольшие различия между изделиями — естественная часть ручного оформления.</p></li>
+            </ol>
+            <aside class="custom-order-summary"><h3>Сроки и детали</h3><p>Срок индивидуального оформления согласуем до начала работы. Он зависит от сложности рисунка и количества колокольчиков.</p><p>Размер надписи и количество деталей подбираем под выбранную модель.</p><a class="btn-primary" href="mailto:sales@valdaysuv.ru?subject=Индивидуальный%20заказ%20колокольчиков">Обсудить индивидуальный заказ ↗</a><a class="custom-order-phone" href="tel:+79992801367">+7 (999) 280-13-67</a></aside>
         </div>
     </div>
 </section>
@@ -354,7 +400,7 @@
 </main>
 <footer>
     <div class="container">
-        <img src="img/logo.png" alt="Валдайская колокольная мастерская" class="footer-logo">
+        <img src="img/shared/logo.png" alt="Валдайская колокольная мастерская" class="footer-logo">
         <div class="footer-orn">❦ ✦ ❦</div>
         <h3>Валдайская колокольная мастерская</h3>
         <p>Художественная обработка валдайских колокольчиков</p>
@@ -382,6 +428,11 @@
         <button class="btn-checkout" onclick="openOrderModal()">Оформить заказ →</button>
     </div>
 </div>
+
+<dialog class="product-dialog" id="productDialog" aria-label="Карточка изделия">
+    <div class="product-dialog-header"><span>Колокольчики мастерской</span><button type="button" id="closeProductDialog" aria-label="Закрыть карточку" autofocus>×</button></div>
+    <div id="productDialogContent"></div>
+</dialog>
 
 <!-- ORDER MODAL -->
 <div class="modal-wrap" id="orderWrap">
@@ -474,7 +525,8 @@
     </div>
 </div>
 
-<script src="src/script.js?v=f4d5c7b9d80c" defer></script>
+<script src="src/script.js?v=882e04750ec6" defer></script>
+<script src="src/shop.js?v=522cc78a1c4b" defer></script>
 <script src="src/inscriptions.js?v=99913ad13558" defer></script>
 </body>
 </html>

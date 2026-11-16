@@ -51,6 +51,25 @@ class BuildTests(unittest.TestCase):
         page.feed(markup)
         self.assertEqual(sorted(int(p['data-product-id']) for p in page.products), list(range(1, 12)))
 
+    def test_multiple_product_photos_and_confirmed_number(self):
+        no4 = builder.load(ROOT / 'content/products/3.json')
+        no5 = builder.load(ROOT / 'content/products/4.json')
+        self.assertEqual(no4['image'], '/img/shop/nomer4.jpg')
+        self.assertNotIn('/img/shop/nomer4.jpg', [photo['image'] for photo in no5['photos']])
+        self.assertEqual(no5['number'], 5)
+        self.assertEqual(no5['image'], '/img/shop/nomer5slojvld.png')
+        product = dict(no5, _file='4', image='/img/shop/nomer4.jpg', photos=[
+            {'image': '/img/shop/nomer4.jpg', 'caption': 'Первый ракурс'},
+            {'image': '/img/gallery/gerbvalday.jpg', 'caption': 'Тестовый второй ракурс'},
+        ])
+        markup = builder.catalog_html([product], self.categories, 'test@example.com')
+        self.assertEqual(markup.count('class="product-photo-button"'), 2)
+        self.assertIn('data-caption="Первый ракурс"', markup)
+        self.assertEqual(markup.split('<template')[0].count('aria-pressed="true"'), 1)
+        product['photos'] = [{'image': '../outside.jpg'}]
+        with self.assertRaises(ValueError):
+            builder.catalog_html([product], self.categories, 'test@example.com')
+
     def test_rejects_invalid_catalog(self):
         product = {'_file': 'test', 'name': 'Тест', 'id': 1, 'category': 'bells'}
         for change in ({'price': 0}, {'category': 'missing'}, {'number': -1}):
@@ -63,7 +82,21 @@ class BuildTests(unittest.TestCase):
         for value in ('../secrets.png', 'content/settings/site.json', 'img/does-not-exist.jpg', 'https://example.com/image.jpg'):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 builder.image_path(value, required=True)
-        self.assertEqual(builder.image_path('/img/nomer4.jpg'), 'img/nomer4.jpg')
+        self.assertEqual(builder.image_path('/img/shop/nomer4.jpg'), 'img/shop/nomer4.jpg')
+
+    def test_shop_and_gallery_media_are_separate(self):
+        config = builder.load(ROOT / 'admin/config.yml')
+        collections = {entry['name']: entry for entry in config['collections']}
+        self.assertEqual(collections['products']['media_folder'], '/img/shop')
+        self.assertEqual(collections['works']['media_folder'], '/img/gallery')
+        for product in builder.entries('products'):
+            if product.get('image'):
+                self.assertTrue(product['image'].startswith('/img/shop/'))
+            for photo in product.get('photos', []):
+                self.assertTrue(photo['image'].startswith('/img/shop/'))
+                self.assertTrue((ROOT / photo['image'].lstrip('/')).is_file())
+        self.assertFalse(list((ROOT / 'img').glob('*.jpg')))
+        self.assertFalse((ROOT / 'dist/img/nomer4.jpg').exists())
 
     def test_drafts_excluded(self):
         original = builder.ROOT

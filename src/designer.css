@@ -47,3 +47,6 @@
     .stage-top { font-size: 10px; }
     .designer-reference { grid-template-columns: 1fr; }
 }
+
+.bell-side-choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 18px; }
+.bell-side-choices button { border: 1px solid var(--bgold); background: var(--cream); border-radius: 20px; padding: 7px 12px; font: 11px Arial, sans-serif; color: var(--rust); cursor: pointer; }

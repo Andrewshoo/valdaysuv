@@ -49,6 +49,7 @@ def catalog_html(products, categories, email):
         raise ValueError('Category IDs must be unique lowercase Latin identifiers')
     groups = {c['id']: [] for c in categories}
     ids = set()
+    detail_panels = []
     for product in products:
         # Existing IDs preserve saved carts; new IDs are stable across rebuilds and renames of titles.
         product['id'] = product.get('id') or (1000 + zlib.crc32(product['_file'].encode('utf-8')))
@@ -66,17 +67,56 @@ def catalog_html(products, categories, email):
             raise ValueError('Price must be positive or empty')
         image = image_path(product.get('image'))
         name = esc(product['name'])
+        short_name = esc(product.get('short_name') or product['name'])
         picture = (f'<img class="product-img" src="{esc(image)}" alt="{name}" loading="lazy">' if image else
                    '<div class="product-placeholder"><span>Фотография скоро появится</span></div>')
+        photo_items = product.get('photos', [])
+        if not isinstance(photo_items, list):
+            raise ValueError('Product photos must be a list')
+        photos = []
+        for item in photo_items:
+            photo = image_path(item['image'], required=True)
+            photos.append((photo, item.get('caption') or product['name']))
+        if image and all(path != image for path, _ in photos):
+            photos.insert(0, (image, product['name']))
+        if len(photos) > 1:
+            thumbs = ''.join(
+                f'<button type="button" class="product-photo-button" data-photo="{esc(path)}" data-caption="{esc(caption)}" aria-label="{esc(caption)}" aria-pressed="{str(path == image).lower()}"><img src="{esc(path)}" alt="" loading="lazy"></button>'
+                for path, caption in photos
+            )
+            picture = f'<div class="product-photos">{picture}<div class="product-photo-thumbs" aria-label="Ракурсы товара">{thumbs}</div></div>'
         badge = f'Модель №{number}' if number else next(c['name'] for c in categories if c['id'] == product['category'])
-        details = ''.join(f'<p class="product-detail">{esc(product[key])}</p>' for key in ('dimensions', 'description') if product.get(key))
+        details = ''.join(f'<p class="product-detail product-{key}">{esc(product[key])}</p>' for key in ('dimensions', 'description') if product.get(key))
         price_text = f'{price:,.0f}'.replace(',', ' ') + ' ₽' if price is not None else 'Цена по запросу'
         availability = f'<p class="product-availability">{esc(product["availability"])}</p>' if product.get('availability') else ''
+        detail_button = ''
+        if image and product.get('description'):
+            features = product.get('features', [])
+            if not isinstance(features, list) or any(not isinstance(value, str) for value in features):
+                raise ValueError('Product features must be a list of text values')
+            feature_list = '<ul class="product-feature-list">' + ''.join(f'<li>{esc(value)}</li>' for value in features) + '</ul>' if features else ''
+            main_photo = f'<a class="product-detail-image-link" href="{esc(image)}" target="_blank" rel="noopener"><img class="product-detail-image" src="{esc(image)}" alt="{name}"></a>'
+            thumbnails = ''.join(f'<button type="button" class="product-detail-thumb" data-photo="{esc(path)}" data-caption="{esc(caption)}" aria-label="{esc(caption)}" aria-pressed="{str(path == image).lower()}"><img src="{esc(path)}" alt="" loading="lazy"></button>' for path, caption in photos) if len(photos) > 1 else ''
+            dimension_text = esc(product.get('dimensions') or 'Уточните у мастерской')
+            availability_text = esc(product.get('availability') or 'Уточните наличие')
+            note = esc(product.get('design_note') or '')
+            detail_panels.append(f'''<template id="product-detail-{pid}">
+<div class="product-detail-layout">
+    <div class="product-detail-photos">{main_photo}<div class="product-detail-thumbnails">{thumbnails}</div></div>
+    <div class="product-detail-description"><span class="eyebrow">{esc(badge)}</span><h2 class="product-dialog-title" id="product-dialog-title-{pid}">{name}</h2><p>{esc(product['description'])}</p>{feature_list}
+    <dl class="product-specs"><div><dt>Размеры</dt><dd>{dimension_text}</dd></div><div><dt>Наличие</dt><dd>{availability_text}</dd></div><div><dt>Стоимость</dt><dd>{price_text}</dd></div></dl>
+    <div class="product-design-note"><h3>Ваше оформление</h3><p>{note}</p></div>
+    <button type="button" class="btn-primary product-detail-select" data-select-product="{pid}">Выбрать для заявки →</button><p class="product-select-note">Добавим изделие в корзину. Оформление и стоимость согласуем перед заказом.</p></div>
+</div>
+</template>''')
+            detail_button = f'<button type="button" class="product-more" data-product-details="{pid}" hidden>Рассмотреть изделие ↗</button>'
+
         card = f'''<article class="product-card" id="product-{pid}" data-category="{esc(product['category'])}" data-size-number="{number}" data-product-id="{pid}" data-product-name="{name}" data-product-image="{esc(image)}">
     {picture}
     <div class="product-info"><span class="product-type">{esc(badge)}</span>
-        <h4 class="product-name">{name}</h4>{details}
+        <h4 class="product-name">{short_name}</h4>{details}
         <p class="product-price">{price_text}</p>{availability}
+{detail_button}
         <button class="btn-add" id="ba{pid}" onclick="addToCart({pid})" hidden>+ В корзину</button>
     </div>
 </article>'''
@@ -95,7 +135,7 @@ def catalog_html(products, categories, email):
             f'<a class="btn-primary" href="mailto:{esc(email)}?subject={quote(category["name"])}">Узнать об ассортименте ↗</a></div>')
         sections.append(f'''<section class="catalog-group" id="catalog-{slug}" aria-labelledby="heading-{slug}">
 <div class="catalog-group-heading"><h3 id="heading-{slug}">{esc(category['name'])}</h3><p>{esc(category['description'])}</p></div>{content}</section>''')
-    return nav + toolbar + '<div id="catalogGrid">' + '\n'.join(sections) + '</div>'
+    return nav + toolbar + '<div id="catalogGrid">' + '\n'.join(sections) + '</div>' + '\n'.join(detail_panels)
 
 
 def gallery_html(works):
@@ -105,10 +145,14 @@ def gallery_html(works):
             raise ValueError(f'Unknown gallery category: {work["category"]}')
         image = image_path(work['image'], required=True)
         caption = work.get('caption') or work['name']
-        cards.append(f'''<figure class="gallery-card" data-gallery-category="{esc(work['category'])}">
+        focus_x, focus_y = work.get('image_focus_x', 50), work.get('image_focus_y', 50)
+        if any(type(value) not in (int, float) or not 0 <= value <= 100 for value in (focus_x, focus_y)):
+            raise ValueError('Gallery image focus must be between 0 and 100')
+        theme = {'classic': 'Формы и узоры', 'custom': 'Имена и события', 'places': 'Города и места'}[work['category']]
+        cards.append(f'''<figure class="gallery-card" data-gallery-category="{esc(work['category'])}" style="--image-focus-x:{focus_x}%;--image-focus-y:{focus_y}%">
 <a class="gallery-image" href="{esc(image)}" aria-label="Увеличить: {esc(work['name'])}">
 <img src="{esc(image)}" alt="{esc(caption)}" loading="{'eager' if i < 3 else 'lazy'}" decoding="async"><span class="gallery-zoom" aria-hidden="true">↗</span></a>
-<figcaption><h2>{esc(work['name'])}</h2><p>{esc(caption)}</p></figcaption></figure>''')
+<figcaption><span class="gallery-theme">{theme}</span><h2>{esc(work['name'])}</h2><p>{esc(caption)}</p></figcaption></figure>''')
     return '\n'.join(cards)
 
 
@@ -121,7 +165,7 @@ def structured_data(name, settings, works):
     else:
         value = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'LocalBusiness', '@id': SITE_URL + '#workshop', 'name': settings['name'], 'url': SITE_URL,
-             'image': SITE_URL + 'img/photo_5325715840693302141_y.jpg', 'logo': SITE_URL + 'img/logo.png',
+             'image': SITE_URL + 'img/shared/photo_5325715840693302141_y.jpg', 'logo': SITE_URL + 'img/shared/logo.png',
              'telephone': [settings['phone'], settings['phone_secondary']], 'email': settings['email'],
              'address': {'@type': 'PostalAddress', 'streetAddress': settings['street'], 'addressLocality': settings['city'], 'addressCountry': 'RU'},
              'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification',
@@ -178,7 +222,13 @@ def build(output, include_admin=False):
             shutil.rmtree(admin_output)
         folders = ('img', 'src', 'admin') if include_admin else ('img', 'src')
         for folder in folders:
-            shutil.copytree(ROOT / folder, output / folder, dirs_exist_ok=True)
+            destination = output / folder
+            if destination.exists():
+                # Recreate generated asset folders so moved/deleted files do not linger.
+                if destination.resolve().parent != output.resolve() or destination.resolve() == (ROOT / folder).resolve():
+                    raise ValueError('Unsafe generated asset path')
+                shutil.rmtree(destination)
+            shutil.copytree(ROOT / folder, destination)
         for name in ('CNAME', 'robots.txt', 'sitemap.xml'):
             shutil.copy2(ROOT / name, output / name)
         (output / '.nojekyll').touch()

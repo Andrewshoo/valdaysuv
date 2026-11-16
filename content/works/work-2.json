@@ -1,8 +1,10 @@
 {
-  "name": "Именной подарок",
-  "image": "/img/nomer7svadeb.jpg",
-  "caption": "Колокольчик с надписями «Дар Валдая» и «Маше от…»",
+  "name": "Именная надпись",
+  "image": "/img/gallery/nomer7svadeb.jpg",
+  "caption": "Именное послание на юбке колокольчика.",
   "category": "custom",
   "order": 1,
-  "published": true
+  "published": true,
+  "image_focus_x": 50,
+  "image_focus_y": 55
 }

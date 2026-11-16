@@ -5,9 +5,10 @@
   "number": 2,
   "image": "",
   "description": "",
-  "dimensions": "",
+  "dimensions": "Диаметр 3,6 см · Высота 3,8 см",
   "price": null,
   "availability": "Уточните наличие",
   "published": true,
-  "order": 0
+  "order": 0,
+  "short_name": "Колокольчик №2"
 }

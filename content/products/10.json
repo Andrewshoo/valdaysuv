@@ -9,5 +9,6 @@
   "price": null,
   "availability": "Уточните наличие",
   "published": true,
-  "order": 9
+  "order": 9,
+  "short_name": "Колокольчик в берестяной корзинке"
 }

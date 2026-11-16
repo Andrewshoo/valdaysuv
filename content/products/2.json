@@ -5,9 +5,10 @@
   "number": 3,
   "image": "",
   "description": "",
-  "dimensions": "",
+  "dimensions": "Диаметр 4,2 см · Высота 4,4 см",
   "price": null,
   "availability": "Уточните наличие",
   "published": true,
-  "order": 1
+  "order": 1,
+  "short_name": "Колокольчик №3"
 }

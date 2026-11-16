@@ -1,8 +1,10 @@
 {
-  "name": "Разные формы — один характер",
-  "image": "/img/kolokolasuv.jpg",
-  "caption": "Группа валдайских колокольчиков разных форм с узорами",
+  "name": "Формы и рисунки",
+  "image": "/img/gallery/kolokolasuv.jpg",
+  "caption": "Примеры форм и художественного оформления валдайских колокольчиков.",
   "category": "classic",
   "order": 8,
-  "published": true
+  "published": true,
+  "image_focus_x": 50,
+  "image_focus_y": 75
 }

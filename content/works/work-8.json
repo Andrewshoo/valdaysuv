@@ -1,8 +1,10 @@
 {
-  "name": "Весенний Валдай",
-  "image": "/img/photo_5325715840693302140_y.jpg",
-  "caption": "Колокольчик с золотистой ручкой на фоне цветущих ветвей",
+  "name": "Дар Валдая",
+  "image": "/img/gallery/photo_5325715840693302140_y.jpg",
+  "caption": "Надпись «Дар Валдая» и орнамент на колокольчике с ручкой.",
   "category": "classic",
   "order": 7,
-  "published": true
+  "published": true,
+  "image_focus_x": 52,
+  "image_focus_y": 52
 }

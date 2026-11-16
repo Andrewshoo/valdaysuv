@@ -5,9 +5,10 @@
   "number": 7,
   "image": "",
   "description": "",
-  "dimensions": "",
+  "dimensions": "Диаметр 8,4 см · Высота 9,0 см",
   "price": null,
   "availability": "Уточните наличие",
   "published": true,
-  "order": 4
+  "order": 4,
+  "short_name": "Колокольчик №7"
 }

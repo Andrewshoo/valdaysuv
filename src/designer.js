@@ -27,7 +27,7 @@ async function initialize() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 0.95, 0);
+    controls.target.set(0, 1.18, 0);
     controls.enablePan = false;
     controls.minDistance = 3.6;
     controls.maxDistance = 9;
@@ -39,6 +39,7 @@ async function initialize() {
     let visible = true;
     let frame = 0;
     const model = new THREE.Group();
+    model.scale.y = 1.25;
     scene.add(model);
 
     // A small generated studio environment keeps the demo local and lightweight.
@@ -74,7 +75,7 @@ async function initialize() {
 
     const brass = new THREE.MeshStandardMaterial({ color: 0xb59a59, metalness: 0.91, roughness: 0.34 });
     const darkMetal = new THREE.MeshStandardMaterial({ color: 0x5d5340, metalness: 0.87, roughness: 0.44 });
-    // Approximate turned profile from img/gerbvalday.jpg. No real dimensions assumed.
+    // Approximate turned profile from img/gallery/gerbvalday.jpg. No real dimensions assumed.
     const profile = [
         [1.035, 0.045], [1.09, 0.005], [1.13, 0.012], [1.145, 0.05],
         [1.128, 0.09], [1.095, 0.14], [1.02, 0.38], [0.975, 0.49],
@@ -165,34 +166,45 @@ async function initialize() {
     ornament(674, 9, 28);
     ornament(652, 5, 28);
     ornament(80, 7, 24);
-    const original = await new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error('Reference image unavailable'));
-        img.src = new URL('../img/gerbvalday.jpg', import.meta.url).href;
-    });
-    const crestCanvas = document.createElement('canvas');
-    crestCanvas.width = 400;
-    crestCanvas.height = 400;
-    const crest = crestCanvas.getContext('2d', { willReadFrequently: true });
-    crest.drawImage(original, 260, 228, 270, 235, 0, 0, 400, 400);
-    const mask = crest.getImageData(0, 0, 400, 400);
-    for (let i = 0; i < mask.data.length; i += 4) {
-        const r = mask.data[i], g = mask.data[i + 1], b = mask.data[i + 2];
-        const gold = Math.min((r - 80) / 60, (g - b - 4) / 28);
-        mask.data[i] = 199;
-        mask.data[i + 1] = 170;
-        mask.data[i + 2] = 108;
-        mask.data[i + 3] = Math.max(0, Math.min(1, gold)) * 255;
+    async function loadPhoto(path) {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            image.onload = () => resolve(image);
+            image.onerror = () => reject(new Error('Reference image unavailable: ' + path));
+            image.src = new URL(path, import.meta.url).href;
+        });
     }
-    crest.putImageData(mask, 0, 0);
-    fixed.drawImage(crestCanvas, 745, 142, 558, 440);
-    // Back lettering belongs to the fixed design, independently of the skirt.
+    const [bellPhoto, crestPhoto] = await Promise.all([
+        loadPhoto('../img/shop/nomer4.jpg'),
+        loadPhoto('../img/gallery/gerbvalday.jpg'),
+    ]);
+    function drawPhotoArtwork(image, crop, destination) {
+        const panel = document.createElement('canvas');
+        panel.width = 512;
+        panel.height = 440;
+        const context = panel.getContext('2d', { willReadFrequently: true });
+        context.drawImage(image, ...crop, 0, 0, panel.width, panel.height);
+        const mask = context.getImageData(0, 0, panel.width, panel.height);
+        for (let i = 0; i < mask.data.length; i += 4) {
+            const r = mask.data[i], g = mask.data[i + 1], b = mask.data[i + 2];
+            const gold = Math.min((r - 72) / 80, (g - b - 3) / 24);
+            mask.data[i] = 199;
+            mask.data[i + 1] = 170;
+            mask.data[i + 2] = 108;
+            mask.data[i + 3] = Math.max(0, Math.min(1, gold)) * 255;
+        }
+        context.putImageData(mask, 0, 0);
+        fixed.drawImage(panel, ...destination);
+    }
+    // Confirmed no. 5: transfer the bells drawing from its actual photograph.
+    drawPhotoArtwork(bellPhoto, [230, 390, 280, 235], [762, 142, 524, 440]);
+    // Temporary crest source, explicitly identified below the viewer.
+    drawPhotoArtwork(crestPhoto, [260, 228, 270, 235], [1450, 142, 512, 440]);
     fixed.fillStyle = '#bfa467';
     fixed.textAlign = 'center';
-    fixed.font = '52px Georgia';
-    fixed.fillText('ДАР', 175, 340);
-    fixed.fillText('ВАЛДАЯ', 175, 405);
+    fixed.font = 'italic 600 68px Georgia';
+    fixed.fillText('Дар', 342, 330);
+    fixed.fillText('Валдая', 342, 420);
     surface.material.map = canvasTexture(fixedCanvas);
     surface.material.color.set(0xffffff);
     surface.material.metalness = 0.86;
@@ -246,11 +258,18 @@ async function initialize() {
         if (visible && !document.hidden) { dirty = true; frame = requestAnimationFrame(render); }
     }
     // Slightly off-axis default view shows the curvature without hiding the crest.
-    camera.position.set(0.7, 2.35, 5.6);
+    camera.position.set(0.7, 2.6, 6.2);
     controls.update();
     controls.saveState();
     document.getElementById('resetView').addEventListener('click', () => { controls.reset(); model.rotation.set(0, 0, 0); dirty = true; });
     function turn(amount) { model.rotation.y += amount; dirty = true; }
+    document.querySelectorAll('[data-bell-angle]').forEach(button => {
+        button.addEventListener('click', () => {
+            controls.reset();
+            model.rotation.y = Number(button.dataset.bellAngle) * Math.PI / 180;
+            dirty = true;
+        });
+    });
     document.getElementById('turnLeft').addEventListener('click', () => turn(-Math.PI / 8));
     document.getElementById('turnRight').addEventListener('click', () => turn(Math.PI / 8));
     viewport.addEventListener('keydown', event => {

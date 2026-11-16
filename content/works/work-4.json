@@ -1,8 +1,10 @@
 {
-  "name": "Тверь",
-  "image": "/img/tver1.jpg",
-  "caption": "Колокольчик с изображением моста и надписью «Тверь»",
+  "name": "Символика Твери",
+  "image": "/img/gallery/tver1.jpg",
+  "caption": "Изображение городского моста и надпись «Тверь».",
   "category": "places",
   "order": 3,
-  "published": true
+  "published": true,
+  "image_focus_x": 50,
+  "image_focus_y": 50
 }

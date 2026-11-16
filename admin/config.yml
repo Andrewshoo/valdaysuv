@@ -9,11 +9,11 @@
   },
   "locale": "ru",
   "publish_mode": "editorial_workflow",
-  "media_folder": "img",
-  "public_folder": "/img",
+  "media_folder": "img/shared",
+  "public_folder": "/img/shared",
   "site_url": "https://valdaysuv.ru",
   "display_url": "https://valdaysuv.ru",
-  "logo_url": "https://valdaysuv.ru/img/logo.png",
+  "logo_url": "https://valdaysuv.ru/img/shared/logo.png",
   "editor": {
     "preview": false
   },
@@ -40,6 +40,13 @@
           "name": "name",
           "label": "Название",
           "widget": "string"
+        },
+        {
+          "name": "short_name",
+          "label": "Короткое название в каталоге",
+          "widget": "string",
+          "required": false,
+          "hint": "Полное название сохраняется в подробной карточке и корзине."
         },
         {
           "name": "category",
@@ -69,6 +76,25 @@
           "label": "Основное фото",
           "widget": "image",
           "required": false
+        },
+        {
+          "name": "photos",
+          "label": "Дополнительные ракурсы",
+          "widget": "list",
+          "required": false,
+          "summary": "{{fields.caption}}",
+          "fields": [
+            {
+              "name": "image",
+              "label": "Фото",
+              "widget": "image"
+            },
+            {
+              "name": "caption",
+              "label": "Подпись ракурса",
+              "widget": "string"
+            }
+          ]
         },
         {
           "name": "description",
@@ -116,8 +142,27 @@
           "default": 0,
           "value_type": "int",
           "min": 0
+        },
+        {
+          "name": "features",
+          "label": "Особенности изделия",
+          "widget": "list",
+          "required": false,
+          "field": {
+            "name": "feature",
+            "label": "Особенность",
+            "widget": "string"
+          }
+        },
+        {
+          "name": "design_note",
+          "label": "Индивидуальное оформление",
+          "widget": "text",
+          "required": false
         }
-      ]
+      ],
+      "media_folder": "/img/shop",
+      "public_folder": "/img/shop"
     },
     {
       "name": "works",
@@ -179,8 +224,30 @@
           "default": 0,
           "value_type": "int",
           "min": 0
+        },
+        {
+          "name": "image_focus_x",
+          "label": "Горизонтальное кадрирование фото",
+          "widget": "number",
+          "value_type": "int",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "hint": "Положение кадра от 0 до 100. Оригинальное фото не изменяется."
+        },
+        {
+          "name": "image_focus_y",
+          "label": "Вертикальное кадрирование фото",
+          "widget": "number",
+          "value_type": "int",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "hint": "Положение кадра от 0 до 100. Оригинальное фото не изменяется."
         }
-      ]
+      ],
+      "media_folder": "/img/gallery",
+      "public_folder": "/img/gallery"
     },
     {
       "name": "settings",
@@ -327,6 +394,11 @@
                 "label": "Надпись",
                 "widget": "string"
               }
+            },
+            {
+              "name": "custom_order_timing",
+              "label": "Сроки индивидуального оформления",
+              "widget": "text"
             }
           ],
           "format": "json"

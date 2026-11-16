@@ -9,5 +9,6 @@
   "price": null,
   "availability": "Уточните наличие",
   "published": true,
-  "order": 8
+  "order": 8,
+  "short_name": "№6 с ручкой"
 }

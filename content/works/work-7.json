@@ -1,8 +1,10 @@
 {
-  "name": "Узор в деталях",
-  "image": "/img/nomer4.jpg",
-  "caption": "Чернёный валдайский колокольчик с золотистым узором",
+  "name": "Колокольный узор",
+  "image": "/img/shop/nomer4.jpg",
+  "caption": "Колокольчик №4 с рисунком колокольчиков.",
   "category": "classic",
   "order": 6,
-  "published": true
+  "published": true,
+  "image_focus_x": 50,
+  "image_focus_y": 68
 }

@@ -9,22 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/home.css">
     <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/shop.css">
     <meta name="description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://valdaysuv.ru/">
-    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="icon" type="image/png" href="img/shared/logo.png">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="{{ site_name }}">
     <meta property="og:title" content="Валдайские колокольчики с художественной обработкой — мастерская в Валдае">
     <meta property="og:description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
     <meta property="og:url" content="https://valdaysuv.ru/">
-    <meta property="og:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
+    <meta property="og:image" content="https://valdaysuv.ru/img/shared/photo_5325715840693302141_y.jpg">
     <meta property="og:image:alt" content="Валдайские колокольчики с художественной обработкой">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Валдайские колокольчики с художественной обработкой — мастерская в Валдае">
     <meta name="twitter:description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
-    <meta name="twitter:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
+    <meta name="twitter:image" content="https://valdaysuv.ru/img/shared/photo_5325715840693302141_y.jpg">
     {{ structured_data }}
 </head>
 <body data-contact-phone="{{ phone }}" data-contact-email="{{ email }}" data-pickup-address="{{ address }}">
@@ -32,7 +33,7 @@
 <header>
     <div class="header-inner">
         <a href="index.html" class="logo-link">
-            <img src="img/logo.png" alt="{{ site_name }}" class="logo">
+            <img src="img/shared/logo.png" alt="{{ site_name }}" class="logo">
             <span class="site-name">Валдайская<br>колокольная мастерская</span>
         </a>
         <button class="cart-btn" onclick="openCart()">
@@ -51,6 +52,7 @@
             <a href="gallery.html">Галерея</a>
             <a href="#history">История</a>
             <a href="#about">О мастерской</a>
+            <a href="#custom-order">Индивидуальный заказ</a>
             <a href="#where-to-buy">Где купить</a>
             <a href="#contacts">Контакты</a>
         </div>
@@ -62,13 +64,13 @@
 <section class="hero">
     <div class="hero-frame">
         <span class="eyebrow">Валдай · Колокольная мастерская</span>
-        <h1>Валдайские колокольчики.<br><em>Ручная работа.<br>Живой звук.</em></h1>
+        <h1>Валдайские колокольчики.<br><em>Ручная работа.</em></h1>
         <p>{{ hero_intro }}</p>
         <p class="hero-availability">Колокольчики с валдайской символикой <strong>всегда в наличии</strong>.</p>
         <div class="hero-actions"><a href="#catalog" class="btn-primary">Выбрать колокольчик ↗</a><a href="#about" class="text-link">Познакомиться с мастерской</a></div>
         <div class="hero-footnote"><span>Ручная работа<br>и внимание к деталям</span><span>Из Валдая<br>с доставкой по России</span></div>
     </div>
-    <figure class="hero-photo"><img src="img/photo_5325715840693302141_y.jpg" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
+    <figure class="hero-photo"><img src="img/shared/photo_5325715840693302141_y.jpg" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
 </section>
 
 <section id="history" class="history-section">
@@ -76,10 +78,10 @@
         <div class="history-heading"><span class="eyebrow">Из дорожного звона — в памятный подарок</span><h2 class="sec-title">Откуда родом валдайский звон</h2></div>
         <div class="history-text"><p>{{ history_intro }}</p><p>{{ history_text }}</p></div>
         <p class="history-source">Об истории колокольчика: <a href="https://www.prlib.ru/history/619320" target="_blank" rel="noopener">Президентская библиотека ↗</a></p>
-        <div class="inscriptions-heading"><span class="eyebrow">Традиционные надписи нашей мастерской</span><h2 class="sec-title">Слова, которые хочется подарить</h2><p>Признание, пожелание счастья или память о Валдае — у каждого колокольчика может быть своё послание.</p></div>
+        <div class="inscriptions-heading"><span class="eyebrow">Традиционные надписи нашей мастерской</span><h2 class="sec-title">Слова, которые хочется подарить</h2><p>Признание, пожелание счастья или память о Валдае — надпись выбирается отдельно от изображения. Любую из этих надписей можно сочетать с выбранным рисунком.</p></div>
         <div class="inscriptions-controls"><button type="button" id="inscriptionsToggle" class="inscriptions-toggle" aria-controls="inscriptionsRail" hidden><span class="inscriptions-toggle-icon" aria-hidden="true">Ⅱ</span><span class="inscriptions-toggle-label">Остановить прокрутку</span></button></div>
         <div class="inscriptions-grid" id="inscriptionsRail" tabindex="0" role="region" aria-label="Традиционные надписи на колокольчиках">{{ inscriptions_html }}</div>
-        <p class="inscriptions-note">Выберите надпись из наших работ или предложите свои слова — обсудим оформление вашего колокольчика.</p>
+        <p class="inscriptions-note">На фотографиях показаны примеры сочетаний рисунков и надписей. Выберите любую традиционную надпись из списка или предложите свои слова — обсудим оформление вашего колокольчика.</p>
     </div>
 </section>
 
@@ -123,6 +125,22 @@
                 <h3>Индивидуальный заказ</h3>
                 <p>Разработаем дизайн специально для вашего колокольчика — с именем, важной датой, любимым местом или значимым для вас символом.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<section id="custom-order" class="custom-order-section">
+    <div class="container">
+        <span class="eyebrow">Своё имя, свой рисунок, своя история</span>
+        <h2 class="sec-title">Колокольчик специально для вас</h2>
+        <p class="custom-order-intro">Изображение и надпись выбираются отдельно: любую из представленных традиционных надписей можно сочетать с выбранным рисунком. Для своих слов или особой идеи разработаем индивидуальное оформление. Рисунки и надписи наносим вручную, без трафаретов.</p>
+        <div class="custom-order-layout">
+            <ol class="custom-order-steps">
+                <li><h3>Расскажите об идее</h3><p>Пришлите желаемую надпись, рисунок или пример. Укажите модель колокольчика, количество и дату, к которой нужен подарок.</p></li>
+                <li><h3>Согласуем оформление и условия</h3><p>Обсудим дизайн, стоимость, срок работы и способ получения. Приступим после согласования деталей.</p></li>
+                <li><h3>Выполним работу вручную</h3><p>Мастер нанесёт рисунок и надпись. Небольшие различия между изделиями — естественная часть ручного оформления.</p></li>
+            </ol>
+            <aside class="custom-order-summary"><h3>Сроки и детали</h3><p>{{ custom_order_timing }}</p><p>Размер надписи и количество деталей подбираем под выбранную модель.</p><a class="btn-primary" href="mailto:{{ email }}?subject=Индивидуальный%20заказ%20колокольчиков">Обсудить индивидуальный заказ ↗</a><a class="custom-order-phone" href="tel:{{ phone }}">{{ phone_display }}</a></aside>
         </div>
     </div>
 </section>
@@ -210,7 +228,7 @@
 </main>
 <footer>
     <div class="container">
-        <img src="img/logo.png" alt="{{ site_name }}" class="footer-logo">
+        <img src="img/shared/logo.png" alt="{{ site_name }}" class="footer-logo">
         <div class="footer-orn">❦ ✦ ❦</div>
         <h3>{{ site_name }}</h3>
         <p>Художественная обработка валдайских колокольчиков</p>
@@ -238,6 +256,11 @@
         <button class="btn-checkout" onclick="openOrderModal()">Оформить заказ →</button>
     </div>
 </div>
+
+<dialog class="product-dialog" id="productDialog" aria-label="Карточка изделия">
+    <div class="product-dialog-header"><span>Колокольчики мастерской</span><button type="button" id="closeProductDialog" aria-label="Закрыть карточку" autofocus>×</button></div>
+    <div id="productDialogContent"></div>
+</dialog>
 
 <!-- ORDER MODAL -->
 <div class="modal-wrap" id="orderWrap">
@@ -331,6 +354,7 @@
 </div>
 
 <script src="src/script.js" defer></script>
+<script src="src/shop.js" defer></script>
 <script src="src/inscriptions.js" defer></script>
 </body>
 </html>

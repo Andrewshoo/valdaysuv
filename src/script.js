@@ -221,3 +221,17 @@ catalogSort.addEventListener('change', () => {
         grid.append(...cards);
     });
 });
+
+// Switch only the selected product photo; product/cart IDs stay unchanged.
+document.querySelectorAll('.product-photos').forEach(group => {
+    const image = group.querySelector('.product-img');
+    group.addEventListener('click', event => {
+        const button = event.target.closest('.product-photo-button');
+        if (!button || !group.contains(button)) return;
+        image.src = button.dataset.photo;
+        image.alt = button.dataset.caption;
+        group.querySelectorAll('.product-photo-button').forEach(item => {
+            item.setAttribute('aria-pressed', String(item === button));
+        });
+    });
+});

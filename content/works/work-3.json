@@ -1,8 +1,10 @@
 {
-  "name": "Валдайский Иверский монастырь",
-  "image": "/img/kolivmon3.jpg",
-  "caption": "Колокольчик с изображением монастыря на фоне его построек",
+  "name": "Иверский монастырь",
+  "image": "/img/gallery/kolivmon3.jpg",
+  "caption": "Архитектурный рисунок и надпись о Валдайском Иверском монастыре.",
   "category": "places",
   "order": 2,
-  "published": true
+  "published": true,
+  "image_focus_x": 50,
+  "image_focus_y": 52
 }

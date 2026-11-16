@@ -1,8 +1,10 @@
 {
-  "name": "Символы и надписи",
-  "image": "/img/naborkolind.jpg",
-  "caption": "Колокольчики с различными эмблемами и памятными надписями",
+  "name": "Эмблемы и символы",
+  "image": "/img/gallery/naborkolind.jpg",
+  "caption": "Рисунки и памятные надписи в ручном исполнении.",
   "category": "custom",
   "order": 4,
-  "published": true
+  "published": true,
+  "image_focus_x": 50,
+  "image_focus_y": 50
 }
