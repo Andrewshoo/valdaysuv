@@ -1,5 +1,8 @@
 # Optional Netlify mirror for GitHub OAuth. Primary hosting remains GitHub Pages.
 [build]
+  # Skip Git-triggered builds; keep the published CMS running.
+  # To update the CMS, temporarily remove this line or use a Netlify build hook.
+  ignore = "exit 0"
   command = "python scripts/build.py --include-admin"
   publish = "dist"
 
