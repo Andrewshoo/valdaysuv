@@ -1,6 +1,6 @@
 {
   "name": "На память о финише",
-  "image": "img/finisher105.jpg",
+  "image": "/img/finisher105.jpg",
   "caption": "Колокольчик с надписью «Finisher 105» среди еловых ветвей",
   "category": "custom",
   "order": 5,

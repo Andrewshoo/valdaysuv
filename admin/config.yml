@@ -9,8 +9,8 @@
   },
   "locale": "ru",
   "publish_mode": "editorial_workflow",
-  "media_folder": "img/uploads",
-  "public_folder": "/img/uploads",
+  "media_folder": "img",
+  "public_folder": "/img",
   "site_url": "https://valdaysuv.ru",
   "display_url": "https://valdaysuv.ru",
   "logo_url": "https://valdaysuv.ru/img/logo.png",
@@ -219,7 +219,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "format": "json"
         },
         {
           "name": "site",
@@ -293,9 +294,11 @@
               "label": "О мастерской",
               "widget": "text"
             }
-          ]
+          ],
+          "format": "json"
         }
-      ]
+      ],
+      "format": "json"
     }
   ]
 }
