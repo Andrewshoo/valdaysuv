@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Валдайские колокольчики ручной работы — Валдайская мастерская</title>
+    <title>Валдайские колокольчики с художественной обработкой — мастерская в Валдае</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/home.css">
     <link rel="stylesheet" href="src/styles.css">
-    <meta name="description" content="Валдайские колокольчики ручной работы: классические формы, узоры и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
+    <meta name="description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://valdaysuv.ru/">
     <link rel="icon" type="image/png" href="img/logo.png">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="{{ site_name }}">
-    <meta property="og:title" content="Валдайские колокольчики ручной работы — Валдайская мастерская">
-    <meta property="og:description" content="Валдайские колокольчики ручной работы: классические формы, узоры и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
+    <meta property="og:title" content="Валдайские колокольчики с художественной обработкой — мастерская в Валдае">
+    <meta property="og:description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
     <meta property="og:url" content="https://valdaysuv.ru/">
     <meta property="og:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
-    <meta property="og:image:alt" content="Валдайские колокольчики ручной работы">
+    <meta property="og:image:alt" content="Валдайские колокольчики с художественной обработкой">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Валдайские колокольчики ручной работы — Валдайская мастерская">
-    <meta name="twitter:description" content="Валдайские колокольчики ручной работы: классические формы, узоры и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
+    <meta name="twitter:title" content="Валдайские колокольчики с художественной обработкой — мастерская в Валдае">
+    <meta name="twitter:description" content="Художественная обработка валдайских колокольчиков: узоры, рисунки и индивидуальные надписи. Заказ в мастерской в Валдае, самовывоз и доставка по России.">
     <meta name="twitter:image" content="https://valdaysuv.ru/img/photo_5325715840693302141_y.jpg">
     {{ structured_data }}
 </head>
@@ -49,6 +49,7 @@
         <div class="nav-inner">
             <a href="#catalog">Каталог</a>
             <a href="gallery.html">Галерея</a>
+            <a href="#history">История</a>
             <a href="#about">О мастерской</a>
             <a href="#where-to-buy">Где купить</a>
             <a href="#contacts">Контакты</a>
@@ -63,10 +64,23 @@
         <span class="eyebrow">Валдай · Колокольная мастерская</span>
         <h1>Валдайские колокольчики.<br><em>Ручная работа.<br>Живой звук.</em></h1>
         <p>{{ hero_intro }}</p>
+        <p class="hero-availability">Колокольчики с валдайской символикой <strong>всегда в наличии</strong>.</p>
         <div class="hero-actions"><a href="#catalog" class="btn-primary">Выбрать колокольчик ↗</a><a href="#about" class="text-link">Познакомиться с мастерской</a></div>
         <div class="hero-footnote"><span>Ручная работа<br>и внимание к деталям</span><span>Из Валдая<br>с доставкой по России</span></div>
     </div>
     <figure class="hero-photo"><img src="img/photo_5325715840693302141_y.jpg" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
+</section>
+
+<section id="history" class="history-section">
+    <div class="container">
+        <div class="history-heading"><span class="eyebrow">Из дорожного звона — в памятный подарок</span><h2 class="sec-title">Откуда родом валдайский звон</h2></div>
+        <div class="history-text"><p>{{ history_intro }}</p><p>{{ history_text }}</p></div>
+        <p class="history-source">Об истории колокольчика: <a href="https://www.prlib.ru/history/619320" target="_blank" rel="noopener">Президентская библиотека ↗</a></p>
+        <div class="inscriptions-heading"><span class="eyebrow">Традиционные надписи нашей мастерской</span><h2 class="sec-title">Слова, которые хочется подарить</h2><p>Признание, пожелание счастья или память о Валдае — у каждого колокольчика может быть своё послание.</p></div>
+        <div class="inscriptions-controls"><button type="button" id="inscriptionsToggle" class="inscriptions-toggle" aria-controls="inscriptionsRail" hidden>Остановить прокрутку</button></div>
+        <div class="inscriptions-grid" id="inscriptionsRail" tabindex="0" role="region" aria-label="Традиционные надписи на колокольчиках">{{ inscriptions_html }}</div>
+        <p class="inscriptions-note">Выберите надпись из наших работ или предложите свои слова — обсудим оформление вашего колокольчика.</p>
+    </div>
 </section>
 
 <!-- CATALOG -->
@@ -80,13 +94,15 @@
 </section>
 
 <section class="gallery-teaser">
-    <div class="container"><span class="eyebrow">Примеры наших работ</span><h2 class="sec-title">Больше, чем один узор</h2><p>Именные подарки, символы городов и памятные колокольчики — посмотрите, что создаёт мастерская.</p><a class="btn-primary" href="gallery.html">Открыть галерею ↗</a></div>
+    <div class="container"><span class="eyebrow">Примеры наших работ</span><h2 class="sec-title">Больше, чем один узор</h2><p>Именные подарки, символы городов и памятные колокольчики — посмотрите примеры художественной обработки в нашей мастерской.</p><a class="btn-primary" href="gallery.html">Открыть галерею ↗</a></div>
 </section>
+
+
 
 <!-- ABOUT -->
 <section id="about">
     <div class="container">
-        <span class="eyebrow">Место, где рождается звон</span><h2 class="sec-title">Ремесло, которое живёт</h2>
+        <span class="eyebrow">Валдай · Художественная обработка</span><h2 class="sec-title">Ремесло, которое живёт</h2>
         <div class="divider"><span>❦ ✦ ❦</span></div>
         <p class="about-lead">
             {{ about }}
@@ -94,18 +110,18 @@
         <div class="about-cards">
             <div class="about-card">
                 <div class="about-icon">🔔</div>
-                <h3>Ручная работа</h3>
-                <p>Каждый колокольчик создаётся вручную с использованием традиционных технологий литья и художественной обработки металла.</p>
+                <h3>Художественная обработка</h3>
+                <p>Вручную наносим рисунки, орнаменты и надписи. Работаем без трафаретов: каждый узор рождается под рукой мастера.</p>
             </div>
             <div class="about-card">
                 <div class="about-icon">📍</div>
                 <h3>Город Валдай</h3>
-                <p>Производство в Валдае — историческом центре колокольного искусства России. Приезжайте и выбирайте лично.</p>
+                <p>Мастерская находится в Валдае. Приезжайте познакомиться с нашими работами и выбрать колокольчик лично.</p>
             </div>
             <div class="about-card">
                 <div class="about-icon">🎁</div>
                 <h3>Индивидуальный заказ</h3>
-                <p>Создаём колокольчики по вашему эскизу: гравировка имён, дат, символики организаций и городов.</p>
+                <p>Разработаем дизайн специально для вашего колокольчика — с именем, важной датой, любимым местом или значимым для вас символом.</p>
             </div>
         </div>
     </div>
@@ -156,14 +172,14 @@
 <!-- CONTACTS -->
 <section id="contacts">
     <div class="container">
-        <span class="eyebrow">Всегда на связи</span><h2 class="sec-title">Давайте подберём ваш подарок</h2>
+        <span class="eyebrow">Всегда на связи</span><h2 class="sec-title">Давайте подберём ваш валдайский колокольчик</h2>
         <div class="divider"><span>❦ ✦ ❦</span></div>
         <div class="contacts-grid">
             <div class="contact-card">
                 <div class="contact-icon">📞</div>
                 <div>
-                    <div class="contact-label">Телефон / Telegram (Max)</div>
-                    <div class="contact-value"><a href="tel:{{ phone }}">{{ phone_display }}</a></div>
+                    <div class="contact-label">Телефоны · Макс</div>
+                    <div class="contact-value"><a href="tel:{{ phone }}">{{ phone_display }}</a><br><a href="tel:{{ phone_secondary }}">{{ phone_secondary_display }}</a></div>
                 </div>
             </div>
             <div class="contact-card">
@@ -197,7 +213,7 @@
         <img src="img/logo.png" alt="{{ site_name }}" class="footer-logo">
         <div class="footer-orn">❦ ✦ ❦</div>
         <h3>{{ site_name }}</h3>
-        <p>Авторские колокольчики ручной работы</p>
+        <p>Художественная обработка валдайских колокольчиков</p>
         <div class="copyright">
             © 2024 Все права защищены ·
             <a href="mailto:{{ email }}" style="color:rgba(242,230,204,0.3)">{{ email }}</a> ·
@@ -302,11 +318,10 @@
             <h2>Заказ сформирован</h2>
             <button class="btn-x dark" onclick="closeReceipt()">×</button>
         </div>
-        <p class="receipt-lead">Выберите способ отправки. В WhatsApp и письме текст подставится автоматически. Для Telegram и Макс — текст скопируется, вставьте его в открывшийся чат (Ctrl+V или долгое нажатие).</p>
+        <p class="receipt-lead">Выберите способ отправки. В WhatsApp и письме текст подставится автоматически. Для Макс текст скопируется, вставьте его в открывшийся чат (Ctrl+V или долгое нажатие).</p>
         <div class="receipt-box" id="receiptBox"></div>
         <div class="action-btns">
             <button class="btn-act btn-copy" onclick="copyReceipt()">📋 Скопировать текст</button>
-            <a class="btn-act btn-tg" id="tgBtn" href="#" target="_blank" rel="noopener">✈️ Telegram</a>
             <a class="btn-act btn-wa" id="waBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
             <a class="btn-act btn-max" id="maxBtn" href="#" target="_blank" rel="noopener">💙 Макс</a>
             <a class="btn-act btn-email" id="emailBtn" href="#">✉️ Письмо на email</a>
@@ -316,5 +331,6 @@
 </div>
 
 <script src="src/script.js" defer></script>
+<script src="src/inscriptions.js" defer></script>
 </body>
 </html>

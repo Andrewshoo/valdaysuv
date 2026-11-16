@@ -9,3 +9,5 @@ __pycache__/
 /NOTES.md
 /README.md
 /SEO.md
+
+.local-preview/

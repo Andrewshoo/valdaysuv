@@ -152,7 +152,6 @@ ${lines}
 
         document.getElementById('receiptBox').textContent = text;
         const enc = encodeURIComponent(text);
-        document.getElementById('tgBtn').href = 'https://t.me/' + atob('YW5kcmV3c2hvbw==');
         document.getElementById('waBtn').href = 'https://wa.me/' + SITE.contactPhone.replace(/\D/g, '') + '?text=' + enc;
         document.getElementById('maxBtn').href = 'https://max.ru' + '/u/' + 'f9LHodD0cOJ4Vkr' + 'KwCvHQq4xEsapp' + 'WLGc3P_Ogl_ALy' + '_7OXoqaELlh2OGLc';
         document.getElementById('emailBtn').href = 'mailto:' + SITE.contactEmail
@@ -179,7 +178,7 @@ ${lines}
         });
     }
 
-    ['tgBtn', 'maxBtn'].forEach(id => {
+    ['maxBtn'].forEach(id => {
         document.getElementById(id).addEventListener('click', function () {
             navigator.clipboard.writeText(document.getElementById('receiptBox').textContent).catch(() => {});
         });

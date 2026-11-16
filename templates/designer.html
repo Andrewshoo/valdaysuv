@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Эскиз вашего колокольчика — Валдайская мастерская</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/home.css">
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/designer.css">
+    <script type="importmap">{"imports":{"three":"./src/vendor/three/three.module.js"}}</script>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="logo-link"><img src="img/logo.png" alt="" class="logo"><span class="site-name">Валдайская<br>колокольная мастерская</span></a>
+        <a href="index.html#catalog" class="cart-btn">Вернуться в каталог ↗</a>
+    </div>
+</header>
+<main class="designer-main container">
+    <div class="designer-intro"><span class="eyebrow">Мастерская вашего подарка · Прототип</span><h1>Слова, которые<br><em>останутся на память</em></h1><p>Посмотрите, как ваша надпись может выглядеть на юбке колокольчика. Герб и орнамент остаются на своих местах.</p></div>
+    <div class="designer-layout">
+        <section class="bell-stage" aria-label="Трёхмерный эскиз колокольчика">
+            <div class="stage-top"><span>Валдайский колокольчик · С гербом</span><span class="prototype-mark">3D-эскиз</span></div>
+            <div id="bellViewport" tabindex="0" aria-label="Модель колокольчика. Вращайте мышью или пальцем; стрелки клавиатуры поворачивают модель, плюс и минус меняют масштаб."></div>
+            <p id="modelStatus" class="model-status" role="status">Подготавливаем колокольчик…</p>
+            <div class="stage-bottom"><button type="button" id="resetView">Исходный ракурс</button><div class="view-directions"><button type="button" id="turnLeft" aria-label="Повернуть колокольчик влево">←</button><button type="button" id="turnRight" aria-label="Повернуть колокольчик вправо">→</button></div></div>
+        </section>
+        <section class="bell-editor" aria-labelledby="editorTitle">
+            <span class="eyebrow">Ваше послание</span><h2 id="editorTitle">Что напишем?</h2>
+            <label for="bellText">Надпись на юбке</label>
+            <textarea id="bellText" rows="3" maxlength="64">Кого люблю, того и дарю</textarea>
+            <div class="text-meta"><span>Одна строка по окружности</span><output id="textCount" for="bellText">23 / 64</output></div>
+            <div class="phrase-choices" aria-label="Готовые надписи"><button type="button" data-phrase="Кого люблю, того и дарю">О любви</button><button type="button" data-phrase="Кто колокол купит, тот счастлив будет">На счастье</button><button type="button" data-phrase="Дар Валдая">Дар Валдая</button></div>
+            <label for="letterStyle">Начертание</label><select id="letterStyle"><option value="classic">Классическое</option><option value="italic">Мягкий курсив</option></select>
+            <label for="letterSize">Размер надписи</label><input id="letterSize" type="range" min="90" max="240" value="190">
+            <label for="letterPosition">Положение надписи по окружности</label><input id="letterPosition" type="range" min="-180" max="180" value="0">
+            <button type="button" class="btn-primary save-sketch" id="saveSketch" disabled>Сохранить эскиз PNG ↓</button>
+            <p class="designer-disclaimer">Это эскиз оформления, а не точная копия изделия. Мастер наносит рисунки и надписи вручную — без трафаретов, поэтому готовая работа будет отличаться от визуализации.</p>
+        </section>
+    </div>
+    <section class="designer-reference"><img src="img/gerbvalday.jpg" alt="Исходная фотография колокольчика с гербом Валдая" width="750" height="750" loading="lazy"><div><span class="eyebrow">Основа эскиза</span><h2>Настоящий колокольчик мастерской</h2><p>Форму восстановили приблизительно по этому снимку. Фрагмент герба взят с фотографии; рисунок на обратной стороне и мелкие детали пока переданы условно. Для точной модели понадобятся размеры и дополнительные ракурсы.</p><a href="img/gerbvalday.jpg" class="text-link" target="_blank" rel="noopener">Рассмотреть оригинал ↗</a></div></section>
+    <noscript><p>Для 3D-просмотра нужен JavaScript. Исходное фото доступно ниже.</p></noscript>
+</main>
+<script type="module" src="src/designer.js"></script>
+</body>
+</html>

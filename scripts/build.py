@@ -121,7 +121,7 @@ def structured_data(name, settings, works):
         value = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'LocalBusiness', '@id': SITE_URL + '#workshop', 'name': settings['name'], 'url': SITE_URL,
              'image': SITE_URL + 'img/photo_5325715840693302141_y.jpg', 'logo': SITE_URL + 'img/logo.png',
-             'telephone': settings['phone'], 'email': settings['email'],
+             'telephone': [settings['phone'], settings['phone_secondary']], 'email': settings['email'],
              'address': {'@type': 'PostalAddress', 'streetAddress': settings['street'], 'addressLocality': settings['city'], 'addressCountry': 'RU'},
              'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification',
                  'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -132,8 +132,9 @@ def structured_data(name, settings, works):
 
 def build(output, include_admin=False):
     settings = load(ROOT / 'content/settings/site.json')
-    if not re.fullmatch(r'\+[0-9]{10,15}', settings['phone']):
-        raise ValueError('Phone must be international, e.g. +79992801367')
+    for key in ('phone', 'phone_secondary'):
+        if not re.fullmatch(r'\+[0-9]{10,15}', settings[key]):
+            raise ValueError('Phone must be international, e.g. +79992801367')
     if not re.fullmatch(r'[^\s@<>"\x00-\x1f]+@[^\s@<>"\x00-\x1f]+\.[^\s@<>"\x00-\x1f]+', settings['email']):
         raise ValueError('Invalid email')
     for key in ('opens', 'closes'):
@@ -143,6 +144,12 @@ def build(output, include_admin=False):
     works = entries('works')
     categories = load(ROOT / 'content/settings/categories.json')['items']
     context = {key: esc(value) for key, value in settings.items()}
+    inscriptions = settings.get('inscriptions', [])
+    if not isinstance(inscriptions, list) or any(not isinstance(text, str) or not text.strip() for text in inscriptions):
+        raise ValueError('Inscriptions must be a list of nonempty strings')
+    context['inscriptions_html'] = ''.join(
+        f'<blockquote class="inscription"><p>«{esc(text)}»</p></blockquote>' for text in inscriptions
+    )
     context.update(site_name=esc(settings['name']), hours_display=esc(f'Ежедневно {settings["opens"]} – {settings["closes"]}'),
                    catalog=catalog_html(products, categories, settings['email']), gallery=gallery_html(works), gallery_count=str(len(works)))
     output.mkdir(parents=True, exist_ok=True)

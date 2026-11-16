@@ -92,7 +92,7 @@ class BuildTests(unittest.TestCase):
         self.assertFalse((output / 'admin').exists())
         for private in ('content', 'templates', '.git', 'scripts', 'tests', 'SEO.md'):
             self.assertFalse((output / private).exists(), private)
-        for filename in ('index.html', 'gallery.html', 'privacy.html'):
+        for filename in ('index.html', 'gallery.html', 'privacy.html', 'designer.html'):
             text = (output / filename).read_text(encoding='utf-8')
             self.assertNotRegex(text, r'{{\s*\w+\s*}}')
             page = Page()

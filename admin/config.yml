@@ -247,6 +247,20 @@
               "widget": "string"
             },
             {
+              "name": "phone_secondary",
+              "label": "Второй телефон для ссылок",
+              "widget": "string",
+              "pattern": [
+                "^\\+[0-9]{10,15}$",
+                "Формат +79960672837"
+              ]
+            },
+            {
+              "name": "phone_secondary_display",
+              "label": "Второй телефон для отображения",
+              "widget": "string"
+            },
+            {
               "name": "email",
               "label": "Email",
               "widget": "string"
@@ -293,6 +307,26 @@
               "name": "about",
               "label": "О мастерской",
               "widget": "text"
+            },
+            {
+              "name": "history_intro",
+              "label": "История: происхождение колокольчика",
+              "widget": "text"
+            },
+            {
+              "name": "history_text",
+              "label": "История: звон и надписи",
+              "widget": "text"
+            },
+            {
+              "name": "inscriptions",
+              "label": "Традиционные надписи",
+              "widget": "list",
+              "field": {
+                "name": "text",
+                "label": "Надпись",
+                "widget": "string"
+              }
             }
           ],
           "format": "json"
