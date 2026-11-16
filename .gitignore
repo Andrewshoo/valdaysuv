@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 .env
 .env.*
+
+# Local project documentation
+/ADMIN.md
+/NOTES.md
+/README.md
+/SEO.md
