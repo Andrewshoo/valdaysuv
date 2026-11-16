@@ -1,6 +1,6 @@
 # Optional Netlify mirror for GitHub OAuth. Primary hosting remains GitHub Pages.
 [build]
-  command = "python scripts/build.py"
+  command = "python scripts/build.py --include-admin"
   publish = "dist"
 
 [build.environment]

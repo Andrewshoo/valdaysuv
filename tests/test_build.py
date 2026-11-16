@@ -77,9 +77,19 @@ class BuildTests(unittest.TestCase):
             finally:
                 builder.ROOT = original
 
+    def test_admin_is_netlify_only_and_removed_on_public_rebuild(self):
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder) / 'site'
+            builder.build(output, include_admin=True)
+            self.assertTrue((output / 'admin/index.html').is_file())
+            self.assertTrue((output / 'admin/config.yml').is_file())
+            builder.build(output)
+            self.assertFalse((output / 'admin').exists())
+            self.assertTrue((ROOT / 'admin/index.html').is_file())
+
     def test_site_output_and_local_links(self):
         output = ROOT / 'dist'
-        self.assertTrue((output / 'admin/index.html').exists())
+        self.assertFalse((output / 'admin').exists())
         for private in ('content', 'templates', '.git', 'scripts', 'tests', 'SEO.md'):
             self.assertFalse((output / private).exists(), private)
         for filename in ('index.html', 'gallery.html', 'privacy.html'):

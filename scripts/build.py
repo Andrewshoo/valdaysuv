@@ -130,7 +130,7 @@ def structured_data(name, settings, works):
     return '<script type="application/ld+json">\n' + json.dumps(value, ensure_ascii=False, indent=2).replace('<', '\\u003c') + '\n</script>'
 
 
-def build(output):
+def build(output, include_admin=False):
     settings = load(ROOT / 'content/settings/site.json')
     if not re.fullmatch(r'\+[0-9]{10,15}', settings['phone']):
         raise ValueError('Phone must be international, e.g. +79992801367')
@@ -156,7 +156,14 @@ def build(output):
         page = re.sub(r'{{\s*(\w+)\s*}}', replace, template.read_text(encoding='utf-8'))
         (output / template.name).write_text(page, encoding='utf-8')
     if output != ROOT:
-        for folder in ('img', 'src', 'admin'):
+        admin_output = output / 'admin'
+        if not include_admin and admin_output.exists():
+            # Remove only the previous generated admin folder, never source admin/.
+            if admin_output.resolve().parent != output.resolve() or admin_output.resolve() == (ROOT / 'admin').resolve():
+                raise ValueError('Unsafe generated admin path')
+            shutil.rmtree(admin_output)
+        folders = ('img', 'src', 'admin') if include_admin else ('img', 'src')
+        for folder in folders:
             shutil.copytree(ROOT / folder, output / folder, dirs_exist_ok=True)
         for name in ('CNAME', 'robots.txt', 'sitemap.xml'):
             shutil.copy2(ROOT / name, output / name)
@@ -167,5 +174,6 @@ def build(output):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--in-place', action='store_true', help='Update root HTML for local preview')
+    parser.add_argument('--include-admin', action='store_true', help='Include Decap CMS for the Netlify deployment only')
     args = parser.parse_args()
-    build(ROOT if args.in_place else ROOT / 'dist')
+    build(ROOT if args.in_place else ROOT / 'dist', include_admin=args.include_admin)
