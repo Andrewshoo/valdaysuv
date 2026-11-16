@@ -20,13 +20,16 @@
     toggle.hidden = false;
 
     function updateToggle() {
-        toggle.textContent = paused ? 'Включить прокрутку' : 'Остановить прокрутку';
+        const label = paused ? 'Включить прокрутку' : 'Остановить прокрутку';
+        toggle.querySelector('.inscriptions-toggle-label').textContent = label;
+        toggle.querySelector('.inscriptions-toggle-icon').textContent = paused ? '▶' : 'Ⅱ';
+        toggle.setAttribute('aria-label', label);
         toggle.setAttribute('aria-pressed', String(!paused));
     }
 
     function canAnimate() {
         return visible && !document.hidden && !paused && !hovering && !dragging &&
-            document.activeElement !== rail && !document.body.style.overflow;
+            !rail.matches(':focus-visible') && !document.body.style.overflow;
     }
 
     function animate(time) {

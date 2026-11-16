@@ -1,5 +1,6 @@
 """Build the static site from CMS JSON and HTML templates. Python 3.11+, no dependencies."""
 import argparse
+import hashlib
 import html
 import json
 import re
@@ -161,6 +162,12 @@ def build(output, include_admin=False):
                 raise ValueError(f'Unknown template variable: {key}')
             return page_context[key]
         page = re.sub(r'{{\s*(\w+)\s*}}', replace, template.read_text(encoding='utf-8'))
+        # A changed asset gets a new URL, preventing stale mobile CSS/JS after deployment.
+        def version_asset(match):
+            path = match[2]
+            digest = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()[:12]
+            return match[1] + path + '?v=' + digest + match[3]
+        page = re.sub(r'((?:src|href)=")(src/[^"?]+\.(?:css|js))(")', version_asset, page)
         (output / template.name).write_text(page, encoding='utf-8')
     if output != ROOT:
         admin_output = output / 'admin'

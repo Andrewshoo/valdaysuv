@@ -696,3 +696,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
 .inscriptions-controls { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 12px; }
 .inscriptions-controls .inscriptions-hint { margin: 0; }
 .inscriptions-toggle { border: 0; border-bottom: 1px solid var(--bgold); padding: 4px 0; background: transparent; color: var(--rust); font: 12px Arial, sans-serif; cursor: pointer; }
+
+.inscriptions-toggle-icon { display: none; }
+@media (max-width: 760px) {
+    .inscriptions-controls { justify-content: flex-end; }
+    .inscriptions-toggle { width: 40px; height: 40px; padding: 0; border: 1px solid var(--bgold); border-radius: 50%; }
+    .inscriptions-toggle-label { display: none; }
+    .inscriptions-toggle-icon { display: inline-block; font-size: 16px; }
+}

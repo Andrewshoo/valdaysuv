@@ -102,7 +102,7 @@ class BuildTests(unittest.TestCase):
                 if reference.startswith(('http:', 'https:', 'mailto:', 'tel:')):
                     continue
                 path, _, anchor = reference.partition('#')
-                target = output / (path.lstrip('/') or filename)
+                target = output / (path.split('?', 1)[0].lstrip('/') or filename)
                 self.assertTrue(target.is_file(), reference)
                 if anchor:
                     target_page = Page()
