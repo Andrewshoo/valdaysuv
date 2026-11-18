@@ -17,14 +17,16 @@
         releasePage();
     }
 
-    document.querySelectorAll('[data-product-details]').forEach(button => {
-        button.hidden = false;
-        button.addEventListener('click', () => {
-            const template = document.getElementById('product-detail-' + button.dataset.productDetails);
+    document.querySelectorAll('[data-product-details]').forEach(link => {
+        if (link instanceof HTMLButtonElement) link.disabled = false;
+        link.addEventListener('click', event => {
+            if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+            const template = document.getElementById('product-detail-' + link.dataset.productDetails);
             if (!template) return;
+            event.preventDefault();
             content.replaceChildren(template.content.cloneNode(true));
             dialog.setAttribute('aria-labelledby', content.querySelector('.product-dialog-title').id);
-            trigger = button;
+            trigger = link;
             previousOverflow = document.body.style.overflow;
             scrollLocked = true;
             dialog.showModal();
@@ -39,6 +41,11 @@
             event.clientY < bounds.top || event.clientY > bounds.bottom)) closeProduct();
     });
     content.addEventListener('click', event => {
+        const customOrder = event.target.closest('.product-custom-link');
+        if (customOrder && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+            closeProduct();
+            return;
+        }
         const photo = event.target.closest('.product-detail-thumb');
         if (photo) {
             const image = content.querySelector('.product-detail-image');

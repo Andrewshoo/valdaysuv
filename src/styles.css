@@ -377,19 +377,15 @@ footer p {
     opacity:.7;
 }
 
-.modal,.cart-sidebar {
+.cart-sidebar {
     background:var(--cream);
 }
 
-.modal h2,.cart-sidebar h2 {
+.cart-sidebar h2 {
     font-size:32px;
 }
 
-.qty-btn,.btn-checkout,.btn-act {
-    font-family:Arial,sans-serif;
-}
-
-.modal-wrap .btn-primary {
+.qty-btn,.btn-checkout {
     font-family:Arial,sans-serif;
 }
 
@@ -433,13 +429,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
     }
 
     .hero {
-        grid-template-columns:1fr;
+        grid-template-columns:minmax(0,1fr);
         gap:32px;
         padding:35px 20px 48px;
     }
 
     .hero h1 {
-        font-size:58px;
+        font-size:clamp(32px,9vw,58px);
+        overflow-wrap:anywhere;
     }
 
     .hero-frame {
@@ -447,7 +444,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
     }
 
     .hero-photo img {
-        height:440px;
+        height:clamp(300px,68vw,440px);
         border-radius:45% 45% 3px 3px;
     }
 

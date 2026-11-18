@@ -2,8 +2,32 @@ const SITE = document.body.dataset;
 const PRODUCTS = Array.from(document.querySelectorAll('[data-product-id]'), card => ({
     id: Number(card.dataset.productId),
     name: card.dataset.productName,
-    img: card.dataset.productImage || null,
+    image: card.dataset.productImage,
+    price: card.dataset.priceKopecks ? BigInt(card.dataset.priceKopecks) : null,
 }));
+const rubleNumber = new Intl.NumberFormat('ru-RU');
+
+function formatPrice(kopecks) {
+    const fraction = kopecks % 100n;
+    return rubleNumber.format(kopecks / 100n) +
+        (fraction ? ',' + String(fraction).padStart(2, '0') : '') + ' ₽';
+}
+
+function cartLines() {
+    return Object.entries(cart).map(([id, quantity]) => {
+        const product = PRODUCTS.find(item => item.id === Number(id));
+        return { ...product, quantity, subtotal: product.price === null ? null : product.price * BigInt(quantity) };
+    });
+}
+
+function summarizePrices(lines) {
+    const priced = lines.filter(line => line.subtotal !== null);
+    if (!priced.length) return { label: 'Стоимость изделий', value: 'По запросу' };
+    const total = priced.reduce((sum, line) => sum + line.subtotal, 0n);
+    return priced.length === lines.length
+        ? { label: 'Итого за изделия', value: formatPrice(total) }
+        : { label: 'Сумма по известным ценам', value: formatPrice(total) + ' + цена по запросу' };
+}
 
     let cart = {};
     try {
@@ -44,30 +68,44 @@ const PRODUCTS = Array.from(document.querySelectorAll('[data-product-id]'), card
     function renderCartBody() {
         const body = document.getElementById('cartBody');
         const foot = document.getElementById('cartFoot');
-        const ids  = Object.keys(cart).map(Number);
+        const lines = cartLines();
 
-        if (!ids.length) {
-            body.innerHTML = `<div class="cart-empty"><div class="big">🔔</div><p>Корзина пуста</p><p style="font-size:.85rem;margin-top:5px">Добавьте товары из каталога</p></div>`;
+        if (!lines.length) {
+            body.innerHTML = `<div class="cart-empty"><p>Корзина пуста</p><a href="#catalog" onclick="closeCart()">Перейти к каталогу</a></div>`;
             foot.style.display = 'none';
             return;
         }
 
         foot.style.display = 'block';
         document.getElementById('cartTotal').textContent = totalQty() + ' шт.';
-        body.innerHTML = ids.map(id => {
-            const p = PRODUCTS.find(x => x.id === id);
+        const summary = summarizePrices(lines);
+        document.getElementById('cartSubtotalLabel').textContent = summary.label;
+        document.getElementById('cartSubtotal').textContent = summary.value;
+        body.innerHTML = lines.map(({ id, image, quantity, price, subtotal }) => {
+            const pricing = price === null ? 'Цена по запросу' : formatPrice(price) + ' за шт.';
             return `<div class="cart-item">
-                <div class="cart-item-name">${p.name}</div>
-                <div class="qty">
-                    <button class="qty-btn" onclick="changeQty(${id},-1)">−</button>
-                    <span class="qty-val">${cart[id]}</span>
-                    <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
+                ${image ? '<img class="cart-item-photo" alt="" width="64" height="64">' : ''}
+                <div class="cart-item-name"><span class="cart-product-title"></span>
+                    <span class="cart-item-price">${pricing}</span>
                 </div>
+                <div class="qty">
+                    <button type="button" class="qty-btn" onclick="changeQty(${id},-1)" aria-label="Уменьшить количество">−</button>
+                    <span class="qty-val">${quantity}</span>
+                    <button type="button" class="qty-btn" onclick="changeQty(${id},1)" aria-label="Увеличить количество">+</button>
+                </div>
+                <strong class="cart-item-subtotal">${subtotal === null ? '' : formatPrice(subtotal)}</strong>
             </div>`;
         }).join('');
+        body.querySelectorAll('.cart-item').forEach((row, index) => {
+            const { name, image } = lines[index];
+            row.querySelector('.cart-product-title').textContent = name;
+            const photo = row.querySelector('.cart-item-photo');
+            if (photo) photo.src = image;
+        });
     }
 
     function openCart() {
+        closeOrderModal();
         document.getElementById('cartOverlay').classList.add('open');
         document.getElementById('cartSidebar').classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -80,87 +118,90 @@ const PRODUCTS = Array.from(document.querySelectorAll('[data-product-id]'), card
     }
 
     function openOrderModal() {
+        if (!totalQty()) return;
         closeCart();
         document.getElementById('orderWrap').classList.add('open');
         document.body.style.overflow = 'hidden';
+        document.getElementById('orderTitle').focus();
     }
     function closeOrderModal() {
         document.getElementById('orderWrap').classList.remove('open');
         document.body.style.overflow = '';
     }
 
-    function setDelivery(type) {
-        document.getElementById('dPickup').classList.toggle('sel', type === 'pickup');
-        document.getElementById('dSdek').classList.toggle('sel',   type === 'sdek');
-        document.getElementById('cityGroup').style.display   = type === 'sdek' ? 'block' : 'none';
-        document.getElementById('estimateBox').style.display = 'none';
+    function setDelivery() {
+        const delivery = document.querySelector('input[name="del"]:checked').value === 'delivery';
+        const city = document.getElementById('oCity');
+        document.getElementById('dPickup').classList.toggle('sel', !delivery);
+        document.getElementById('dDelivery').classList.toggle('sel', delivery);
+        document.getElementById('cityGroup').hidden = !delivery;
+        city.disabled = !delivery;
+        city.required = delivery;
+        city.setCustomValidity('');
     }
 
-    function calcDelivery() {
-        const sel = document.getElementById('oCity');
-        const box = document.getElementById('estimateBox');
-        if (!sel.value) { box.style.display = 'none'; return; }
-        const [, rate] = sel.value.split('|');
-        document.getElementById('estimateCost').textContent = '~' + rate + ' руб.';
-        box.style.display = 'block';
-    }
-
-    function buildReceipt() {
+    function buildReceipt(event) {
+        event.preventDefault();
+        const products = cartLines();
+        if (!products.length) return;
         const email   = document.getElementById('oEmail').value.trim();
         const consent = document.getElementById('oConsent');
         const delType = document.querySelector('input[name="del"]:checked').value;
         const cityEl  = document.getElementById('oCity');
 
-        if (email && !document.getElementById('oEmail').checkValidity()) { alert('Проверьте email-адрес.'); return; }
         if (email && !consent.checked) {
             alert('Пожалуйста, дайте согласие на обработку персональных данных (чекбокс под полем email).');
             return;
         }
-        if (delType === 'sdek' && !cityEl.value) { alert('Пожалуйста, выберите город доставки.'); return; }
+        const city = cityEl.value.trim();
+        if (delType === 'delivery' && !city) {
+            cityEl.setCustomValidity('Укажите город или населённый пункт.');
+            cityEl.reportValidity();
+            return;
+        }
 
         const now = new Date().toLocaleString('ru-RU', {
             day: '2-digit', month: '2-digit', year: 'numeric',
             hour: '2-digit', minute: '2-digit'
         });
 
-        let delStr = '', delCostStr = '';
-        if (delType === 'pickup') {
-            delStr = 'Самовывоз — ' + SITE.pickupAddress;
-        } else {
-            const [city, rate] = cityEl.value.split('|');
-            delStr     = 'Доставка СДЭК — г. ' + city;
-            delCostStr = '\nПримерная стоимость доставки: ~' + rate + ' руб.';
-        }
+        const delStr = delType === 'pickup' ? 'Самовывоз — ' + SITE.pickupAddress :
+            'Доставка — ' + city + '\nСтоимость доставки уточнит мастерская.';
 
-        const emailStr = email ? `\nEmail:     ${email}` : '';
+        const emailStr = email ? `\nEmail для ответа: ${email}` : '';
 
-        const lines = Object.keys(cart).map(id => {
-            const p = PRODUCTS.find(x => x.id === Number(id));
-            return `  • ${p.name} — ${cart[id]} шт.`;
+        const lines = products.map(({ name, quantity, price, subtotal }) => {
+            const pricing = price === null ? 'цена по запросу' :
+                formatPrice(price) + ' за шт., сумма ' + formatPrice(subtotal);
+            return `• ${name} — ${quantity} шт., ${pricing}`;
         }).join('\n');
+        const summary = summarizePrices(products);
 
         const text =
-`ЗАКАЗ от ${now}
-================================${emailStr}
-Получение: ${delStr}${delCostStr}
+`Заявка от ${now}${emailStr}
+Получение: ${delStr}
 
-Состав заказа (${totalQty()} шт.):
+Состав заявки (${totalQty()} шт.):
 ${lines}
 
-================================
-📧 ${SITE.contactEmail}`;
+${summary.label}: ${summary.value}
+Способ оплаты согласуем после подтверждения заявки.
+
+Мастерская: ${SITE.contactEmail}`;
 
         document.getElementById('receiptBox').textContent = text;
         const enc = encodeURIComponent(text);
         document.getElementById('waBtn').href = 'https://wa.me/' + SITE.contactPhone.replace(/\D/g, '') + '?text=' + enc;
         document.getElementById('maxBtn').href = 'https://max.ru' + '/u/' + 'f9LHodD0cOJ4Vkr' + 'KwCvHQq4xEsapp' + 'WLGc3P_Ogl_ALy' + '_7OXoqaELlh2OGLc';
         document.getElementById('emailBtn').href = 'mailto:' + SITE.contactEmail
-            + '?subject=' + encodeURIComponent('Заказ с сайта valdaysuv.ru')
+            + '?subject=' + encodeURIComponent('Заявка с сайта valdaysuv.ru')
             + '&body=' + encodeURIComponent(text);
 
         closeOrderModal();
+        document.getElementById('copyStatus').textContent = '';
         document.getElementById('receiptWrap').classList.add('open');
         document.body.style.overflow = 'hidden';
+        document.getElementById('receiptTitle').focus();
     }
 
     function closeReceipt() {
@@ -168,27 +209,27 @@ ${lines}
         document.body.style.overflow = '';
     }
 
-    function copyReceipt() {
+    async function copyReceipt() {
         const text = document.getElementById('receiptBox').textContent;
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = document.querySelector('.btn-copy');
-            const orig = btn.textContent;
-            btn.textContent = '✓ Скопировано!';
-            setTimeout(() => { btn.textContent = orig; }, 2000);
-        });
+        const status = document.getElementById('copyStatus');
+        try {
+            await navigator.clipboard.writeText(text);
+            status.textContent = 'Текст заявки скопирован.';
+        } catch (_) {
+            status.textContent = 'Не удалось скопировать автоматически. Выделите текст заявки и скопируйте его вручную.';
+        }
     }
 
-    ['maxBtn'].forEach(id => {
-        document.getElementById(id).addEventListener('click', function () {
-            navigator.clipboard.writeText(document.getElementById('receiptBox').textContent).catch(() => {});
-        });
-    });
+    document.getElementById('maxBtn').addEventListener('click', copyReceipt);
 
     document.getElementById('oEmail').addEventListener('input', function () {
         const wrap = document.getElementById('consentWrap');
         wrap.style.display = this.value.trim() ? 'flex' : 'none';
         if (!this.value.trim()) document.getElementById('oConsent').checked = false;
     });
+    document.getElementById('orderForm').addEventListener('submit', buildReceipt);
+    document.getElementById('oCity').addEventListener('input', event => event.target.setCustomValidity(''));
+    setDelivery();
 
     ['orderWrap', 'receiptWrap'].forEach(id => {
         document.getElementById(id).addEventListener('click', function(e) {
@@ -230,6 +271,8 @@ document.querySelectorAll('.product-photos').forEach(group => {
         if (!button || !group.contains(button)) return;
         image.src = button.dataset.photo;
         image.alt = button.dataset.caption;
+        const link = image.closest('.product-photo-link');
+        if (link) link.href = button.dataset.photo;
         group.querySelectorAll('.product-photo-button').forEach(item => {
             item.setAttribute('aria-pressed', String(item === button));
         });

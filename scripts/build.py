@@ -6,11 +6,15 @@ import json
 import re
 import shutil
 import zlib
+from decimal import Decimal
 from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE_URL = 'https://valdaysuv.ru/'
+MONASTERY_INSCRIPTION = 'Валдайский Иверский монастырь.'
+STOCK_AVAILABLE = 'В наличии'
+STOCK_UNAVAILABLE = 'Нет в наличии'
 
 
 def load(path):
@@ -43,7 +47,28 @@ def entries(folder):
     return sorted(result, key=lambda item: (item.get('order', 0), item['name']))
 
 
-def catalog_html(products, categories, email):
+def inscription_stock(product):
+    saved = product.get('inscription_stock')
+    if saved is None:
+        return {}
+    if isinstance(saved, dict) and all(type(value) is bool for value in saved.values()):
+        return {text: STOCK_AVAILABLE if value else STOCK_UNAVAILABLE for text, value in saved.items()}
+    if not isinstance(saved, list):
+        raise ValueError('Inscription stock must be a list of statuses')
+    stock = {}
+    for row in saved:
+        if not isinstance(row, dict) or not isinstance(row.get('text'), str) or row.get('status') not in (STOCK_AVAILABLE, STOCK_UNAVAILABLE):
+            raise ValueError('Each inscription stock entry needs an inscription and a valid status')
+        stock[row['text']] = row['status']
+    return stock
+
+
+def stock_badge(status):
+    css = {STOCK_AVAILABLE: 'available', STOCK_UNAVAILABLE: 'unavailable', 'Под заказ': 'unknown'}
+    return f'<span class="stock-badge stock-{css.get(status, "unknown")}">{esc(status or "Уточнить")}</span>'
+
+
+def catalog_html(products, categories, email, inscriptions=()):
     known = {c['id'] for c in categories}
     if len(known) != len(categories) or any(not re.fullmatch(r'[a-z][a-z0-9-]*', c) for c in known):
         raise ValueError('Category IDs must be unique lowercase Latin identifiers')
@@ -63,13 +88,30 @@ def catalog_html(products, categories, email):
         if type(number) is not int or number < 0:
             raise ValueError('Model number must be a nonnegative integer')
         price = product.get('price')
-        if price is not None and (type(price) not in (int, float) or price <= 0):
-            raise ValueError('Price must be positive or empty')
+        price_kopecks = ''
+        price_text = 'Цена по запросу'
+        if price is not None:
+            if type(price) not in (int, float):
+                raise ValueError('Price must be positive or empty')
+            amount = Decimal(str(price))
+            if not amount.is_finite() or amount <= 0 or amount.as_tuple().exponent < -2:
+                raise ValueError('Price must be positive with at most two decimal places')
+            price_kopecks = str(int(amount * 100))
+            rubles, kopecks = divmod(int(price_kopecks), 100)
+            price_text = f'{rubles:,}'.replace(',', ' ') + (f',{kopecks:02d}' if kopecks else '') + ' ₽'
         image = image_path(product.get('image'))
         name = esc(product['name'])
         short_name = esc(product.get('short_name') or product['name'])
         picture = (f'<img class="product-img" src="{esc(image)}" alt="{name}" loading="lazy">' if image else
                    '<div class="product-placeholder"><span>Фотография скоро появится</span></div>')
+        standard_bell = product['category'] == 'bells'
+        has_details = bool(image) or standard_bell
+        if image:
+            trigger = f' data-product-details="{pid}"' if has_details else ''
+            label = 'Открыть карточку' if has_details else 'Увеличить фото'
+            picture = f'<a class="product-photo-link" href="{esc(image)}"{trigger} aria-label="{label}: {name}">{picture}</a>'
+        elif has_details:
+            picture = f'<button type="button" class="product-photo-link product-placeholder" data-product-details="{pid}" aria-label="Открыть карточку: {name}" disabled><span>Открыть карточку</span></button>'
         photo_items = product.get('photos', [])
         if not isinstance(photo_items, list):
             raise ValueError('Product photos must be a list')
@@ -86,37 +128,43 @@ def catalog_html(products, categories, email):
             )
             picture = f'<div class="product-photos">{picture}<div class="product-photo-thumbs" aria-label="Ракурсы товара">{thumbs}</div></div>'
         badge = f'Модель №{number}' if number else next(c['name'] for c in categories if c['id'] == product['category'])
-        details = ''.join(f'<p class="product-detail product-{key}">{esc(product[key])}</p>' for key in ('dimensions', 'description') if product.get(key))
-        price_text = f'{price:,.0f}'.replace(',', ' ') + ' ₽' if price is not None else 'Цена по запросу'
-        availability = f'<p class="product-availability">{esc(product["availability"])}</p>' if product.get('availability') else ''
-        detail_button = ''
-        if image and product.get('description'):
-            features = product.get('features', [])
-            if not isinstance(features, list) or any(not isinstance(value, str) for value in features):
-                raise ValueError('Product features must be a list of text values')
-            feature_list = '<ul class="product-feature-list">' + ''.join(f'<li>{esc(value)}</li>' for value in features) + '</ul>' if features else ''
-            main_photo = f'<a class="product-detail-image-link" href="{esc(image)}" target="_blank" rel="noopener"><img class="product-detail-image" src="{esc(image)}" alt="{name}"></a>'
+        details = f'<p class="product-detail product-dimensions">{esc(product["dimensions"])}</p>' if product.get('dimensions') else ''
+        availability = product.get('availability')
+        if availability == 'Уточните наличие':
+            availability = None
+        availability = f'<p class="product-availability">{stock_badge(availability)}</p>'
+        if has_details:
+            main_photo = f'<a class="product-detail-image-link" href="{esc(image)}" target="_blank" rel="noopener"><img class="product-detail-image" src="{esc(image)}" alt="{name}"></a>' if image else ''
             thumbnails = ''.join(f'<button type="button" class="product-detail-thumb" data-photo="{esc(path)}" data-caption="{esc(caption)}" aria-label="{esc(caption)}" aria-pressed="{str(path == image).lower()}"><img src="{esc(path)}" alt="" loading="lazy"></button>' for path, caption in photos) if len(photos) > 1 else ''
-            dimension_text = esc(product.get('dimensions') or 'Уточните у мастерской')
-            availability_text = esc(product.get('availability') or 'Уточните наличие')
-            note = esc(product.get('design_note') or '')
+            media = f'\n    <div class="product-detail-photos">{main_photo}<div class="product-detail-thumbnails">{thumbnails}</div></div>' if image else ''
+            design = ''
+            if standard_bell:
+                stock = inscription_stock(product)
+                rows = [
+                    f'<div><dt>«{esc(text)}»</dt><dd>{stock_badge(stock.get(text))}</dd></div>'
+                    for text in inscriptions if text != MONASTERY_INSCRIPTION
+                ]
+                design = f'''
+    <p class="product-design-summary">В верхней части колокольчика — надпись «Съ серебром». Корпус украшают герб Валдая, надпись «Даръ Валдая» и узоры. По краю юбки проходит одна из традиционных надписей, представленных ниже.</p>
+    <h3 class="product-stock-title">Надписи на юбке</h3>
+    <dl class="product-specs">{''.join(rows)}</dl>
+    <h3 class="product-stock-title">Отдельное оформление</h3>
+    <dl class="product-specs"><div><dt>С изображением Иверского монастыря</dt><dd>{stock_badge(stock.get(MONASTERY_INSCRIPTION))}</dd></div></dl>'''
+            layout = 'product-detail-layout' if image else 'product-detail-layout product-detail-text-only'
             detail_panels.append(f'''<template id="product-detail-{pid}">
-<div class="product-detail-layout">
-    <div class="product-detail-photos">{main_photo}<div class="product-detail-thumbnails">{thumbnails}</div></div>
-    <div class="product-detail-description"><span class="eyebrow">{esc(badge)}</span><h2 class="product-dialog-title" id="product-dialog-title-{pid}">{name}</h2><p>{esc(product['description'])}</p>{feature_list}
-    <dl class="product-specs"><div><dt>Размеры</dt><dd>{dimension_text}</dd></div><div><dt>Наличие</dt><dd>{availability_text}</dd></div><div><dt>Стоимость</dt><dd>{price_text}</dd></div></dl>
-    <div class="product-design-note"><h3>Ваше оформление</h3><p>{note}</p></div>
-    <button type="button" class="btn-primary product-detail-select" data-select-product="{pid}">Выбрать для заявки →</button><p class="product-select-note">Добавим изделие в корзину. Оформление и стоимость согласуем перед заказом.</p></div>
+<div class="{layout}">{media}
+    <div class="product-detail-info"><span class="eyebrow">{esc(badge)}</span><h2 class="product-dialog-title" id="product-dialog-title-{pid}">{name}</h2>
+    <p class="product-price">{price_text}</p>{design}
+    <button type="button" class="btn-primary product-detail-select" data-select-product="{pid}">В корзину</button>
+    <a class="product-custom-link" href="#custom-order">Индивидуальный заказ ↗</a></div>
 </div>
 </template>''')
-            detail_button = f'<button type="button" class="product-more" data-product-details="{pid}" hidden>Рассмотреть изделие ↗</button>'
 
-        card = f'''<article class="product-card" id="product-{pid}" data-category="{esc(product['category'])}" data-size-number="{number}" data-product-id="{pid}" data-product-name="{name}" data-product-image="{esc(image)}">
+        card = f'''<article class="product-card" id="product-{pid}" data-category="{esc(product['category'])}" data-size-number="{number}" data-product-id="{pid}" data-product-name="{name}" data-product-image="{esc(image)}" data-price-kopecks="{price_kopecks}">
     {picture}
     <div class="product-info"><span class="product-type">{esc(badge)}</span>
         <h4 class="product-name">{short_name}</h4>{details}
         <p class="product-price">{price_text}</p>{availability}
-{detail_button}
         <button class="btn-add" id="ba{pid}" onclick="addToCart({pid})" hidden>+ В корзину</button>
     </div>
 </article>'''
@@ -196,7 +244,7 @@ def build(output, include_admin=False):
         f'<blockquote class="inscription"><p>«{esc(text)}»</p></blockquote>' for text in inscriptions
     )
     context.update(site_name=esc(settings['name']), hours_display=esc(f'Ежедневно {settings["opens"]} – {settings["closes"]}'),
-                   catalog=catalog_html(products, categories, settings['email']), gallery=gallery_html(works), gallery_count=str(len(works)))
+                   catalog=catalog_html(products, categories, settings['email'], inscriptions), gallery=gallery_html(works), gallery_count=str(len(works)))
     output.mkdir(parents=True, exist_ok=True)
     for template in (ROOT / 'templates').glob('*.html'):
         page_context = dict(context, structured_data=structured_data(template.name, settings, works))
@@ -229,6 +277,16 @@ def build(output, include_admin=False):
                     raise ValueError('Unsafe generated asset path')
                 shutil.rmtree(destination)
             shutil.copytree(ROOT / folder, destination)
+        if include_admin:
+            config_path = admin_output / 'config.yml'
+            config = load(config_path)
+            products_config = next(item for item in config['collections'] if item['name'] == 'products')
+            stock_field = next(field for field in products_config['fields'] if field['name'] == 'inscription_stock')
+            variant_field = next(field for field in stock_field['fields'] if field['name'] == 'text')
+            variant_field['options'] = [
+                {'label': text, 'value': text} for text in inscriptions if text != MONASTERY_INSCRIPTION
+            ] + [{'label': 'С изображением Иверского монастыря', 'value': MONASTERY_INSCRIPTION}]
+            config_path.write_text(json.dumps(config, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         for name in ('CNAME', 'robots.txt', 'sitemap.xml'):
             shutil.copy2(ROOT / name, output / name)
         (output / '.nojekyll').touch()

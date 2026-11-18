@@ -245,15 +245,19 @@
 <div class="cart-sidebar" id="cartSidebar">
     <div class="panel-hd">
         <h2>Корзина</h2>
-        <button class="btn-x" onclick="closeCart()">×</button>
+        <button type="button" class="btn-x" onclick="closeCart()" aria-label="Закрыть корзину">×</button>
     </div>
     <div class="cart-body" id="cartBody"></div>
     <div class="cart-foot" id="cartFoot" style="display:none">
         <div class="cart-summary">
-            <span>Итого позиций:</span>
+            <span>Количество изделий</span>
             <strong id="cartTotal">0 шт.</strong>
         </div>
-        <button class="btn-checkout" onclick="openOrderModal()">Оформить заказ →</button>
+        <div class="cart-summary">
+            <span id="cartSubtotalLabel">Итого за изделия</span>
+            <strong id="cartSubtotal"></strong>
+        </div>
+        <button type="button" class="btn-checkout" onclick="openOrderModal()">Подготовить заявку →</button>
     </div>
 </div>
 
@@ -262,94 +266,68 @@
     <div id="productDialogContent"></div>
 </dialog>
 
-<!-- ORDER MODAL -->
+<!-- REQUEST FORM -->
 <div class="modal-wrap" id="orderWrap">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
         <div class="modal-hd">
-            <h2>Оформление заказа</h2>
-            <button class="btn-x dark" onclick="closeOrderModal()">×</button>
+            <h2 id="orderTitle" tabindex="-1">Подготовка заявки</h2>
+            <button type="button" class="btn-x" onclick="closeOrderModal()" aria-label="Закрыть форму заявки">×</button>
         </div>
-        <div class="form-group">
-            <label>Email для подтверждения <span style="color:var(--rust);font-size:0.8rem;text-transform:none;letter-spacing:0">(необязательно)</span></label>
-            <input type="email" id="oEmail" placeholder="example@mail.ru" autocomplete="email">
-        </div>
-        <label class="consent-label" id="consentWrap">
-            <input type="checkbox" id="oConsent">
-            <span>Я согласен(а) с <a href="privacy.html" target="_blank">Политикой конфиденциальности</a> и обработкой моего email-адреса для связи по заказу</span>
-        </label>
-        <div class="form-group">
-            <label>Способ получения</label>
-            <div class="del-row">
-                <label class="del-opt sel" id="dPickup">
-                    <input type="radio" name="del" value="pickup" checked onchange="setDelivery('pickup')">
-                    <div class="del-opt-icon">🚶</div>
-                    <div class="del-opt-name">Самовывоз<br>г. Валдай</div>
-                </label>
-                <label class="del-opt" id="dSdek">
-                    <input type="radio" name="del" value="sdek" onchange="setDelivery('sdek')">
-                    <div class="del-opt-icon">📦</div>
-                    <div class="del-opt-name">Доставка<br>СДЭК</div>
-                </label>
+        <form id="orderForm">
+            <fieldset class="form-group">
+                <legend>Способ получения</legend>
+                <div class="del-row">
+                    <label class="del-opt sel" id="dPickup">
+                        <input type="radio" name="del" value="pickup" checked onchange="setDelivery()">
+                        <span>Самовывоз<small>г. Валдай</small></span>
+                    </label>
+                    <label class="del-opt" id="dDelivery">
+                        <input type="radio" name="del" value="delivery" onchange="setDelivery()">
+                        <span>Доставка</span>
+                    </label>
+                </div>
+            </fieldset>
+            <div class="form-group" id="cityGroup" hidden>
+                <label for="oCity">Город или населённый пункт</label>
+                <input type="text" id="oCity" autocomplete="address-level2" maxlength="120" aria-describedby="deliveryNote" disabled>
+                <p class="order-note" id="deliveryNote">Стоимость доставки уточнит мастерская.</p>
             </div>
-        </div>
-        <div class="form-group" id="cityGroup" style="display:none">
-            <label>Город доставки</label>
-            <div class="sel-wrap">
-                <select id="oCity" onchange="calcDelivery()">
-                    <option value="">— Выберите город —</option>
-                    <option value="Великий Новгород|240">Великий Новгород</option>
-                    <option value="Тверь|280">Тверь</option>
-                    <option value="Москва|340">Москва</option>
-                    <option value="Санкт-Петербург|360">Санкт-Петербург</option>
-                    <option value="Нижний Новгород|380">Нижний Новгород</option>
-                    <option value="Воронеж|400">Воронеж</option>
-                    <option value="Казань|420">Казань</option>
-                    <option value="Самара|430">Самара</option>
-                    <option value="Саратов|430">Саратов</option>
-                    <option value="Волгоград|440">Волгоград</option>
-                    <option value="Краснодар|450">Краснодар</option>
-                    <option value="Калининград|450">Калининград</option>
-                    <option value="Ростов-на-Дону|460">Ростов-на-Дону</option>
-                    <option value="Уфа|460">Уфа</option>
-                    <option value="Екатеринбург|480">Екатеринбург</option>
-                    <option value="Челябинск|480">Челябинск</option>
-                    <option value="Пермь|490">Пермь</option>
-                    <option value="Омск|510">Омск</option>
-                    <option value="Новосибирск|550">Новосибирск</option>
-                    <option value="Красноярск|560">Красноярск</option>
-                    <option value="Иркутск|600">Иркутск</option>
-                    <option value="Хабаровск|680">Хабаровск</option>
-                    <option value="Владивосток|700">Владивосток</option>
-                    <option value="Другой город|500">Другой город (~500 руб.)</option>
-                </select>
+            <div class="form-group">
+                <label for="oEmail">Email для ответа <span class="order-optional">(необязательно)</span></label>
+                <input type="email" id="oEmail" placeholder="example@mail.ru" autocomplete="email">
             </div>
-        </div>
-        <div class="estimate-box" id="estimateBox" style="display:none">
-            Примерная стоимость доставки: <strong id="estimateCost">—</strong><br>
-            <span class="estimate-note">Точная цена будет подтверждена менеджером</span>
-        </div>
-        <button class="btn-primary" style="width:100%;padding:12px;display:block" onclick="buildReceipt()">
-            Сформировать заказ →
-        </button>
+            <label class="consent-label" id="consentWrap">
+                <input type="checkbox" id="oConsent">
+                <span>Я согласен(а) с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a> и обработкой моего email для связи по заявке.</span>
+            </label>
+            <p class="order-note">Способ оплаты согласуем после подтверждения заявки.</p>
+            <div class="order-actions">
+                <button type="button" class="order-secondary" onclick="openCart()">Назад в корзину</button>
+                <button type="submit" class="order-primary">Сформировать заявку →</button>
+            </div>
+        </form>
     </div>
 </div>
 
-<!-- RECEIPT MODAL -->
+<!-- REQUEST PREVIEW -->
 <div class="modal-wrap" id="receiptWrap">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
         <div class="modal-hd">
-            <h2>Заказ сформирован</h2>
-            <button class="btn-x dark" onclick="closeReceipt()">×</button>
+            <h2 id="receiptTitle" tabindex="-1">Заявка готова к отправке</h2>
+            <button type="button" class="btn-x" onclick="closeReceipt()" aria-label="Закрыть просмотр заявки">×</button>
         </div>
-        <p class="receipt-lead">Выберите способ отправки. В WhatsApp и письме текст подставится автоматически. Для Макс текст скопируется, вставьте его в открывшийся чат (Ctrl+V или долгое нажатие).</p>
-        <div class="receipt-box" id="receiptBox"></div>
-        <div class="action-btns">
-            <button class="btn-act btn-copy" onclick="copyReceipt()">📋 Скопировать текст</button>
-            <a class="btn-act btn-wa" id="waBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
-            <a class="btn-act btn-max" id="maxBtn" href="#" target="_blank" rel="noopener">💙 Макс</a>
-            <a class="btn-act btn-email" id="emailBtn" href="#">✉️ Письмо на email</a>
+        <p class="receipt-lead">В WhatsApp и письме текст подставится автоматически. В Макс вставьте скопированный текст в чат.</p>
+        <pre class="receipt-box" id="receiptBox"></pre>
+        <div class="action-btns" aria-label="Способы отправки">
+            <a class="order-secondary" id="waBtn" href="#" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="order-secondary" id="maxBtn" href="#" target="_blank" rel="noopener">Макс</a>
+            <a class="order-secondary" id="emailBtn" href="#">Отправить по email</a>
         </div>
-<button class="btn-close-plain" onclick="closeReceipt()">Закрыть</button>
+        <p class="copy-status" id="copyStatus" role="status"></p>
+        <div class="order-actions">
+            <button type="button" class="order-secondary" onclick="closeReceipt(); openOrderModal()">Назад к заявке</button>
+            <button type="button" class="order-primary" onclick="copyReceipt()">Скопировать текст</button>
+        </div>
     </div>
 </div>
 

@@ -43,6 +43,15 @@ class BuildTests(unittest.TestCase):
         self.assertNotIn('<script>alert', first)
         self.assertIn('&lt;script&gt;', first)
         self.assertIn('1 500 ₽', first)
+        self.assertIn('data-price-kopecks="150000"', first)
+        product['price'] = 1499.05
+        fractional = builder.catalog_html([dict(product)], self.categories, 'test@example.com')
+        self.assertIn('data-price-kopecks="149905"', fractional)
+        self.assertIn('1 499,05 ₽', fractional)
+        product['price'] = None
+        unpriced = builder.catalog_html([dict(product)], self.categories, 'test@example.com')
+        self.assertIn('data-price-kopecks=""', unpriced)
+        self.assertIn('Цена по запросу', unpriced)
 
     def test_legacy_cart_ids_preserved(self):
         products = builder.entries('products')
@@ -62,7 +71,23 @@ class BuildTests(unittest.TestCase):
             {'image': '/img/shop/nomer4.jpg', 'caption': 'Первый ракурс'},
             {'image': '/img/gallery/gerbvalday.jpg', 'caption': 'Тестовый второй ракурс'},
         ])
-        markup = builder.catalog_html([product], self.categories, 'test@example.com')
+        inscriptions = builder.load(ROOT / 'content/settings/site.json')['inscriptions']
+        product['inscription_stock'] = [
+            {'text': inscriptions[0], 'status': 'В наличии'},
+            {'text': inscriptions[1], 'status': 'Нет в наличии'},
+        ]
+        markup = builder.catalog_html([product], self.categories, 'test@example.com', inscriptions)
+        self.assertIn('class="product-photo-link" href="img/shop/nomer4.jpg" data-product-details="4"', markup)
+        self.assertNotIn('Рассмотреть изделие', markup)
+        for text in inscriptions[:-1]:
+            self.assertIn(f'<dt>«{text}»</dt>', markup)
+        self.assertNotIn(f'<dt>«{inscriptions[-1]}»</dt>', markup)
+        self.assertIn('С изображением Иверского монастыря', markup)
+        self.assertIn('stock-available">В наличии', markup)
+        self.assertIn('stock-unavailable">Нет в наличии', markup)
+        self.assertIn('stock-unknown">Уточнить</span>', markup)
+        self.assertIn('href="#custom-order"', markup)
+        self.assertNotIn('Ваше оформление', markup)
         self.assertEqual(markup.count('class="product-photo-button"'), 2)
         self.assertIn('data-caption="Первый ракурс"', markup)
         self.assertEqual(markup.split('<template')[0].count('aria-pressed="true"'), 1)
@@ -115,6 +140,14 @@ class BuildTests(unittest.TestCase):
             output = Path(folder) / 'site'
             builder.build(output, include_admin=True)
             self.assertTrue((output / 'admin/index.html').is_file())
+            config = builder.load(output / 'admin/config.yml')
+            products = next(item for item in config['collections'] if item['name'] == 'products')
+            stock = next(field for field in products['fields'] if field['name'] == 'inscription_stock')
+            variants = next(field for field in stock['fields'] if field['name'] == 'text')
+            self.assertEqual(
+                [option['value'] for option in variants['options']],
+                builder.load(ROOT / 'content/settings/site.json')['inscriptions'],
+            )
             self.assertTrue((output / 'admin/config.yml').is_file())
             builder.build(output)
             self.assertFalse((output / 'admin').exists())

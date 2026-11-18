@@ -125,9 +125,35 @@
           "options": [
             "Уточните наличие",
             "В наличии",
+            "Нет в наличии",
             "Под заказ"
           ],
           "default": "Уточните наличие"
+        },
+        {
+          "name": "inscription_stock",
+          "label": "Наличие по надписям",
+          "widget": "list",
+          "required": false,
+          "default": [],
+          "collapsed": true,
+          "label_singular": "статус надписи",
+          "summary": "{{fields.text}} — {{fields.status}}",
+          "hint": "Для обычных колокольчиков. Добавьте строки только для вариантов с известным наличием.",
+          "fields": [
+            {
+              "name": "text",
+              "label": "Вариант оформления",
+              "widget": "select",
+              "options": []
+            },
+            {
+              "name": "status",
+              "label": "Наличие",
+              "widget": "select",
+              "options": ["В наличии", "Нет в наличии"]
+            }
+          ]
         },
         {
           "name": "published",
