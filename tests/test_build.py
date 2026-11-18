@@ -59,6 +59,11 @@ class BuildTests(unittest.TestCase):
         page = Page()
         page.feed(markup)
         self.assertEqual(sorted(int(p['data-product-id']) for p in page.products), list(range(1, 12)))
+        for product in page.products:
+            product_id = product['data-product-id']
+            self.assertIn(f'data-product-details="{product_id}"', markup)
+            self.assertIn(f'product-detail-{product_id}', page.ids)
+            self.assertIn(f'data-select-product="{product_id}"', markup)
 
     def test_multiple_product_photos_and_confirmed_number(self):
         no4 = builder.load(ROOT / 'content/products/3.json')

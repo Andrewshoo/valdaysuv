@@ -102,15 +102,10 @@ def catalog_html(products, categories, email, inscriptions=()):
         image = image_path(product.get('image'))
         name = esc(product['name'])
         short_name = esc(product.get('short_name') or product['name'])
-        picture = (f'<img class="product-img" src="{esc(image)}" alt="{name}" loading="lazy">' if image else
-                   '<div class="product-placeholder"><span>Фотография скоро появится</span></div>')
         standard_bell = product['category'] == 'bells'
-        has_details = bool(image) or standard_bell
         if image:
-            trigger = f' data-product-details="{pid}"' if has_details else ''
-            label = 'Открыть карточку' if has_details else 'Увеличить фото'
-            picture = f'<a class="product-photo-link" href="{esc(image)}"{trigger} aria-label="{label}: {name}">{picture}</a>'
-        elif has_details:
+            picture = f'<a class="product-photo-link" href="{esc(image)}" data-product-details="{pid}" aria-label="Открыть карточку: {name}"><img class="product-img" src="{esc(image)}" alt="{name}" loading="lazy"></a>'
+        else:
             picture = f'<button type="button" class="product-photo-link product-placeholder" data-product-details="{pid}" aria-label="Открыть карточку: {name}" disabled><span>Открыть карточку</span></button>'
         photo_items = product.get('photos', [])
         if not isinstance(photo_items, list):
@@ -133,25 +128,24 @@ def catalog_html(products, categories, email, inscriptions=()):
         if availability == 'Уточните наличие':
             availability = None
         availability = f'<p class="product-availability">{stock_badge(availability)}</p>'
-        if has_details:
-            main_photo = f'<a class="product-detail-image-link" href="{esc(image)}" target="_blank" rel="noopener"><img class="product-detail-image" src="{esc(image)}" alt="{name}"></a>' if image else ''
-            thumbnails = ''.join(f'<button type="button" class="product-detail-thumb" data-photo="{esc(path)}" data-caption="{esc(caption)}" aria-label="{esc(caption)}" aria-pressed="{str(path == image).lower()}"><img src="{esc(path)}" alt="" loading="lazy"></button>' for path, caption in photos) if len(photos) > 1 else ''
-            media = f'\n    <div class="product-detail-photos">{main_photo}<div class="product-detail-thumbnails">{thumbnails}</div></div>' if image else ''
-            design = ''
-            if standard_bell:
-                stock = inscription_stock(product)
-                rows = [
-                    f'<div><dt>«{esc(text)}»</dt><dd>{stock_badge(stock.get(text))}</dd></div>'
-                    for text in inscriptions if text != MONASTERY_INSCRIPTION
-                ]
-                design = f'''
+        main_photo = f'<a class="product-detail-image-link" href="{esc(image)}" target="_blank" rel="noopener"><img class="product-detail-image" src="{esc(image)}" alt="{name}"></a>' if image else ''
+        thumbnails = ''.join(f'<button type="button" class="product-detail-thumb" data-photo="{esc(path)}" data-caption="{esc(caption)}" aria-label="{esc(caption)}" aria-pressed="{str(path == image).lower()}"><img src="{esc(path)}" alt="" loading="lazy"></button>' for path, caption in photos) if len(photos) > 1 else ''
+        media = f'\n    <div class="product-detail-photos">{main_photo}<div class="product-detail-thumbnails">{thumbnails}</div></div>' if image else ''
+        design = '' if standard_bell else f'\n    {availability}'
+        if standard_bell:
+            stock = inscription_stock(product)
+            rows = [
+                f'<div><dt>«{esc(text)}»</dt><dd>{stock_badge(stock.get(text))}</dd></div>'
+                for text in inscriptions if text != MONASTERY_INSCRIPTION
+            ]
+            design = f'''
     <p class="product-design-summary">В верхней части колокольчика — надпись «Съ серебром». Корпус украшают герб Валдая, надпись «Даръ Валдая» и узоры. По краю юбки проходит одна из традиционных надписей, представленных ниже.</p>
     <h3 class="product-stock-title">Надписи на юбке</h3>
     <dl class="product-specs">{''.join(rows)}</dl>
     <h3 class="product-stock-title">Отдельное оформление</h3>
     <dl class="product-specs"><div><dt>С изображением Иверского монастыря</dt><dd>{stock_badge(stock.get(MONASTERY_INSCRIPTION))}</dd></div></dl>'''
-            layout = 'product-detail-layout' if image else 'product-detail-layout product-detail-text-only'
-            detail_panels.append(f'''<template id="product-detail-{pid}">
+        layout = 'product-detail-layout' if image else 'product-detail-layout product-detail-text-only'
+        detail_panels.append(f'''<template id="product-detail-{pid}">
 <div class="{layout}">{media}
     <div class="product-detail-info"><span class="eyebrow">{esc(badge)}</span><h2 class="product-dialog-title" id="product-dialog-title-{pid}">{name}</h2>
     <p class="product-price">{price_text}</p>{design}
