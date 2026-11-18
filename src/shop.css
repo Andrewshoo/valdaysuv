@@ -19,14 +19,23 @@ button.product-photo-link { padding: 0; font: inherit; cursor: pointer; }
 .product-detail-info .product-price { color: var(--rust); font: 700 20px/1.15 Arial, sans-serif; }
 .product-design-summary { color: var(--ink2); font-size: 14px; line-height: 1.6; }
 .product-stock-title { margin: 24px 0 10px; font-size: 22px; }
-.product-specs > div { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-top: 1px solid var(--bgold); font-size: 13px; }
-.product-specs dt { color: var(--ink2); }
-.product-specs dd { text-align: right; }
+.product-photo-caption { margin-top: 10px; color: var(--ink2); font-size: 13px; }
+.product-variants { min-width: 0; border: 0; padding: 0; margin: 0 0 14px; }
+.product-variants h3 { margin: 8px 0; font-size: 19px; }
+.product-variant {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center;
+    gap: 8px; min-height: 44px; padding: 6px 8px; border-bottom: 1px solid var(--bgold);
+    color: var(--ink); font-size: 13px; line-height: 1.35; cursor: pointer;
+}
+.product-variant:has(input:checked) { background: var(--parchment2); }
+.product-variant:has(input:disabled) { cursor: default; color: var(--ink2); }
+.product-variant input { margin: 0; accent-color: var(--rust); }
 .stock-badge { display: inline-block; padding: 3px 7px; border-radius: 4px; font-size: 11px; line-height: 1.4; }
 .stock-available { color: #285233; background: #e3eee2; }
 .stock-unavailable { color: #7b3429; background: #f3e1dc; }
 .stock-unknown { color: var(--ink2); background: var(--parchment2); }
 .product-detail-select { margin-top: 24px; width: 100%; }
+.product-detail-select:disabled { background: var(--parchment2); color: var(--ink2); cursor: default; }
 .product-custom-link { display: inline-block; margin-top: 14px; color: var(--rust); text-decoration: underline; text-underline-offset: 3px; }
 .custom-order-section { background: var(--cream); }
 .custom-order-intro { max-width: 720px; margin: 20px 0 36px; color: var(--ink2); font-size: 16px; }

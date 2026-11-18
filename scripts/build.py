@@ -68,6 +68,10 @@ def stock_badge(status):
     return f'<span class="stock-badge stock-{css.get(status, "unknown")}">{esc(status or "Уточнить")}</span>'
 
 
+def product_id(product):
+    return product.get('id') or (1000 + zlib.crc32(product['_file'].encode('utf-8')))
+
+
 def catalog_html(products, categories, email, inscriptions=()):
     known = {c['id'] for c in categories}
     if len(known) != len(categories) or any(not re.fullmatch(r'[a-z][a-z0-9-]*', c) for c in known):
@@ -77,7 +81,7 @@ def catalog_html(products, categories, email, inscriptions=()):
     detail_panels = []
     for product in products:
         # Existing IDs preserve saved carts; new IDs are stable across rebuilds and renames of titles.
-        product['id'] = product.get('id') or (1000 + zlib.crc32(product['_file'].encode('utf-8')))
+        product['id'] = product_id(product)
         pid = product['id']
         if type(pid) is not int or pid < 1 or pid > 9007199254740991 or pid in ids:
             raise ValueError(f'Invalid or duplicate product ID: {pid}')
@@ -124,32 +128,48 @@ def catalog_html(products, categories, email, inscriptions=()):
             picture = f'<div class="product-photos">{picture}<div class="product-photo-thumbs" aria-label="Ракурсы товара">{thumbs}</div></div>'
         badge = f'Модель №{number}' if number else next(c['name'] for c in categories if c['id'] == product['category'])
         details = f'<p class="product-detail product-dimensions">{esc(product["dimensions"])}</p>' if product.get('dimensions') else ''
+        stock = inscription_stock(product) if standard_bell else {}
         availability = product.get('availability')
+        if standard_bell:
+            statuses = [stock.get(text) for text in dict.fromkeys([*inscriptions, MONASTERY_INSCRIPTION])]
+            availability = STOCK_AVAILABLE if STOCK_AVAILABLE in statuses else (
+                STOCK_UNAVAILABLE if all(status == STOCK_UNAVAILABLE for status in statuses) else None
+            )
         if availability == 'Уточните наличие':
             availability = None
         availability = f'<p class="product-availability">{stock_badge(availability)}</p>'
         main_photo = f'<a class="product-detail-image-link" href="{esc(image)}" target="_blank" rel="noopener"><img class="product-detail-image" src="{esc(image)}" alt="{name}"></a>' if image else ''
         thumbnails = ''.join(f'<button type="button" class="product-detail-thumb" data-photo="{esc(path)}" data-caption="{esc(caption)}" aria-label="{esc(caption)}" aria-pressed="{str(path == image).lower()}"><img src="{esc(path)}" alt="" loading="lazy"></button>' for path, caption in photos) if len(photos) > 1 else ''
-        media = f'\n    <div class="product-detail-photos">{main_photo}<div class="product-detail-thumbnails">{thumbnails}</div></div>' if image else ''
+        media = ''
+        if image:
+            caption = esc(product.get('photo_caption') or 'На фото — пример оформления этой модели.')
+            media = f'\n    <div class="product-detail-photos">{main_photo}<div class="product-detail-thumbnails">{thumbnails}</div><p class="product-photo-caption">{caption}</p></div>'
         design = '' if standard_bell else f'\n    {availability}'
+        quick_action = f'id="ba{pid}" onclick="addToCart({pid})"'
+        quick_label = '+ В корзину'
         if standard_bell:
-            stock = inscription_stock(product)
-            rows = [
-                f'<div><dt>«{esc(text)}»</dt><dd>{stock_badge(stock.get(text))}</dd></div>'
-                for text in inscriptions if text != MONASTERY_INSCRIPTION
-            ]
+            def option(text, label):
+                status = stock.get(text)
+                disabled = ' disabled' if status == STOCK_UNAVAILABLE else ''
+                return f'<label class="product-variant"><input type="checkbox" name="product-variant" value="{esc(text)}"{disabled}><span>{label}</span>{stock_badge(status)}</label>'
+            rows = ''.join(option(text, f'«{esc(text)}»') for text in inscriptions if text != MONASTERY_INSCRIPTION)
+            monastery = option(MONASTERY_INSCRIPTION, 'С изображением Иверского монастыря')
             design = f'''
-    <p class="product-design-summary">В верхней части колокольчика — надпись «Съ серебром». Корпус украшают герб Валдая, надпись «Даръ Валдая» и узоры. По краю юбки проходит одна из традиционных надписей, представленных ниже.</p>
-    <h3 class="product-stock-title">Надписи на юбке</h3>
-    <dl class="product-specs">{''.join(rows)}</dl>
-    <h3 class="product-stock-title">Отдельное оформление</h3>
-    <dl class="product-specs"><div><dt>С изображением Иверского монастыря</dt><dd>{stock_badge(stock.get(MONASTERY_INSCRIPTION))}</dd></div></dl>'''
+    <p class="product-design-summary">В стандартном оформлении сверху — «Съ серебром», на корпусе — герб Валдая, «Даръ Валдая» и узоры.</p>
+    <fieldset class="product-variants"><legend class="product-stock-title">Выберите оформление</legend>
+    <p class="product-design-summary">Можно отметить несколько вариантов. Каждый добавится в корзину по одной штуке.</p>
+    <h3>Надписи на юбке</h3>{rows}
+    <h3>Отдельное оформление</h3>{monastery}</fieldset>
+    <p class="product-design-summary">Для варианта «Уточнить» мастерская проверит наличие после заявки. Если нужного варианта нет, можно обсудить индивидуальный заказ.</p>'''
+            quick_action = f'data-product-details="{pid}"'
+            quick_label = 'Выбрать оформление'
+        select_disabled = ' disabled' if standard_bell else ''
         layout = 'product-detail-layout' if image else 'product-detail-layout product-detail-text-only'
         detail_panels.append(f'''<template id="product-detail-{pid}">
 <div class="{layout}">{media}
     <div class="product-detail-info"><span class="eyebrow">{esc(badge)}</span><h2 class="product-dialog-title" id="product-dialog-title-{pid}">{name}</h2>
-    <p class="product-price">{price_text}</p>{design}
-    <button type="button" class="btn-primary product-detail-select" data-select-product="{pid}">В корзину</button>
+    <p class="product-price">{price_text}</p>{details}{design}
+    <button type="button" class="btn-primary product-detail-select" data-select-product="{pid}"{select_disabled}>В корзину</button>
     <a class="product-custom-link" href="#custom-order">Индивидуальный заказ ↗</a></div>
 </div>
 </template>''')
@@ -159,7 +179,7 @@ def catalog_html(products, categories, email, inscriptions=()):
     <div class="product-info"><span class="product-type">{esc(badge)}</span>
         <h4 class="product-name">{short_name}</h4>{details}
         <p class="product-price">{price_text}</p>{availability}
-        <button class="btn-add" id="ba{pid}" onclick="addToCart({pid})" hidden>+ В корзину</button>
+        <button type="button" class="btn-add" {quick_action} hidden>{quick_label}</button>
     </div>
 </article>'''
         groups[product['category']].append((number, product.get('order', 0), card))

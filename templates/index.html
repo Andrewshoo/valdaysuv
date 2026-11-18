@@ -36,7 +36,7 @@
             <img src="img/shared/logo.png" alt="{{ site_name }}" class="logo">
             <span class="site-name">Валдайская<br>колокольная мастерская</span>
         </a>
-        <button class="cart-btn" onclick="openCart()">
+        <button class="cart-btn" onclick="openCart(this)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
@@ -66,11 +66,11 @@
         <span class="eyebrow">Валдай · Колокольная мастерская</span>
         <h1>Валдайские колокольчики.<br><em>Ручная работа.</em></h1>
         <p>{{ hero_intro }}</p>
-        <p class="hero-availability">Колокольчики с валдайской символикой <strong>всегда в наличии</strong>.</p>
+        <p class="hero-availability">Готовые колокольчики с валдайской символикой и оформление на заказ.</p>
         <div class="hero-actions"><a href="#catalog" class="btn-primary">Выбрать колокольчик ↗</a><a href="#about" class="text-link">Познакомиться с мастерской</a></div>
         <div class="hero-footnote"><span>Ручная работа<br>и внимание к деталям</span><span>Из Валдая<br>с доставкой по России</span></div>
     </div>
-    <figure class="hero-photo"><img src="img/shared/photo_5325715840693302141_y.jpg" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
+    <figure class="hero-photo"><img src="img/shared/photo_5325715840693302141_y.jpg" width="948" height="1280" alt="Два валдайских колокольчика с золотистыми ручками на камне" fetchpriority="high"><figcaption>МЕТАЛЛ, УЗОР И НЕМНОГО ВАЛДАЙСКОЙ ДУШИ</figcaption></figure>
 </section>
 
 <section id="history" class="history-section">
@@ -78,17 +78,17 @@
         <div class="history-heading"><span class="eyebrow">Из дорожного звона — в памятный подарок</span><h2 class="sec-title">Откуда родом валдайский звон</h2></div>
         <div class="history-text"><p>{{ history_intro }}</p><p>{{ history_text }}</p></div>
         <p class="history-source">Об истории колокольчика: <a href="https://www.prlib.ru/history/619320" target="_blank" rel="noopener">Президентская библиотека ↗</a></p>
-        <div class="inscriptions-heading"><span class="eyebrow">Традиционные надписи нашей мастерской</span><h2 class="sec-title">Слова, которые хочется подарить</h2><p>Признание, пожелание счастья или память о Валдае — надпись выбирается отдельно от изображения. Любую из этих надписей можно сочетать с выбранным рисунком.</p></div>
+        <div class="inscriptions-heading"><span class="eyebrow">Традиционные надписи нашей мастерской</span><h2 class="sec-title">Слова, которые хочется подарить</h2><p>Признание, пожелание счастья или память о Валдае. Выберите надпись в карточке модели и проверьте её наличие.</p></div>
         <div class="inscriptions-controls"><button type="button" id="inscriptionsToggle" class="inscriptions-toggle" aria-controls="inscriptionsRail" hidden><span class="inscriptions-toggle-icon" aria-hidden="true">Ⅱ</span><span class="inscriptions-toggle-label">Остановить прокрутку</span></button></div>
         <div class="inscriptions-grid" id="inscriptionsRail" tabindex="0" role="region" aria-label="Традиционные надписи на колокольчиках">{{ inscriptions_html }}</div>
-        <p class="inscriptions-note">На фотографиях показаны примеры сочетаний рисунков и надписей. Выберите любую традиционную надпись из списка или предложите свои слова — обсудим оформление вашего колокольчика.</p>
+        <p class="inscriptions-note">Свою надпись или рисунок можно обсудить в разделе <a href="#custom-order">«Индивидуальный заказ»</a>.</p>
     </div>
 </section>
 
 <!-- CATALOG -->
 <section id="catalog">
     <div class="container">
-        <span class="eyebrow">Сделано руками</span><h2 class="sec-title">Найдите свой колокольчик</h2><p class="section-intro">От классических колокольчиков до подарков в бересте. Выберите категорию — стоимость и детали заказа обсудим лично.</p>
+        <span class="eyebrow">Сделано руками</span><h2 class="sec-title">Найдите свой колокольчик</h2><p class="section-intro">Цены в карточках указаны за одно изделие. После заявки мастерская подтвердит наличие, стоимость доставки и способ оплаты.</p>
         <div class="divider"><span>❦ ✦ ❦</span></div>
 {{ catalog }}
         <noscript><p>Для заказа позвоните <a href="tel:{{ phone }}">{{ phone_display }}</a> или напишите <a href="mailto:{{ email }}">{{ email }}</a>.</p></noscript>
@@ -242,9 +242,9 @@
 
 <!-- CART -->
 <div class="overlay" id="cartOverlay" onclick="closeCart()"></div>
-<div class="cart-sidebar" id="cartSidebar">
+<div class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-labelledby="cartTitle" inert>
     <div class="panel-hd">
-        <h2>Корзина</h2>
+        <h2 id="cartTitle" tabindex="-1">Корзина</h2>
         <button type="button" class="btn-x" onclick="closeCart()" aria-label="Закрыть корзину">×</button>
     </div>
     <div class="cart-body" id="cartBody"></div>
@@ -267,7 +267,7 @@
 </dialog>
 
 <!-- REQUEST FORM -->
-<div class="modal-wrap" id="orderWrap">
+<div class="modal-wrap" id="orderWrap" inert>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
         <div class="modal-hd">
             <h2 id="orderTitle" tabindex="-1">Подготовка заявки</h2>
@@ -310,7 +310,7 @@
 </div>
 
 <!-- REQUEST PREVIEW -->
-<div class="modal-wrap" id="receiptWrap">
+<div class="modal-wrap" id="receiptWrap" inert>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
         <div class="modal-hd">
             <h2 id="receiptTitle" tabindex="-1">Заявка готова к отправке</h2>
@@ -325,7 +325,7 @@
         </div>
         <p class="copy-status" id="copyStatus" role="status"></p>
         <div class="order-actions">
-            <button type="button" class="order-secondary" onclick="closeReceipt(); openOrderModal()">Назад к заявке</button>
+            <button type="button" class="order-secondary" onclick="openOrderModal()">Назад к заявке</button>
             <button type="button" class="order-primary" onclick="copyReceipt()">Скопировать текст</button>
         </div>
     </div>

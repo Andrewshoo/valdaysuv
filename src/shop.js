@@ -35,6 +35,12 @@
     });
     document.getElementById('closeProductDialog').addEventListener('click', closeProduct);
     dialog.addEventListener('close', releasePage);
+    content.addEventListener('change', event => {
+        if (event.target.name === 'product-variant') {
+            content.querySelector('[data-select-product]').disabled =
+                !content.querySelector('input[name="product-variant"]:checked');
+        }
+    });
     dialog.addEventListener('click', event => {
         const bounds = dialog.getBoundingClientRect();
         if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right ||
@@ -60,9 +66,14 @@
         const select = event.target.closest('[data-select-product]');
         if (select) {
             const id = Number(select.dataset.selectProduct);
+            const variants = content.querySelectorAll('input[name="product-variant"]:checked');
             closeProduct();
-            addToCart(id);
-            openCart();
+            if (variants.length) {
+                variants.forEach(variant => addToCart(id, variant.value));
+            } else {
+                addToCart(id);
+            }
+            openCart(trigger);
         }
     });
 })();

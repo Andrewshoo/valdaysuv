@@ -2,6 +2,7 @@ const SITE = document.body.dataset;
 const PRODUCTS = Array.from(document.querySelectorAll('[data-product-id]'), card => ({
     id: Number(card.dataset.productId),
     name: card.dataset.productName,
+    category: card.dataset.category,
     image: card.dataset.productImage,
     price: card.dataset.priceKopecks ? BigInt(card.dataset.priceKopecks) : null,
 }));
@@ -14,9 +15,13 @@ function formatPrice(kopecks) {
 }
 
 function cartLines() {
-    return Object.entries(cart).map(([id, quantity]) => {
+    return Object.entries(cart).map(([key, quantity]) => {
+        const separator = key.indexOf(':');
+        const id = separator < 0 ? key : key.slice(0, separator);
+        const variant = separator < 0 ? '' : key.slice(separator + 1);
         const product = PRODUCTS.find(item => item.id === Number(id));
-        return { ...product, quantity, subtotal: product.price === null ? null : product.price * BigInt(quantity) };
+        const design = variant || (product.category === 'bells' ? 'Оформление уточним' : '');
+        return { ...product, key, design, quantity, subtotal: product.price === null ? null : product.price * BigInt(quantity) };
     });
 }
 
@@ -32,14 +37,18 @@ function summarizePrices(lines) {
     let cart = {};
     try {
         const saved = JSON.parse(localStorage.getItem('valday-cart') || '{}');
-        for (const p of PRODUCTS) {
-            if (Number.isSafeInteger(saved[p.id]) && saved[p.id] > 0) cart[p.id] = saved[p.id];
+        for (const [key, quantity] of Object.entries(saved)) {
+            const id = key.split(':', 1)[0];
+            if (PRODUCTS.some(p => String(p.id) === id) && Number.isSafeInteger(quantity) && quantity > 0) {
+                cart[key] = quantity;
+            }
         }
     } catch (_) {}
 
 
-    function addToCart(id) {
-        cart[id] = (cart[id] || 0) + 1;
+    function addToCart(id, variant) {
+        const key = variant ? id + ':' + variant : String(id);
+        cart[key] = (cart[key] || 0) + 1;
         syncBadge();
         const btn = document.getElementById('ba' + id);
         if (!btn) return;
@@ -48,11 +57,15 @@ function summarizePrices(lines) {
         setTimeout(() => { btn.textContent = '+ В корзину'; btn.classList.remove('added'); }, 1400);
     }
 
-    function changeQty(id, d) {
-        cart[id] = (cart[id] || 0) + d;
-        if (cart[id] <= 0) delete cart[id];
+    function changeQty(key, d, index) {
+        cart[key] = (cart[key] || 0) + d;
+        if (cart[key] <= 0) delete cart[key];
         syncBadge();
         renderCartBody();
+        const rows = document.querySelectorAll('#cartBody .cart-item');
+        const row = rows[Math.min(index, rows.length - 1)];
+        (row?.querySelector(d < 0 ? '[data-qty="-1"]' : '[data-qty="1"]') ||
+            document.querySelector('#cartBody .cart-empty a'))?.focus({ preventScroll: true });
     }
 
     function totalQty() { return Object.values(cart).reduce((s, v) => s + v, 0); }
@@ -81,53 +94,69 @@ function summarizePrices(lines) {
         const summary = summarizePrices(lines);
         document.getElementById('cartSubtotalLabel').textContent = summary.label;
         document.getElementById('cartSubtotal').textContent = summary.value;
-        body.innerHTML = lines.map(({ id, image, quantity, price, subtotal }) => {
+        body.innerHTML = lines.map(({ image, design, quantity, price, subtotal }) => {
             const pricing = price === null ? 'Цена по запросу' : formatPrice(price) + ' за шт.';
             return `<div class="cart-item">
                 ${image ? '<img class="cart-item-photo" alt="" width="64" height="64">' : ''}
                 <div class="cart-item-name"><span class="cart-product-title"></span>
+                    ${design ? '<span class="cart-item-design"></span>' : ''}
                     <span class="cart-item-price">${pricing}</span>
                 </div>
                 <div class="qty">
-                    <button type="button" class="qty-btn" onclick="changeQty(${id},-1)" aria-label="Уменьшить количество">−</button>
+                    <button type="button" class="qty-btn" data-qty="-1" aria-label="Уменьшить количество">−</button>
                     <span class="qty-val">${quantity}</span>
-                    <button type="button" class="qty-btn" onclick="changeQty(${id},1)" aria-label="Увеличить количество">+</button>
+                    <button type="button" class="qty-btn" data-qty="1" aria-label="Увеличить количество">+</button>
                 </div>
                 <strong class="cart-item-subtotal">${subtotal === null ? '' : formatPrice(subtotal)}</strong>
             </div>`;
         }).join('');
         body.querySelectorAll('.cart-item').forEach((row, index) => {
-            const { name, image } = lines[index];
+            const { name, image, key, design } = lines[index];
             row.querySelector('.cart-product-title').textContent = name;
+            const designLabel = row.querySelector('.cart-item-design');
+            if (designLabel) designLabel.textContent = design;
             const photo = row.querySelector('.cart-item-photo');
             if (photo) photo.src = image;
+            row.querySelectorAll('[data-qty]').forEach(button => {
+                button.addEventListener('click', () => changeQty(key, Number(button.dataset.qty), index));
+            });
         });
     }
 
-    function openCart() {
-        closeOrderModal();
-        document.getElementById('cartOverlay').classList.add('open');
-        document.getElementById('cartSidebar').classList.add('open');
-        document.body.style.overflow = 'hidden';
-        renderCartBody();
-    }
-    function closeCart() {
-        document.getElementById('cartOverlay').classList.remove('open');
-        document.getElementById('cartSidebar').classList.remove('open');
-        document.body.style.overflow = '';
+    const checkoutPanels = ['cartSidebar', 'orderWrap', 'receiptWrap'].map(id => document.getElementById(id));
+    const checkoutBackground = document.querySelectorAll('body > header, body > main, body > footer');
+    let activeCheckout = null;
+    let checkoutTrigger = null;
+
+    function showCheckout(panelId, trigger) {
+        const panel = checkoutPanels.find(item => item.id === panelId) || null;
+        if (panel && !activeCheckout) checkoutTrigger = trigger || document.activeElement;
+        activeCheckout = panel;
+        for (const item of checkoutPanels) {
+            item.classList.toggle('open', item === panel);
+            item.inert = item !== panel;
+        }
+        document.getElementById('cartOverlay').classList.toggle('open', panelId === 'cartSidebar');
+        document.body.style.overflow = panel ? 'hidden' : '';
+        checkoutBackground.forEach(item => { item.inert = Boolean(panel); });
+        if (panel) {
+            panel.querySelector('h2').focus({ preventScroll: true });
+        } else {
+            checkoutTrigger?.focus({ preventScroll: true });
+            checkoutTrigger = null;
+        }
     }
 
+    function openCart(trigger) {
+        renderCartBody();
+        showCheckout('cartSidebar', trigger);
+    }
+    function closeCart() { showCheckout(); }
+
     function openOrderModal() {
-        if (!totalQty()) return;
-        closeCart();
-        document.getElementById('orderWrap').classList.add('open');
-        document.body.style.overflow = 'hidden';
-        document.getElementById('orderTitle').focus();
+        if (totalQty()) showCheckout('orderWrap');
     }
-    function closeOrderModal() {
-        document.getElementById('orderWrap').classList.remove('open');
-        document.body.style.overflow = '';
-    }
+    function closeOrderModal() { showCheckout(); }
 
     function setDelivery() {
         const delivery = document.querySelector('input[name="del"]:checked').value === 'delivery';
@@ -170,10 +199,10 @@ function summarizePrices(lines) {
 
         const emailStr = email ? `\nEmail для ответа: ${email}` : '';
 
-        const lines = products.map(({ name, quantity, price, subtotal }) => {
+        const lines = products.map(({ name, design, quantity, price, subtotal }) => {
             const pricing = price === null ? 'цена по запросу' :
                 formatPrice(price) + ' за шт., сумма ' + formatPrice(subtotal);
-            return `• ${name} — ${quantity} шт., ${pricing}`;
+            return `• ${name}${design ? ' · ' + design : ''} — ${quantity} шт., ${pricing}`;
         }).join('\n');
         const summary = summarizePrices(products);
 
@@ -197,17 +226,11 @@ ${summary.label}: ${summary.value}
             + '?subject=' + encodeURIComponent('Заявка с сайта valdaysuv.ru')
             + '&body=' + encodeURIComponent(text);
 
-        closeOrderModal();
         document.getElementById('copyStatus').textContent = '';
-        document.getElementById('receiptWrap').classList.add('open');
-        document.body.style.overflow = 'hidden';
-        document.getElementById('receiptTitle').focus();
+        showCheckout('receiptWrap');
     }
 
-    function closeReceipt() {
-        document.getElementById('receiptWrap').classList.remove('open');
-        document.body.style.overflow = '';
-    }
+    function closeReceipt() { showCheckout(); }
 
     async function copyReceipt() {
         const text = document.getElementById('receiptBox').textContent;
@@ -238,8 +261,24 @@ ${summary.label}: ${summary.value}
     });
 
     document.addEventListener('keydown', e => {
-        if (e.key !== 'Escape') return;
-        closeCart(); closeOrderModal(); closeReceipt();
+        if (!activeCheckout) return;
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            showCheckout();
+        }
+        if (e.key !== 'Tab') return;
+        const controls = [...activeCheckout.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled)')]
+            .filter(element => element.getClientRects().length);
+        if (!controls.length) return;
+        const first = controls[0];
+        const last = controls.at(-1);
+        if (e.shiftKey && (document.activeElement === first || document.activeElement.matches('h2'))) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
     });
 
     document.querySelectorAll('.btn-add').forEach(button => { button.hidden = false; });

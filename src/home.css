@@ -357,7 +357,7 @@
             opacity: 0; visibility: hidden; pointer-events: none;
             transition: opacity var(--t), visibility var(--t);
         }
-        .cart-sidebar.open { opacity: 1; visibility: visible; pointer-events: auto; }
+        .cart-sidebar.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--t); }
 
         .panel-hd {
             flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
@@ -398,6 +398,7 @@
         }
         .cart-item-name { grid-area: name; min-width: 0; overflow-wrap: anywhere; font: 600 16px/1.4 Arial, sans-serif; }
         .cart-item-price { display: block; margin-top: 4px; color: var(--ink2); font: 14px/1.4 Arial, sans-serif; }
+        .cart-item-design { display: block; margin-top: 4px; color: var(--ink); font: 14px/1.4 Arial, sans-serif; }
         .cart-item-subtotal {
             grid-area: subtotal; text-align: right; overflow-wrap: anywhere;
             font-size: 17px; font-variant-numeric: tabular-nums;
@@ -459,7 +460,7 @@
             opacity: 0; visibility: hidden; pointer-events: none;
             transition: opacity var(--t), visibility var(--t);
         }
-        .modal-wrap.open { opacity: 1; visibility: visible; pointer-events: auto; }
+        .modal-wrap.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--t); }
 
         .modal {
             --order-gutter: 18px;

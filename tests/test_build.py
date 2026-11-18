@@ -85,8 +85,10 @@ class BuildTests(unittest.TestCase):
         self.assertIn('class="product-photo-link" href="img/shop/nomer4.jpg" data-product-details="4"', markup)
         self.assertNotIn('Рассмотреть изделие', markup)
         for text in inscriptions[:-1]:
-            self.assertIn(f'<dt>«{text}»</dt>', markup)
-        self.assertNotIn(f'<dt>«{inscriptions[-1]}»</dt>', markup)
+            self.assertIn(f'<span>«{text}»</span>', markup)
+        self.assertNotIn(f'<span>«{inscriptions[-1]}»</span>', markup)
+        self.assertIn(f'value="{inscriptions[1]}" disabled', markup)
+        self.assertEqual(markup.count('type="checkbox" name="product-variant"'), len(inscriptions))
         self.assertIn('С изображением Иверского монастыря', markup)
         self.assertIn('stock-available">В наличии', markup)
         self.assertIn('stock-unavailable">Нет в наличии', markup)
